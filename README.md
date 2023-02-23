@@ -22,3 +22,7 @@ Modelos jerárquicos - Ventajas y desventajas
 - Modelos lineales generalizados con enfoque Bayesiano: Uso de interfase RJAGS para análisis Bayesianos – GLM – Introducción a efectos aleatorios y GLMM – GLMM Poisson y Binomial
 - Ejercicios de GLM y GLMM con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
 - Trabajo práctico en proyectos finales (práctica)
+
+
+
+file:///C:/Users/usuario/Downloads/formatos.html
