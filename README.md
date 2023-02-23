@@ -25,4 +25,4 @@ Modelos jerárquicos - Ventajas y desventajas
 
 
 
-file:///C:/Users/usuario/Downloads/formatos.html
+[embed]https://github.com/apgoijman/Curso-Ocupacion23/blob/main/modulo1.pdf [/embed]
