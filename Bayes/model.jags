@@ -1,0 +1,27 @@
+
+model {
+
+# Priors
+alpha.occ ~ dunif(-10, 10)
+beta.occ ~ dunif(-10, 10)
+alpha.p ~ dunif(-10, 10)
+beta.p ~ dunif(-10, 10)
+
+# Verosimilitud
+for (i in 1:R) {
+   # Modelo del Estado Verdadero para el estado verdadero parcialmente observado
+   z[i] ~ dbern(psi[i])             # Ocupacion Real z en el sitio i
+   logit(psi[i]) <- alpha.occ + beta.occ * X[i]
+
+   for (j in 1:T) {
+      # Modelo de Observacion para las observaciones actuales
+      y[i,j] ~ dbern(p.eff[i,j])    # Deteccion-no deteccion en i  j
+      p.eff[i,j] <- z[i] * p[i,j]
+      logit(p[i,j]) <- alpha.p + beta.p * X[i]
+      } #j
+   } #i
+
+# Cantidades Derivadas
+occ.fs <- sum(z[])       # Numero de sitios ocupados entre los estudiados
+}
+
