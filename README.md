@@ -33,7 +33,7 @@ El objetivo del curso es el de proveer bases teórico-prácticas de métodos cua
 - Conceptos básicos de estadística: Tipos de modelos y rol de los modelos en ciencia - Modelos estadísticos - Distribuciones de probabilidad - Probabilidad,
 verosimilitud - Precisión, sesgo, exactitud.
 
-[modulo2.pdf](https://github.com/apgoijman/Curso-Ocupacion23/files/10797405/modulo2.pdf)
+(https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%202_Occupacion2023.pptx)
 
 - Introducción al enfoque Bayesiano: Comparación de inferencia frecuentista y Bayesiana - Inferencia Bayesiana y Teorema de Bayes -Componentes - Modelos jerárquicos - Ventajas y desventajas 
 - Ejercicios con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
