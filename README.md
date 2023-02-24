@@ -5,6 +5,20 @@
 - Dr. Facundo Contreras. CONICET, FCEyN Universidad Nacional de Rio Cuarto, Córdoba.
 - Dra. Vanesa Serafini. CONICET, FCEyN Universidad Nacional de Rio Cuarto, Córdoba
 
+## Objetivos del curso
+El objetivo del curso es el de proveer bases teórico-prácticas de métodos cuantitativos bajo un enfoque Bayesiano para estimar parámetros para el análisis de poblaciones y comunidades de fauna silvestre con modelos jerárquicos. Se hará foco en los métodos de ocupación, que tienen en cuenta la detección imperfecta de flora y fauna silvestre.
+
+## Expectativas
+- Breve presentación de los alumnos
+- ¿Cuáles son sus expectativas? 
+
+<img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/docs/Imagen1.jpg" width=40% height=40%>
+
+
+## Requisitos
+- R última versión
+- JAGS https://sourceforge.net/projects/mcmc-jags/
+
 ## Programa
 
 ### DIA 1
@@ -26,7 +40,6 @@ verosimilitud - Precisión, sesgo, exactitud.
 - Trabajo práctico en proyectos finales (práctica)
 
 [Formatos de bases de datos.pdf](https://github.com/apgoijman/Curso-Ocupacion23/files/10824363/Formatos.de.bases.de.datos.pdf)
-
 
 ### DIA 4
 - Modelos de Ocupación de comunidades.
