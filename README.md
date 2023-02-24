@@ -1,7 +1,7 @@
 # Modelado y estimación de ocupación para poblaciones y comunidades de especies bajo enfoque Bayesiano.
 
 ## Docentes
-- Dra. Andrea Paula Goijman. INTA EEA La Consulta, Mendoza.
+- Dra. Andrea Paula Goijman. INTA EEA La Consulta, Mendoza. <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/docs/Imagen2.png" width=40% height=40%>
 - Dr. Facundo Contreras. CONICET, FCEyN Universidad Nacional de Rio Cuarto, Córdoba.
 - Dra. Vanesa Serafini. CONICET, FCEyN Universidad Nacional de Rio Cuarto, Córdoba
 
