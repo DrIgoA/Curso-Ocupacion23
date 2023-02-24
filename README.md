@@ -80,8 +80,6 @@ verosimilitud - Precisión, sesgo, exactitud.
 ### DIA 5
 - Ejercicios de modelado, y trabajo en proyectos con datos propios.
 
-### DIA 6
-- Trabajo en proyectos con datos propios y comienzo del trabajo final.
 
 ## Modo de evaluación
 La condición de aprobación será el 60% correspondiente a un 6 (seis). La evaluación del curso se realizará a través de un trabajo final que deberán entregar para su corrección 15 días después de finalizado el curso presencial. En la nota final se tendrá en cuenta la participación del estudiante a lo largo del curso y el trabajo final.
