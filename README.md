@@ -36,6 +36,7 @@ verosimilitud - Precisión, sesgo, exactitud.
 
 ```diff
  [Modulo 2](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%202_Occupacion2023.pptx)   ## completar este archivo
+ https://github.com/apgoijman/Curso-Ocupacion23/blob/main/ExerciseTE1_modificar.pdf
 ```
 
 - Introducción al enfoque Bayesiano: Comparación de inferencia frecuentista y Bayesiana - Inferencia Bayesiana y Teorema de Bayes -Componentes - Modelos jerárquicos - Ventajas y desventajas 
