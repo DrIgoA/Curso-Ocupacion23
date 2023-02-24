@@ -1,8 +1,10 @@
 # Modelado y estimación de ocupación para poblaciones y comunidades de especies bajo enfoque Bayesiano.
+## CCT CONICET Mendoza 24 - 28 Abril 2023 <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Imagen4.png" width=20% height=20%>
 
 ## Docentes
 - Dra. Andrea Paula Goijman. INTA EEA La Consulta, Mendoza. 
-<img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Imagen2.png" width=20% height=20%>
+<img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Imagen2.png" width=20% height=20%> <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Imagen3.png" width=20% height=20%>
+
 - Dr. Facundo Contreras. CONICET, FCEyN Universidad Nacional de Rio Cuarto, Córdoba.
 - Dra. Vanesa Serafini. CONICET, FCEyN Universidad Nacional de Rio Cuarto, Córdoba
 
