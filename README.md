@@ -37,11 +37,20 @@ verosimilitud - Precisión, sesgo, exactitud.
 ```diff
  [Modulo 2](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%202_Occupacion2023.pptx)   ## completar este archivo
  https://github.com/apgoijman/Curso-Ocupacion23/blob/main/ExerciseTE1_modificar.pdf
+ *** completar y armar ejercicio en excel
 ```
 
 - Introducción al enfoque Bayesiano: Comparación de inferencia frecuentista y Bayesiana - Inferencia Bayesiana y Teorema de Bayes -Componentes - Modelos jerárquicos - Ventajas y desventajas 
-- Ejercicios con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
 
+```diff
+[Modulo 3](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%203_Ocupacion2023.pptx)
+*** completar intro al enfoque bayesiano
+```
+
+- Ejercicios con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
+```
+*** aca podemos usar unos basicos del libro de mackarty
+```
 
 ### DIA 2
 - Modelos lineales generalizados con enfoque Bayesiano: Uso de interfase RJAGS para análisis Bayesianos – GLM – Introducción a efectos aleatorios y GLMM – GLMM Poisson y Binomial
