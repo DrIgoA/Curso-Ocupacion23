@@ -30,10 +30,11 @@ El objetivo del curso es el de proveer bases teórico-prácticas de métodos cua
 
 ### DIA 1
 - Conceptos básicos para estudios de poblaciones y comunidades de fauna silvestre: Algunas definiciones - Poblaciones cerradas y abiertas – Comunidades – observaciones en ecología 
+
 - Conceptos básicos de estadística: Tipos de modelos y rol de los modelos en ciencia - Modelos estadísticos - Distribuciones de probabilidad - Probabilidad,
 verosimilitud - Precisión, sesgo, exactitud.
 
-(https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%202_Occupacion2023.pptx)
+[Modulo 2](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%202_Occupacion2023.pptx)   ## completar este archivo
 
 - Introducción al enfoque Bayesiano: Comparación de inferencia frecuentista y Bayesiana - Inferencia Bayesiana y Teorema de Bayes -Componentes - Modelos jerárquicos - Ventajas y desventajas 
 - Ejercicios con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
@@ -64,3 +65,12 @@ verosimilitud - Precisión, sesgo, exactitud.
 ## Modo de evaluación
 La condición de aprobación será el 60% correspondiente a un 6 (seis). La evaluación del curso se realizará a través de un trabajo final que deberán entregar para su corrección 15 días después de finalizado el curso presencial. En la nota final se tendrá en cuenta la participación del estudiante a lo largo del curso y el trabajo final.
 
+
+
+```diff
+- text in red
++ text in green
+! text in orange
+# text in gray
+@@ text in purple (and bold)@@
+```
