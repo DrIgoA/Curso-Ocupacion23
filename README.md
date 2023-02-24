@@ -49,6 +49,10 @@ verosimilitud - Precisión, sesgo, exactitud.
 
 ### DIA 3
 - Modelos de ocupación para poblaciones: Solo una estación – Con covariables – Estaciones múltiples.
+```diff
+ [Modulo 5] (https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%205_Ocupacion2023.pptx)
+ ** este es la presentacion de la intro a deteccion imperfecta, hay que sumarle la intro de ocupacion
+```
 - Ejercicios de ocupación con interfase R-JAGS para análisis con métodos Bayesianos (práctica) y puesta en común.
 - Trabajo práctico en proyectos finales (práctica)
 
