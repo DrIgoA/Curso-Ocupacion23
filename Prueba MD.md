@@ -1,1 +1,7 @@
+
 Prueba rmarkdown
+
+```
+library(jagsui)
+```
+
