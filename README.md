@@ -1,3 +1,4 @@
+[Modulo 2_Occupacion2023.pdf](https://github.com/apgoijman/Curso-Ocupacion23/files/10883613/Modulo.2_Occupacion2023.pdf)
 # Modelado y estimación de ocupación para poblaciones y comunidades de especies bajo enfoque Bayesiano.
 ### CCT CONICET Mendoza 24 - 28 Abril 2023 
 <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Imagen4.png" width=7% height=7%>
