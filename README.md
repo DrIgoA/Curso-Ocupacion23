@@ -44,11 +44,15 @@ verosimilitud - Precisión, sesgo, exactitud.
 ```diff
 [Modulo 3](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%203_Ocupacion2023.pptx)
 *** completar intro al enfoque bayesiano
+ver ejemplos del curso de Hobbs
+agregar la de rasmuth de numero de visitas a pag web y cambiar ejemplo
 ```
 
 - Ejercicios con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
 ```
 *** aca podemos usar unos basicos del libro de mackarty
+*** ejemplos de Kery
+*** ejemplos de rasmuth
 ```
 
 ### DIA 2
