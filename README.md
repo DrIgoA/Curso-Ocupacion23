@@ -5,12 +5,10 @@
 
 ## Docentes
 - Dra. Andrea Paula Goijman. INTA EEA La Consulta, Mendoza. 
-<img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Imagen2.png" width=15% height=15%> <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Imagen3.png" width=15% height=15%>
+- Dr. Facundo Contreras. CONICET, FCEyN Universidad Nacional de Rio Cuarto, Córdoba. 
+- Dra. Vanesa Serafini. CONICET, FCEyN Universidad Nacional de Rio Cuarto, Córdoba. 
 
-- Dr. Facundo Contreras. CONICET, FCEyN Universidad Nacional de Rio Cuarto, Córdoba.
-- Dra. Vanesa Serafini. CONICET, FCEyN Universidad Nacional de Rio Cuarto, Córdoba
-
-
+<img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Imagen2.png" width=17% height=17%>    <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Imagen3.png" width=17% height=17%>   <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/logo_giepco.png" width=17% height=17%>    <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/images.png" width=9% height=9%>
 
 ## Objetivos del curso
 El objetivo del curso es el de proveer bases teórico-prácticas de métodos cuantitativos bajo un enfoque Bayesiano para estimar parámetros para el análisis de poblaciones y comunidades de fauna silvestre con modelos jerárquicos. Se hará foco en los métodos de ocupación, que tienen en cuenta la detección imperfecta de flora y fauna silvestre.
