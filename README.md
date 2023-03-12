@@ -1,6 +1,6 @@
 # Modelado y estimación de ocupación para poblaciones y comunidades de especies bajo enfoque Bayesiano.
 ### CCT CONICET Mendoza 24 - 28 Abril 2023 
-<img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Imagen4.png" width=7% height=7%>
+<img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/varios/Imagen4.png" width=7% height=7%>
 
 
 ## Docentes
@@ -8,7 +8,7 @@
 - Dr. Facundo Contreras. CONICET, FCEyN Universidad Nacional de Rio Cuarto, Córdoba. 
 - Dra. Vanesa Serafini. CONICET, FCEyN Universidad Nacional de Rio Cuarto, Córdoba. 
 
-<img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Imagen2.png" width=17% height=17%>    <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Imagen3.png" width=17% height=17%>   <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/logo_giepco.png" width=17% height=17%>    <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/images.png" width=9% height=9%>
+<img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/varios/Imagen2.png" width=17% height=17%>    <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/varios/Imagen3.png" width=17% height=17%>   <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/varios/logo_giepco.png" width=17% height=17%>    <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/images.png" width=9% height=9%>
 
 ## Objetivos del curso
 El objetivo del curso es el de proveer bases teórico-prácticas de métodos cuantitativos bajo un enfoque Bayesiano para estimar parámetros para el análisis de poblaciones y comunidades de fauna silvestre con modelos jerárquicos. Se hará foco en los métodos de ocupación, que tienen en cuenta la detección imperfecta de flora y fauna silvestre.
