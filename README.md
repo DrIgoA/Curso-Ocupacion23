@@ -16,6 +16,7 @@ El objetivo del curso es el de proveer bases teórico-prácticas de métodos cua
 ## Expectativas
 - Breve presentación de los alumnos
 - ¿Cuáles son sus expectativas? 
+- Nuestras expectativas...
 
 ![image](https://user-images.githubusercontent.com/124918841/222793849-89917531-59a4-4047-93ab-1148d1030d38.png)
 
