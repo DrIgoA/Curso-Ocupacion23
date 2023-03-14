@@ -250,8 +250,14 @@ Podemos (y debemos) inspeccionar visualmente la salida del MCMC
 ```{r, error=TRUE}
 plot(out)
 ```
+![image](https://user-images.githubusercontent.com/124918841/225100192-618180bd-27e3-4a3e-afba-332021f9a46b.png)
 
 Cuando tengamos muchos parámetros, podemos "llamar" a aquellos que nos interesen
-```{r, error=TRUE}
-traceplot(out, parameters=c("mean", "varianza")) 
 ```
+traceplot(out, parameters=c("mean", "varianza")) 
+````
+![image](https://user-images.githubusercontent.com/124918841/225100353-730e4a73-7f06-4170-8886-9f5dcd3dc2bd.png)
+```
+densityplot(out, parameters=c("mean", "varianza")) 
+```
+![image](https://user-images.githubusercontent.com/124918841/225101379-b5c9c0f6-3104-4ce1-b811-a524413179b1.png)
