@@ -137,6 +137,114 @@ También podemos ver todo lo que tiene guardada la salida con
 ```{r, error=TRUE}
 str(out)
 ```
+Inspeccionamos la salida...
+```
+List of 24
+ $ sims.list  :List of 3
+  ..$ mean    : num [1:13500] 9.95 9.34 9.17 10.03 9.53 ...
+  ..$ varianza: num [1:13500] 1.44 1.08 1.64 1.69 1.34 ...
+  ..$ deviance: num [1:13500] 32.7 31.3 31.7 33.2 31 ...
+ $ mean       :List of 3
+  ..$ mean    : num 9.46
+  ..$ varianza: num 1.89
+  ..$ deviance: num 33.2
+ $ sd         :List of 3
+  ..$ mean    : num 0.435
+  ..$ varianza: num 1.26
+  ..$ deviance: num 2.29
+ $ q2.5       :List of 3
+  ..$ mean    : num 8.59
+  ..$ varianza: num 0.673
+  ..$ deviance: num 31
+ $ q25        :List of 3
+  ..$ mean    : num 9.19
+  ..$ varianza: num 1.15
+  ..$ deviance: num 31.6
+ $ q50        :List of 3
+  ..$ mean    : num 9.46
+  ..$ varianza: num 1.57
+  ..$ deviance: num 32.5
+ $ q75        :List of 3
+  ..$ mean    : num 9.72
+  ..$ varianza: num 2.23
+  ..$ deviance: num 34.1
+ $ q97.5      :List of 3
+  ..$ mean    : num 10.3
+  ..$ varianza: num 4.89
+  ..$ deviance: num 39.3
+ $ overlap0   :List of 3
+  ..$ mean    : logi FALSE
+  ..$ varianza: logi FALSE
+  ..$ deviance: logi FALSE
+ $ f          :List of 3
+  ..$ mean    : num 1
+  ..$ varianza: num 1
+  ..$ deviance: num 1
+ $ Rhat       :List of 3
+  ..$ mean    : num 1
+  ..$ varianza: num 1
+  ..$ deviance: num 1
+ $ n.eff      :List of 3
+  ..$ mean    : num 13500
+  ..$ varianza: num 13500
+  ..$ deviance: num 13500
+ $ pD         : num 2.62
+ $ DIC        : num 35.8
+ $ summary    : num [1:3, 1:11] 9.457 1.888 33.221 0.435 1.256 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:3] "mean" "varianza" "deviance"
+  .. ..$ : chr [1:11] "mean" "sd" "2.5%" "25%" ...
+ $ samples    :List of 3
+  ..$ : 'mcmc' num [1:4500, 1:3] 9.95 9.34 9.17 10.03 9.53 ...
+  .. ..- attr(*, "dimnames")=List of 2
+  .. .. ..$ : NULL
+  .. .. ..$ : chr [1:3] "mean" "varianza" "deviance"
+  .. ..- attr(*, "mcpar")= num [1:3] 1103 10101 2
+  ..$ : 'mcmc' num [1:4500, 1:3] 8.29 9.37 9.68 9.44 10.22 ...
+  .. ..- attr(*, "dimnames")=List of 2
+  .. .. ..$ : NULL
+  .. .. ..$ : chr [1:3] "mean" "varianza" "deviance"
+  .. ..- attr(*, "mcpar")= num [1:3] 1103 10101 2
+  ..$ : 'mcmc' num [1:4500, 1:3] 8.94 9.35 9.67 9.42 9.84 ...
+  .. ..- attr(*, "dimnames")=List of 2
+  .. .. ..$ : NULL
+  .. .. ..$ : chr [1:3] "mean" "varianza" "deviance"
+  .. ..- attr(*, "mcpar")= num [1:3] 1103 10101 2
+  ..- attr(*, "class")= chr "mcmc.list"
+ $ modfile    : chr "zorzales.jags"
+ $ model      :List of 8
+  ..$ ptr      :function ()  
+  ..$ data     :function ()  
+  ..$ model    :function ()  
+  ..$ state    :function (internal = FALSE)  
+  ..$ nchain   :function ()  
+  ..$ iter     :function ()  
+  ..$ sync     :function ()  
+  ..$ recompile:function ()  
+  ..- attr(*, "class")= chr "jags"
+ $ parameters : chr [1:3] "mean" "varianza" "deviance"
+ $ mcmc.info  :List of 9
+  ..$ n.chains        : num 3
+  ..$ n.adapt         : num 100
+  ..$ sufficient.adapt: logi TRUE
+  ..$ n.iter          : num 10000
+  ..$ n.burnin        : num 1000
+  ..$ n.thin          : num 2
+  ..$ n.samples       : num 13500
+  ..$ end.values      :List of 3
+  .. ..$ : Named num [1:3] 39.31 10.36 5.55
+  .. .. ..- attr(*, "names")= chr [1:3] "deviance" "mean" "varianza"
+  .. ..$ : Named num [1:3] 32.44 9.85 1.91
+  .. .. ..- attr(*, "names")= chr [1:3] "deviance" "mean" "varianza"
+  .. ..$ : Named num [1:3] 31.556 9.453 0.939
+  .. .. ..- attr(*, "names")= chr [1:3] "deviance" "mean" "varianza"
+  ..$ elapsed.mins    : num 0.003
+ $ run.date   : POSIXct[1:1], format: "2023-03-14 14:21:01"
+ $ parallel   : logi FALSE
+ $ bugs.format: logi FALSE
+ $ calc.DIC   : logi TRUE
+ - attr(*, "class")= chr "jagsUI"
+ ```
 
 Podemos (y debemos) inspeccionar visualmente la salida del MCMC
 ```{r, error=TRUE}
