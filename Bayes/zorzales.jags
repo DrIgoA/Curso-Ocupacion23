@@ -1,0 +1,17 @@
+
+
+model
+{
+# previas no informativas
+mean ~ dnorm (0, 1.0E-6)  # tamaño medio de los zorzales
+varianza ~ dlnorm (0 ,1.0E-6)  # varianza tamaño zorzales
+
+prec <- 1/varianza             # pasar de varianza a precision 
+
+for (i in 1:10)            # para cada uno de los Zorzales
+{
+size[i] ~ dnorm (mean, prec)   # tamaño zorzal trazado de una distribución normal
+}
+}
+
+
