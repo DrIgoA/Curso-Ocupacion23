@@ -44,7 +44,7 @@ verosimilitud - Precisión, sesgo, exactitud.
 
     - [Ejemplos Modulo 3 - Iniciación a R-JAGS](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Ejemplo%20Modulo3.md)
     - [Script para trabajar en R](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Script%20Modulo%203%20-%20I.R)
-    - Agregar enlace R para trabajar en script modelo jerarquico de las ranas
+    - Agregar enlace R para trabajar en script modelo jerarquico de las ranas y revisar el archivo 
 
 ```diff
 [Modulo 3](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%203_Ocupacion2023.pptx)
