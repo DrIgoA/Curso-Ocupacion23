@@ -4,8 +4,9 @@ author: "Goijman, Serafini, Contreras"
 date: '2023-03-14'
 output: html_document
 ---
-# Ejemplo tamaño medio de zorzales (n=10) 
-#     Media de una distribucion normal
+## Ejemplo tamaño medio de zorzales (n=10) 
+### Media de una distribucion normal
+
 
 Cargamos la librería `jagsUI` para correr JAGS 
 ```{r setup, error=TRUE}
