@@ -2,6 +2,7 @@
 library(jagsUI)    #paquete JAGS
 
 #Ejemplo tamaño medio de zorzales (n=10)
+# media de una distribucion normal
 
 data <- list(size = c(7.9,8.1,11,10.6,9.2,8,9.8,10.1,10.9,9))
 
@@ -11,12 +12,12 @@ cat("
 model
 {
 # previas no informativas
-mean ~ dnorm (0, 1.0E-6)  # tamaño medio de los zorzales
+mean ~ dnorm (0, 1.0E-6)       # tamaño medio de los zorzales
 varianza ~ dlnorm (0 ,1.0E-6)  # varianza tamaño zorzales
 
 prec <- 1/varianza             # pasar de varianza a precision 
 
-for (i in 1:10)            # para cada uno de los Zorzales
+for (i in 1:10)                # para cada uno de los Zorzales
 {
 size[i] ~ dnorm (mean, prec)   # tamaño zorzal trazado de una distribución normal
 }
