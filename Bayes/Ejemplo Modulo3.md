@@ -4,13 +4,13 @@ author: "Goijman, Serafini, Contreras"
 date: '2023-03-14'
 output: html_document
 ---
+# Ejemplo tamaño medio de zorzales (n=10) 
+#     Media de una distribucion normal
 
 Cargamos la librería `jagsUI` para correr JAGS 
 ```{r setup, error=TRUE}
 library(jagsUI)    #paquete JAGS
 ```
-Ejemplo tamaño medio de zorzales (n=10)
-
 Agrupar los datos en una lista para que pueda ser leida por JAGS
 ```{r, error=TRUE}
 data <- list(size = c(7.9,8.1,11,10.6,9.2,8,9.8,10.1,10.9,9))
