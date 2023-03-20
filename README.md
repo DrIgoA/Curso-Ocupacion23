@@ -42,7 +42,8 @@ verosimilitud - Precisión, sesgo, exactitud.
 
 - Introducción al enfoque Bayesiano: Comparación de inferencia frecuentista y Bayesiana - Inferencia Bayesiana y Teorema de Bayes -Componentes - Modelos jerárquicos - Ventajas y desventajas 
 
-[Ejemplos Modulo 3 - Iniciación a R-JAGS](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Ejemplo%20Modulo3.md)
+- [Ejemplos Modulo 3 - Iniciación a R-JAGS](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Ejemplo%20Modulo3.md)
+- [Script para trabajar en R](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Script%20Modulo%203%20-%20I.R)
 
 ```diff
 [Modulo 3](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%203_Ocupacion2023.pptx)
