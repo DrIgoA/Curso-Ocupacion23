@@ -42,22 +42,11 @@ verosimilitud - Precisión, sesgo, exactitud.
 
 - Introducción al enfoque Bayesiano: Comparación de inferencia frecuentista y Bayesiana - Inferencia Bayesiana y Teorema de Bayes -Componentes - Modelos jerárquicos - Ventajas y desventajas 
 
+- Ejercicios con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
     - [Ejemplos Modulo 3 - Iniciación a R-JAGS](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Ejemplo%20Modulo3.md)
     - [Script para trabajar en R](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Script%20Modulo%203%20-%20I.R)
-    - Agregar enlace R para trabajar en script modelo jerarquico de las ranas y revisar el archivo 
+    - Agregar enlace R para trabajar en script modelo jerarquico de las ranas y revisar el archivo https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/ejemplos-nuevo.R
 
-```diff
-[Modulo 3](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%203_Ocupacion2023.pptx)
-*** completar intro al enfoque bayesiano
-ver ejemplos del curso de Hobbs
-agregar la de rasmuth de numero de visitas a pag web y cambiar ejemplo
-```
-
-- Ejercicios con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
-```
-*** ejemplos de Kery
-*** ejemplos de rasmuth
-```
 
 ### DIA 2
 - Modelos lineales generalizados con enfoque Bayesiano: Uso de interfase RJAGS para análisis Bayesianos – GLM – Introducción a efectos aleatorios y GLMM – GLMM Poisson y Binomial
