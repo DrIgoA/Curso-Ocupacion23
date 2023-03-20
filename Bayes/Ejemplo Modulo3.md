@@ -1,5 +1,5 @@
 ---
-title: "Ejemplos Modulo 2"
+title: "Ejemplos Modulo 3"
 author: "Goijman, Serafini, Contreras"
 date: '2023-03-14'
 output: html_document
