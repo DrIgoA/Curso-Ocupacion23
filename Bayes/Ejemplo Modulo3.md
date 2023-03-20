@@ -262,3 +262,9 @@ traceplot(out, parameters=c("mean", "varianza"))
 densityplot(out, parameters=c("mean", "varianza")) 
 ```
 ![image](https://user-images.githubusercontent.com/124918841/225101379-b5c9c0f6-3104-4ce1-b811-a524413179b1.png)
+
+
+### ¿Qué pasa si agregamos información previa?
+Supongamos que tenemos información previa de otro estudio que encontró que los zorzales tienen un tamaño (media=9.45 sd= 0.8), y una varianza(0.81,0.52) 
+¿Cuál es el tamaño medio de los zorzales?
+
