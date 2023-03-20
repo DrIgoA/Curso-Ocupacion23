@@ -32,7 +32,7 @@ El objetivo del curso es el de proveer bases teórico-prácticas de métodos cua
 
 - Conceptos básicos de estadística: Tipos de modelos y rol de los modelos en ciencia - Modelos estadísticos - Distribuciones de probabilidad - Probabilidad,
 verosimilitud - Precisión, sesgo, exactitud. 
-[Modulo 2_Occupacion2023.pdf](https://github.com/apgoijman/Curso-Ocupacion23/files/10883613/Modulo.2_Occupacion2023.pdf)
+    - [Modulo 2_Occupacion2023.pdf](https://github.com/apgoijman/Curso-Ocupacion23/files/10883613/Modulo.2_Occupacion2023.pdf)
 
 ```diff
  [Modulo 2](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%202_Occupacion2023.pptx)   ## completar este archivo
@@ -42,9 +42,9 @@ verosimilitud - Precisión, sesgo, exactitud.
 
 - Introducción al enfoque Bayesiano: Comparación de inferencia frecuentista y Bayesiana - Inferencia Bayesiana y Teorema de Bayes -Componentes - Modelos jerárquicos - Ventajas y desventajas 
 
-- [Ejemplos Modulo 3 - Iniciación a R-JAGS](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Ejemplo%20Modulo3.md)
-- [Script para trabajar en R](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Script%20Modulo%203%20-%20I.R)
-- Agregar enlace R para trabajar en script modelo jerarquico de las ranas
+    - [Ejemplos Modulo 3 - Iniciación a R-JAGS](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Ejemplo%20Modulo3.md)
+    - [Script para trabajar en R](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Script%20Modulo%203%20-%20I.R)
+    - Agregar enlace R para trabajar en script modelo jerarquico de las ranas
 
 ```diff
 [Modulo 3](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%203_Ocupacion2023.pptx)
