@@ -1,12 +1,7 @@
 ############################################################
-##### CURSO METODOS CUANTITATIVOS DETECCION IMPERFECTA #####
-###########        UNRC - JUNIO JULIO 2016       ###########
-###########             A. P. GOIJMAN            ###########
+###########          Ejemplo GLM y  GLMM         ###########
 ############################################################
-###########          Ejemplo GLM Basico          ###########
-###########     Estimacion de Supervivencia      ###########
-############################################################
-########              Ejemplos de:                  ########
+########              Basado en e:                  ########
 ########   Kéry, M., & Schaub, M. (2012). Bayesian  ########
 ########    population analysis using WinBUGS: a    ######## 
 ########          hierarchical perspective.         ######## 
@@ -21,7 +16,23 @@ rm(list=ls(all=TRUE))
 ###################################### 
 ### Elegir directorio de trabajo
 ######################################
-setwd("C:/Users/Andrea/Dropbox/TEACHING/APG_MetCuant_UNRC_Jun2016/Docentes/Ejercicios/Bayes")
+setwd("C:\\Users\\andrea\\Documents\\GitHub\\Curso-Ocupacion23\\Bayes")
+
+
+
+#####################################
+#Explorar distribuciones
+#####################################
+plot(density(rbeta(n=10^6, shape1=2, shape2 = 4)))
+hist(rbeta(10^6, 2, 4), nclass=100, col="gray")
+
+### ¿Cómo se vería un histograma con poisson, y con binomial?
+## ayuda... para ver los parámetros de las distribuciones
+?dpois
+?dbinom
+?rpois  #genero números al azar
+
+
 
 ###################################################
 ### Cargar Paquete 
@@ -33,6 +44,9 @@ library(jagsUI)    #paquete JAGS
 ### Conteos en el tiempo, comparacion de metodos
 ### Modelo 3.3 pp. BPA
 ###################################################
+
+
+
 
 # Simulacion de datos
 data.fn <- function(n = 40, alpha = 3.5576, beta1 = -0.0912, beta2 = 0.0091, beta3 = -0.00014){
