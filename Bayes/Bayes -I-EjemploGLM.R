@@ -2,7 +2,7 @@
 ###########          Ejemplo GLM y  GLMM         ###########
 ############################################################
 ########              Basado en e:                  ########
-########   Kéry, M., & Schaub, M. (2012). Bayesian  ########
+########   K?ry, M., & Schaub, M. (2012). Bayesian  ########
 ########    population analysis using WinBUGS: a    ######## 
 ########          hierarchical perspective.         ######## 
 ########              Academic Press.               ########
@@ -18,61 +18,63 @@ rm(list=ls(all=TRUE))
 ######################################
 setwd("C:\\Users\\andrea\\Documents\\GitHub\\Curso-Ocupacion23\\Bayes")
 
-
-
 #####################################
 #Explorar distribuciones
 #####################################
 plot(density(rbeta(n=10^6, shape1=2, shape2 = 4)))
 hist(rbeta(10^6, 2, 4), nclass=100, col="gray")
 
-### ¿Cómo se vería un histograma con poisson, y con binomial?
-## ayuda... para ver los parámetros de las distribuciones
+hist(rpois(10^6, 4), nclass=100, col="gray")
+### ?Como se veria un histograma con poisson, y con binomial?
+## ayuda... para ver los parametros de las distribuciones
 ?dpois
 ?dbinom
-?rpois  #genero números al azar
+?rpois  #genero numeros al azar
 
+## como generarian numeros al azar bajo una distribucion binomial? 
+
+#####################################
+# Modelo Lineal
+#####################################
+
+y <- c(25, 37, 68, 79, 86, 139, 49, 91, 111)
+A <- factor(c(1,1,1,2,2,2,3,3,3))
+x<- c(1, 14, 22, 2, 9,20, 2, 13, 22)
+
+plot(x, y, col = c(rep("red",3),rep("blue",3),rep("green",3)),xlim = c(-1,25),ylim = c(0,140))
 
 
 ###################################################
-### Cargar Paquete 
+### GLM Poisson JAGS 
+### Conteos en el tiempo
 ###################################################
-library(jagsUI)    #paquete JAGS
-
-###################################################
-### GLM Poisson GLM en JAGS y frecuentista
-### Conteos en el tiempo, comparacion de metodos
-### Modelo 3.3 pp. BPA
-###################################################
-
-
-
 
 # Simulacion de datos
-data.fn <- function(n = 40, alpha = 3.5576, beta1 = -0.0912, beta2 = 0.0091, beta3 = -0.00014){
-# n: Number of years
+n = 40
+alpha = 3.5576
+beta1 = -0.0912 
+beta2 = 0.0091 
+beta3 = -0.00014
+# n: Numero de anios
 # alpha, beta1, beta2, beta3: coeficientes de un polinomio cubico de conteos anuales
-# Genera valores de cova en el tiempo
+# Genera valores de la covariable en el tiempo
+
 year <- 1:n
+
 # Parte del GLM
 log.expected.count <- alpha + beta1 * year + beta2 * year^2 + beta3 * year^3
-expected.count <- exp(log.expected.count)
+expected.count <- exp(log.expected.count)  #inversa del log para ver conteos en valores reales
+
 # Ruido: genera parte aleatoria del GLM: Ruido Poisson alrededor de los puntos 
 C <- rpois(n = n, lambda = expected.count)
-# Plot simulated data
-plot(year, C, type = "b", lwd = 2, col = "black", main = "", las = 1, ylab = "Population size", xlab = "Year", cex.lab = 1.2, cex.axis = 1.2)
-lines(year, expected.count, type = "l", lwd = 3, col = "red")
-return(list(n = n, alpha = alpha, beta1 = beta1, beta2 = beta2, beta3 = beta3, year = year, expected.count = expected.count, C = C))
-}
-data <- data.fn()
 
-##############################
-#####  DATOS            ######
-##############################
-C = data$C
-n = length(data$C)
-raw.year = data$year
-#########################
+# Grafico datos simulados
+plot(year, C, type = "b", lwd = 2, col = "black", main = "", las = 1, ylab = "TamaÃ±o poblacional",
+     xlab = "AÃ±o", cex.lab = 1.2, cex.axis = 1.2)
+lines(year, expected.count, type = "l", lwd = 3, col = "red")
+
+plot(year, log.expected.count, type = "b", lwd = 2, col = "black", main = "", las = 1, ylab = "Log TamaÃ±o poblacional",
+     xlab = "AÃ±o", cex.lab = 1.2, cex.axis = 1.2)
 
 ##############################
 #####  GLM Poisson      ######
@@ -80,9 +82,13 @@ raw.year = data$year
 fm <- glm(C ~ year + I(year^2) + I(year^3), family = poisson, data = data)
 summary(fm)
 
+
 ##############################
 #####  Analisis en JAGS ######
 ##############################
+
+### Cargar Paquete 
+library(jagsUI)    #paquete JAGS
 
 # Especificar modelo en JAGS
 sink("GLM_Poisson.jags")
@@ -99,7 +105,8 @@ beta3 ~ dunif(-10, 10)
 for (i in 1:n){                       #desde 1 hasta n observaciones (n=40)
    C[i] ~ dpois(lambda[i])          # 1. Distribucion de parte aleatoria
    log(lambda[i]) <- log.lambda[i]  # 2. Funcion de enlace (Link function)
-   log.lambda[i] <- alpha + beta1 * year[i] + beta2 * pow(year[i],2) + beta3 * pow(year[i],3)   # 3. Predictor Lineal
+   log.lambda[i] <- alpha + beta1 * year[i] + beta2 * pow(year[i],2) + 
+   beta3 * pow(year[i],3)            # 3. Predictor Lineal
    } #i
 }
 ",fill = TRUE)
@@ -107,7 +114,7 @@ sink()
 
 # Unir datos
 # Aca se utiliza la variable sin estandarizar, que muchas veces hace que el modelo no funcione, que no corra
-# win.data <- list(C = data$C, n = length(data$C), year = data$year)
+win.data <- list(C = C, n = length(C), year = year)
 
 # Unir datos
 # con variable estandarizada!
@@ -128,22 +135,17 @@ nb <- 1000
 nc <- 3
 
 # Call JAGS from R (BRT < 1 min)
-out <- jags(data = win.data, inits = inits, parameters.to.save = params, model.file = "GLM_Poisson.jags", n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb)
+out <- jags(data = win.data, inits = inits, parameters.to.save = params, 
+            model.file = "GLM_Poisson.jags", n.chains = nc, n.thin = nt, 
+            n.iter = ni, n.burnin = nb)
 print(out, dig = 3)
 plot(out)
-
 traceplot(out)
 
-# New MCMC settings with essentially no burnin
-ni <- 100
-nt <- 1
-nb <- 1
 
-# Call JAGS from R (BRT < 1 min)
-tmp <- jags(data = win.data, inits = inits, parameters.to.save = params, model.file = "GLM_Poisson.jags", n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb)
+##### Como se verÃ­an las cadenas MCMC sin convergencia?
 
-traceplot(tmp)
-
+# graficamos los resultados anteriores 
 plot(1:40, data$C, type = "b", lwd = 2, col = "black", main = "", las = 1, ylab = "Population size", xlab = "Year")
 R.predictions <- predict(glm(C ~ year + I(year^2) + I(year^3), family = poisson, data = data), type = "response")
 lines(1:40, R.predictions, type = "l", lwd = 3, col = "green")
@@ -153,11 +155,9 @@ JAGS.predictions <- out$mean$lambda
 lines(1:40, JAGS.predictions, type = "l", lwd = 3, col = "blue", lty = 2)
 cbind(R.predictions, JAGS.predictions)
 
-
-# An option in JAGS to see the traceplots of all parameters is the following:
-traceplot(tmp)
-
-
+###################################################
+###TRABAJAR ESTE EJEMPLO EN CLASE??################
+###agregar otros ejemplos?################
 ###################################################
 ### GLM Poisson GLM en JAGS y frecuentista
 ### Datos reales de Halcon peregrino 
