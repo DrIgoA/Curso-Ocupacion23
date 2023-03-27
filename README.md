@@ -45,9 +45,9 @@ verosimilitud - Precisión, sesgo, exactitud.
 
 - Ejercicios con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
     - [Ejemplos Modulo 3 - Iniciación a R-JAGS](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Ejemplo%20Modulo3.md)
-    - [Ejemplos Modulo 3](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Script%20Modulo%203%20-%20I.R)
-    - 
-
+    - [Ejemplos Modulo 3 I](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Modulo%203%20-%20Ejemplo.R)
+    - [Ejemplos Modulo 3 II](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Script%20Modulo%203%20-%20I.R)
+ 
 
 ### DIA 2
 - Modelos lineales generalizados con enfoque Bayesiano: Uso de interfase RJAGS para análisis Bayesianos – GLM – Introducción a efectos aleatorios y GLMM – GLMM Poisson y Binomial
