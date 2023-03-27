@@ -45,8 +45,8 @@ verosimilitud - Precisión, sesgo, exactitud.
 
 - Ejercicios con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
     - [Ejemplos Modulo 3 - Iniciación a R-JAGS](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Ejemplo%20Modulo3.md)
-    - [Script para trabajar en R](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Script%20Modulo%203%20-%20I.R)
-    - Agregar enlace R para trabajar en script modelo jerarquico de las ranas y revisar el archivo https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/ejemplos-nuevo.R
+    - [Ejemplos Modulo 3](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Script%20Modulo%203%20-%20I.R)
+    - 
 
 
 ### DIA 2
