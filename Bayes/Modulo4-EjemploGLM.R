@@ -198,3 +198,92 @@ JAGS.predictions <- out1$BUGSoutput$mean$lambda
 lines(Year, JAGS.predictions, type = "l", lwd = 3, col = "blue", lty = 2)
 
 
+
+
+##############################
+#####  GLM Binomial     ######
+##############################
+
+# 3.5. Binomial GLM for modeling bounded counts or proportions
+# 3.5.1. Generation and analysis of simulated data
+nyears = 40 
+alpha = 0 
+beta1 = -0.1 
+beta2 = -0.9
+  # nyears: Number of years
+  # alpha, beta1, beta2: coefficients
+  
+  # Generate untransformed and transformed values of time covariate
+  year <- 1:nyears
+  YR <- (year-round(nyears/2)) / (nyears / 2)
+  
+  # Generate values of binomial totals (N)
+  N <- round(runif(nyears, min = 20, max = 100))
+  
+  # Signal: build up systematic part of the GLM
+  exp.p <- plogis(alpha + beta1 * YR + beta2 * (YR^2))
+  
+  # Noise: generate random part of the GLM: Binomial noise around expected counts (which is N)
+  C <- rbinom(n = nyears, size = N, prob = exp.p)
+  
+  # Plot simulated data
+  plot(year, C/N, type = "b", lwd = 2, col = "black", main = "", las = 1, 
+       ylab = "Proportion successful pairs", xlab = "Year", ylim = c(0, 2))
+  points(year, exp.p, type = "l", lwd = 3, col = "red")
+  
+  
+#####
+  
+nyears = 40
+alpha = 1
+beta1 = -0.03
+beta2 = -0.9
+
+
+###################### Binomial model
+
+# Specify model in BUGS language
+sink("GLM_Binomial.txt")
+cat("
+model {
+
+# Priors
+alpha ~ dnorm(0, 0.001)
+beta1 ~ dnorm(0, 0.001)
+beta2 ~ dnorm(0, 0.001)
+
+# Likelihood
+for (i in 1:nyears){
+   C[i] ~ dbin(p[i], N[i])          # 1. Distribution for random part
+   logit(p[i]) <- alpha + beta1 * year[i] + beta2 * pow(year[i],2) # link function and linear predictor
+   }
+}
+",fill = TRUE)
+sink()
+
+# Bundle data
+win.data <- list(C = C, N = N, nyears = length(C), year = YR)
+
+# Initial values
+inits <- function() list(alpha = runif(1, -1, 1), beta1 = runif(1, -1, 1), beta2 = runif(1, -1, 1))
+
+# Parameters monitored
+params <- c("alpha", "beta1", "beta2", "p")
+
+# MCMC settings
+ni <- 2500
+nt <- 2
+nb <- 500
+nc <- 3
+
+# Call WinBUGS from R (BRT < 1 min)
+out <- jags(data = win.data, inits = inits, parameters.to.save = params, 
+            model.file = "GLM_Binomial.txt", n.chains = nc, n.thin = nt, n.iter = ni,
+            n.burnin = nb)
+
+# Plot predictions
+WinBUGS.predictions <- out$mean$p
+lines(1:length(data$C), WinBUGS.predictions, type = "l", lwd = 3, col = "blue", lty = 2)
+
+
+
