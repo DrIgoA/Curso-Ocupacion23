@@ -228,12 +228,12 @@ beta2 = -0.9
   
   # Plot simulated data
   plot(year, C/N, type = "b", lwd = 2, col = "black", main = "", las = 1, 
-       ylab = "Proportion successful pairs", xlab = "Year", ylim = c(0, 2))
+       ylab = "Proporción de pares exitosos", xlab = "Año", ylim = c(0, 1))
   points(year, exp.p, type = "l", lwd = 3, col = "red")
   
   
-#####
-  
+##### Ejemplo
+
 nyears = 40
 alpha = 1
 beta1 = -0.03
@@ -282,8 +282,172 @@ out <- jags(data = win.data, inits = inits, parameters.to.save = params,
             n.burnin = nb)
 
 # Plot predictions
-WinBUGS.predictions <- out$mean$p
-lines(1:length(data$C), WinBUGS.predictions, type = "l", lwd = 3, col = "blue", lty = 2)
+predictions <- out$mean$p
+lines(1:length(C), predictions, type = "l", lwd = 3, col = "blue", lty = 2)
+
+
+
+
+###### completar ejemplos GLM
+
+###### ejemplos GLMM random slopes and intercepts
+
+
+https://github.com/mikemeredith/AHM_code
+
+
+
+
+### GLMM normal
+
+## generar datos
+n.groups<-56
+n.sample<-10
+n<-n.groups*n.sample
+
+pop<-gl(n=n.groups, k=n.sample)
+
+#longitud del cuerpo (cm)
+largo.original<-runif(n, 45,70)
+mn<-mean(largo.original)
+sd<-sd(largo.original)
+largo<-(largo.original-mn)/sd
+hist(length)
+
+Xmat<-model.matrix(~pop*largo-1-largo)
+
+intercept.mean<-230
+intercept.sd<-20
+slope.mean<-60
+slope.sd<-30
+
+intercept.effects<-rnorm(n=n.groups, mean=intercept.mean, sd=intercept.sd)
+slope.effects<-rnorm(n=n.groups, mean=slope.mean, sd=slope.sd)
+all.effects<-c(intercept.effects,slope.effects)
+
+lin.pred<-Xmat[,]%*%all.effects
+eps<-rnorm(n=n, mean=0, sd=30)
+mass<-lin.pred+eps
+
+hist(mass)
+library(lattice)
+xyplot(mass~largo|pop)
+
+
+### RANDOM INTERCPTS, COMMON SLOPE
+sink("lme.model1.txt")
+cat("
+model{
+
+mu.int~dnorm(0,0.001)
+tau.int<-1/(sigma.int*sigma.int)
+sigma.int~dunif(0,100)
+
+beta~dnorm(0,0.001)
+tau<-1/(sigma*sigma)
+sigma~dunif(0,100)
+
+#previas
+for (i in 1:ngroups){
+alpha[i]~dnorm(mu.int, tau.int)
+}
+
+#likelihood
+for(i in 1:n){
+mass[i]~dnorm(mu[i], tau)
+mu[i]<- alpha[pop[i]]+beta*largo[i]
+}
+}
+    ", fill=TRUE)
+sink()
+
+# datos para jags
+jags.data<-list(mass=as.numeric(mass), pop=as.numeric(pop), 
+                largo=largo,ngroups=max(as.numeric(pop)), n=n)
+
+# inits 
+inits<-function(){list(alpha=rnorm(n.groups,0,2), beta=rnorm(1,1,1), 
+                       mu.int=rnorm(1,0,1), sigma.int=rlnorm(1), sigma=rlnorm(1))}
+
+parameters<-c("alpha","beta","mu.int","sigma.int","sigma")
+
+ni<-2000
+nb<-500
+nt<-2
+nc<-3
+
+out<-jags(jags.data, inits, parameters, "lme.model1.txt", n.thin = nt, n.chains = nc,
+          n.burnin = nb, n.iter = ni)
+
+largo.pred<-seq(-2,2,,1000)
+pred<-array(NA,dim=c(1000,56))
+
+for(i in 1:56){
+  pred[,i]<-out$mean$alpha[i]+out$mean$beta*largo.pred
+}
+
+matplot(largo.pred,pred, col = "grey", xlab = "largo", ylab = "masa",type="l",lty = 1)
+lines(largo.pred, out$mean$mu.int+out$mean$beta*largo.pred, col="black", lwd=3)
+
+
+### RANDOM INTERCPTS, RANDOM SLOPES
+sink("lme.model2.txt")
+cat("
+model{
+
+mu.int~dnorm(0,0.001)
+tau.int<-1/(sigma.int*sigma.int)
+sigma.int~dunif(0,100)
+
+mu.slope~dnorm(0,0.001)
+tau.slope<-1/(sigma.slope*sigma.slope)
+sigma.slope~dunif(0,100)
+
+tau<-1/(sigma*sigma)
+sigma~dunif(0,100)
+
+#previas
+for (i in 1:ngroups){
+alpha[i]~dnorm(mu.int, tau.int)
+beta[i]~ dnorm(mu.slope, tau.slope)
+}
+
+#likelihood
+for(i in 1:n){
+mass[i]~dnorm(mu[i], tau)
+mu[i]<- alpha[pop[i]]+beta[pop[i]]*largo[i]
+}
+}
+    ", fill=TRUE)
+sink()
+
+# datos para jags
+jags.data<-list(mass=as.numeric(mass), pop=as.numeric(pop), 
+                largo=largo,ngroups=max(as.numeric(pop)), n=n)
+
+# inits 
+inits<-function(){list(alpha=rnorm(n.groups,0,2), beta=rnorm(n.groups,1,1), 
+                       mu.int=rnorm(1,0,1), sigma.int=rlnorm(1), sigma=rlnorm(1))}
+
+parameters<-c("alpha","beta","mu.int","mu.slope","sigma.int","sigma.slope")
+
+ni<-2000
+nb<-500
+nt<-2
+nc<-3
+
+out<-jags(jags.data, inits, parameters, "lme.model2.txt", n.thin = nt, n.chains = nc,
+          n.burnin = nb, n.iter = ni)
+
+largo.pred<-seq(-2,2,,1000)
+pred<-array(NA,dim=c(1000,56))
+
+for(i in 1:56){
+  pred[,i]<-out$mean$alpha[i]+out$mean$beta[i]*largo.pred
+}
+
+matplot(largo.pred,pred, col = "grey", xlab = "largo", ylab = "masa",type="l",lty = 1)
+lines(largo.pred, out$mean$mu.int+out$mean$mu.slope*largo.pred, col="black", lwd=3)
 
 
 

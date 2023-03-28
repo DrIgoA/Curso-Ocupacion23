@@ -46,7 +46,8 @@ inits <- function() list(lambda = 5)
 
 ## Ranas jerarquico 2~~~~~~~~~~~~~~####
 
-# Diametro promedio de Ã¡rboles en un parque de bosque de eucalipto
+
+# Diámetro promedio de Ãrboles en un parque de bosque de eucalipto
 
 # Incluye previas no informativas, con incertidumbre en la varianza,
 # a diferencia del ejemplo anterior donde se asume que es un valor conocido

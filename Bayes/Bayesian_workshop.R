@@ -361,7 +361,14 @@ str(out)
 mass <- c(25, 14, 68, 79, 64, 139, 49, 119, 111)
 pop <- factor(c(1, 1, 1, 2, 2, 2, 3, 3, 3))
 length <- c(1, 14, 22, 2, 9, 20, 2, 13, 22)
-plot(length, mass, col = c(rep("red", 3), rep("blue", 3), rep("green", 3)), xlim = c(-1, 25), ylim = c(0, 140), cex = 1.5, lwd = 2, frame.plot = FALSE, las = 1, pch = 16, xlab = "Length", ylab = "Mass")
+plot(length, mass, col = c(rep("red", 3), rep("blue", 3), rep("green", 3)), 
+     xlim = c(-1, 25), ylim = c(0, 140), cex = 1.5, lwd = 2, frame.plot = FALSE, 
+     las = 1, pch = 16, xlab = "Length", ylab = "Mass")
+
+
+
+
+
 
 # Fit fixed-effects model, print regression parameter estimates and plot regression lines
 summary(lm <- lm(mass ~ pop-1 + length))
