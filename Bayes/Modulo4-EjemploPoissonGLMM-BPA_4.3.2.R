@@ -64,7 +64,7 @@ nb <- 200
 nc <- 3
 
 # Call JAGS from R (BRT < 1 min)
-out0 <- jags(win.data, inits, params, "GLM0.jags", n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, working.directory = getwd())
+out0 <- jags(win.data, inits, params, "GLM0.jags", n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb)
 
 # Summarize posteriors
 print(out0, dig = 3)
@@ -109,7 +109,7 @@ nb <- 200
 nc <- 3
 
 # Call JAGS from R (BRT < 1 min)
-out1 <- jags(win.data, inits, params, "GLM1.jags", n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, working.directory = getwd())
+out1 <- jags(win.data, inits, params, "GLM1.jags", n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb)
 
 # Summarize posteriors
 print(out1, dig = 2)
