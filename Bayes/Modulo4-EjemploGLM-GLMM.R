@@ -2,7 +2,7 @@
 ###########          Ejemplo GLM y  GLMM         ###########
 ############################################################
 ########              Basado en e:                  ########
-########   K?ry, M., & Schaub, M. (2012). Bayesian  ########
+########   Kery, M., & Schaub, M. (2012). Bayesian  ########
 ########    population analysis using WinBUGS: a    ######## 
 ########          hierarchical perspective.         ######## 
 ########              Academic Press.               ########
@@ -196,8 +196,6 @@ print(out1, dig = 3)
 
 JAGS.predictions <- out1$BUGSoutput$mean$lambda
 lines(Year, JAGS.predictions, type = "l", lwd = 3, col = "blue", lty = 2)
-
-
 
 
 ##############################
