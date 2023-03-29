@@ -53,7 +53,8 @@ verosimilitud - Precisión, sesgo, exactitud.
 - Modelos lineales generalizados con enfoque Bayesiano: Uso de interfase RJAGS para análisis Bayesianos – GLM – Introducción a efectos aleatorios y GLMM – GLMM Poisson y Binomial
     - [Módulo 4](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%204_Occupacion2023.pdf)
 - Ejercicios de GLM y GLMM con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
-    - [Ejemplos Modulo 4](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Modulo4-EjemploGLM.R)
+    - [Ejemplos Modulo 4, GLM y GLMM](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Modulo4-EjemploGLM-GLMM.R)
+    - [Ejemplos Modulo 4, GLM Poisson] (https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Modulo4-EjemploPoissonGLM-Facu.R)
 
 ### DIA 3
 - Modelos de ocupación para poblaciones: Solo una estación – Con covariables – Estaciones múltiples.
