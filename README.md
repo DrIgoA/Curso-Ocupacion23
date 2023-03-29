@@ -41,7 +41,7 @@ verosimilitud - Precisión, sesgo, exactitud.
 ```
 
 - Introducción al enfoque Bayesiano: Comparación de inferencia frecuentista y Bayesiana - Inferencia Bayesiana y Teorema de Bayes -Componentes - Modelos jerárquicos - Ventajas y desventajas 
-     - [Modulo 3](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%203_Ocupacion2023.pdf) 
+     - [Módulo 3](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%203_Ocupacion2023.pdf) 
 
 - Ejercicios con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
     - [Ejemplos Modulo 3 - Iniciación a R-JAGS](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Ejemplo%20Modulo3.md)
@@ -51,7 +51,9 @@ verosimilitud - Precisión, sesgo, exactitud.
 
 ### DIA 2
 - Modelos lineales generalizados con enfoque Bayesiano: Uso de interfase RJAGS para análisis Bayesianos – GLM – Introducción a efectos aleatorios y GLMM – GLMM Poisson y Binomial
+    - [Módulo 4](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%204_Occupacion2023.pdf)
 - Ejercicios de GLM y GLMM con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
+    - [Ejemplos Modulo 4](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Modulo4-EjemploGLM.R)
 
 ### DIA 3
 - Modelos de ocupación para poblaciones: Solo una estación – Con covariables – Estaciones múltiples.
