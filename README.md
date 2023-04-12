@@ -23,9 +23,9 @@ El objetivo del curso es el de proveer bases teórico-prácticas de métodos cua
 
 ## Requisitos
 - R última versión
-Windows: https://cran.r-project.org/bin/windows/base/
-Ubuntu: https://cran.r-project.org/bin/linux/ubuntu/fullREADME.html#installing-r
-Mac: https://cran.r-project.org/bin/macosx/
+    - Windows: https://cran.r-project.org/bin/windows/base/
+     -  Ubuntu: https://cran.r-project.org/bin/linux/ubuntu/fullREADME.html#installing-r
+     - Mac: https://cran.r-project.org/bin/macosx/
 - Rstudio https://posit.co/download/rstudio-desktop/
 - JAGS https://sourceforge.net/projects/mcmc-jags/
 
@@ -36,7 +36,7 @@ Mac: https://cran.r-project.org/bin/macosx/
 
 - Conceptos básicos de estadística: Tipos de modelos y rol de los modelos en ciencia - Modelos estadísticos - Distribuciones de probabilidad - Probabilidad,
 verosimilitud - Precisión, sesgo, exactitud. 
-    - [Modulo 2_Occupacion2023.pdf](https://github.com/apgoijman/Curso-Ocupacion23/files/10883613/Modulo.2_Occupacion2023.pdf)
+    - [Modulo 2](https://github.com/apgoijman/Curso-Ocupacion23/files/10883613/Modulo.2_Occupacion2023.pdf)
 
 ```diff
  [Modulo 2](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%202_Occupacion2023.pptx)   ## completar este archivo
