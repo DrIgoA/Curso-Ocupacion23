@@ -23,6 +23,10 @@ El objetivo del curso es el de proveer bases teórico-prácticas de métodos cua
 
 ## Requisitos
 - R última versión
+Windows: https://cran.r-project.org/bin/windows/base/
+Ubuntu: https://cran.r-project.org/bin/linux/ubuntu/fullREADME.html#installing-r
+Mac: https://cran.r-project.org/bin/macosx/
+- Rstudio https://posit.co/download/rstudio-desktop/
 - JAGS https://sourceforge.net/projects/mcmc-jags/
 
 ## Programa
