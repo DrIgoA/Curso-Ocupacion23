@@ -57,11 +57,8 @@ verosimilitud - Precisión, sesgo, exactitud.
     - [Ejemplos Modulo 4, GLM Poisson](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Modulo4-EjemploPoissonGLM-Facu.R)
 
 ### DIA 3
-- Modelos de ocupación para poblaciones: Solo una estación – Con covariables – Estaciones múltiples.
-```diff
- [Modulo 5] (https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%205_Ocupacion2023.pptx)
- ** este es la presentacion de la intro a deteccion imperfecta, hay que sumarle la intro de ocupacion
-```
+- Detección imperfecta y modelos de ocupación para poblaciones: Solo una estación – Con covariables.
+    - [Modulo 5](https://github.com/apgoijman/Curso-Ocupacion23/files/11214935/Modulo.5_Occupacion2023.pdf)
 - Ejercicios de ocupación con interfase R-JAGS para análisis con métodos Bayesianos (práctica) y puesta en común.
 - Trabajo práctico en proyectos finales (práctica)
 
@@ -83,7 +80,6 @@ verosimilitud - Precisión, sesgo, exactitud.
 
 ## Modo de evaluación
 La condición de aprobación será el 60% correspondiente a un 6 (seis). La evaluación del curso se realizará a través de un trabajo final que deberán entregar para su corrección 15 días después de finalizado el curso presencial. En la nota final se tendrá en cuenta la participación del estudiante a lo largo del curso y el trabajo final.
-
 
 
 
