@@ -19,7 +19,7 @@
 library(AHMbook)
 # La función "sim.fn" simula ubicaciones de plantas o animales en grillas de 
 # celdas formando un cuadrante de un tamaño específico (quad.size) de acuerdo
-# a una distribución de Possion, donde los organismos están distribuidos al 
+# a una distribución de Poisson, donde los organismos están distribuidos al 
 # azar dentro del cuadrante. El proceso se caracteriza por una constante "intensity",
 # que es el promedio de animales o plantas (puntos) por unidad de área. 
 
