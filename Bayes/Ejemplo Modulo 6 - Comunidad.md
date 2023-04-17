@@ -1,5 +1,5 @@
 ---
-## Guía de un modelo de comunidades con DA en jags 
+# Guía de un modelo de comunidades con DA en jags 
 
 ```
 model {
@@ -8,10 +8,12 @@ model {
 ```
 omega ~ dunif(0,1)
 ```
-### Previa for species-specific effects in occupancy and detection
+### Previas de los efectos especie-específicos en la ocupación y detección
+#### k va de 1 hasta M (M es el número total de especies observadas y "potenciales"
+#### estos hiperparámetros describen a la comunidad donde hay una ordenada (lpsi y lp) de ocupación y detección para cada especie k, y los efectos de las covariables también son modelados para cada especie. Cada uno de esos hiperparámetros, tienen a su vez una media y una precisión
 ```
 for(k in 1:M){
-  lpsi[k] ~ dnorm(mu.lpsi, tau.lpsi)    # Hyperparams describe community
+  lpsi[k] ~ dnorm(mu.lpsi, tau.lpsi)    
   betalpsi1[k] ~ dnorm(mu.betalpsi1, tau.betalpsi1)
   betalpsi2[k] ~ dnorm(mu.betalpsi2, tau.betalpsi2)
   betalpsi3[k] ~ dnorm(mu.betalpsi3, tau.betalpsi3)
