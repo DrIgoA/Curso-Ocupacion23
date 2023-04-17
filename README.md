@@ -71,8 +71,8 @@ verosimilitud - Precisión, sesgo, exactitud.
 ### DIA 4
 - Modelos de Ocupación de comunidades.
 
-    - [Modulo 5](https://github.com/apgoijman/Curso-Ocupacion23/files/11214935/Modulo.6_Occupacion2023.pdf)
-    - [Ejemplos Modulo 6 - Guía de un modelo de comunidades con DA] 
+    - [Modulo 6] (https://github.com/apgoijman/Curso-Ocupacion23/files/11254905/Modulo.6_Occupacion2023.pdf)
+    - [Ejemplos Modulo 6 - Guía de un modelo de comunidades con DA] (https://github.com/apgoijman/Curso-Ocupacion23/files/11254909/Ejemplo.Modulo.6.-.Comunidad.md)
 
 - Ejercicios de ocupación con interfase R-JAGS para análisis con métodos Bayesianos y puesta en común (práctica).
 - Trabajo práctico en proyectos finales (práctica)
@@ -83,6 +83,4 @@ verosimilitud - Precisión, sesgo, exactitud.
 
 ## Modo de evaluación
 La condición de aprobación será el 60% correspondiente a un 6 (seis). La evaluación del curso se realizará a través de un trabajo final que deberán entregar para su corrección 15 días después de finalizado el curso presencial. En la nota final se tendrá en cuenta la participación del estudiante a lo largo del curso y el trabajo final.
-
-
 
