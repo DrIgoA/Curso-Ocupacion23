@@ -1,9 +1,15 @@
-cat("
-model {
+---
+## Guía de un modelo de comunidades con DA en jags 
 
-# Priors
+```
+model {
+```
+### Previa de la meta comunidad
+```
 omega ~ dunif(0,1)
-# Priors for species-specific effects in occupancy and detection
+```
+### Previa for species-specific effects in occupancy and detection
+```
 for(k in 1:M){
   lpsi[k] ~ dnorm(mu.lpsi, tau.lpsi)    # Hyperparams describe community
   betalpsi1[k] ~ dnorm(mu.betalpsi1, tau.betalpsi1)
@@ -93,3 +99,4 @@ betalp1S[1:(nspec+1)] <- betalp1[1:(nspec+1)]
 betalp2S[1:(nspec+1)] <- betalp2[1:(nspec+1)]
 betalp3S[1:(nspec+1)] <- betalp3[1:(nspec+1)]
 }
+```
