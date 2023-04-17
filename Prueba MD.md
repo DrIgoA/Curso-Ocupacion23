@@ -1,7 +1,0 @@
-
-Prueba rmarkdown
-
-```
-library(jagsui)
-```
-
