@@ -11,7 +11,7 @@
 <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/varios/Imagen2.png" width=17% height=17%>    <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/varios/Imagen3.png" width=17% height=17%>   <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/varios/logo_giepco.png" width=17% height=17%>    <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/images.png" width=9% height=9%>
 
 ## Horario
-Lunes a viernes de 8.30 a 12.30hs y de 14 a 19
+Lunes a viernes de 8.30 a 12.15hs y de 1345 a 19hs
 
 ## Objetivos del curso
 El objetivo del curso es el de proveer bases teórico-prácticas de métodos cuantitativos bajo un enfoque Bayesiano para estimar parámetros para el análisis de poblaciones y comunidades de fauna silvestre con modelos jerárquicos. Se hará foco en los métodos de ocupación, que tienen en cuenta la detección imperfecta de flora y fauna silvestre.
