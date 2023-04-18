@@ -1,6 +1,7 @@
 ---
 # Guía de un modelo de comunidades con DA en jags 
 
+Comienzo abriendo el modelo
 ```
 model {
 ```
