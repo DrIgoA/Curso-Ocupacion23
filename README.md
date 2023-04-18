@@ -10,6 +10,9 @@
 
 <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/varios/Imagen2.png" width=17% height=17%>    <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/varios/Imagen3.png" width=17% height=17%>   <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/varios/logo_giepco.png" width=17% height=17%>    <img src="https://github.com/apgoijman/Curso-Ocupacion23/blob/main/images.png" width=9% height=9%>
 
+## Horario
+Lunes a viernes de 8.30-12.15hs y de 13.45-19hs
+
 ## Objetivos del curso
 El objetivo del curso es el de proveer bases teórico-prácticas de métodos cuantitativos bajo un enfoque Bayesiano para estimar parámetros para el análisis de poblaciones y comunidades de fauna silvestre con modelos jerárquicos. Se hará foco en los métodos de ocupación, que tienen en cuenta la detección imperfecta de flora y fauna silvestre.
 
@@ -72,7 +75,7 @@ verosimilitud - Precisión, sesgo, exactitud.
 - Modelos de Ocupación de comunidades.
 
     - [Modulo 6](https://github.com/apgoijman/Curso-Ocupacion23/files/11254905/Modulo.6_Occupacion2023.pdf)
-    - [Ejemplos Modulo 6 - Guía de un modelo de comunidades con DA](https://github.com/apgoijman/Curso-Ocupacion23/files/11254909/Ejemplo.Modulo.6.-.Comunidad.md)
+    - [Ejemplos Modulo 6 - Guía de un modelo de comunidades con DA](https://github.com/apgoijman/Curso-Ocupacion23/files/11254909/Ejemplo.Modulo.6.md)
 
 - Ejercicios de ocupación con interfase R-JAGS para análisis con métodos Bayesianos y puesta en común (práctica).
 - Trabajo práctico en proyectos finales (práctica)
