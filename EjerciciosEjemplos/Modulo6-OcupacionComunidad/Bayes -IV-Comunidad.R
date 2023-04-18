@@ -1,17 +1,18 @@
-############################################################
-##### CURSO METODOS CUANTITATIVOS DETECCION IMPERFECTA #####
-###########        UNRC - JUNIO JULIO 2016       ###########
-###########             A. P. GOIJMAN            ###########
-############################################################
-###########       Ejemplo Ocupacion en JAGS      ###########
-###########              Comunidades             ###########
-############################################################
-########              Ejemplos de:                  ########
-########  Applied hierarchical modeling in ecology  ########
-########  Modeling distribution, abundance and      ########
-########  species richness using R and BUGS         ########
-########  Volume 1: Prelude and Static models       ########
-########      Marc Kéry & J. Andy Royle             ########
+##########################################################
+##### CURSO Modelado y estimación de ocupación para  #####
+#####  poblaciones y comunidades de especies bajo    #####
+#####           enfoque Bayesiano.                   #####
+#######      CCT Mendoza - ABRIL 2023                #####
+##########################################################
+###########       Ejemplo Ocupación en JAGS      #########
+###########              Comunidades             #########
+##########################################################
+########              Ejemplos de:                  ######
+########  Applied hierarchical modeling in ecology  ######
+########  Modeling distribution, abundance and      ######
+########  species richness using R and BUGS         ######
+########  Volume 1: Prelude and Static models       ######
+########      Marc Kéry & J. Andy Royle             ######
 ############################################################
 
 ######################################
@@ -22,7 +23,7 @@ rm(list=ls(all=TRUE))
 ###################################### 
 ### Elegir directorio de trabajo
 ######################################
-setwd("C:/Users/Andrea/Dropbox/TEACHING/APG_MetCuant_UNRC_Jun2016/Docentes/Ejercicios/Bayes")
+setwd("C:\\Users\\andrea\\Documents\\GitHub\\Curso-Ocupacion23\\EjerciciosEjemplos\\Modulo6-OcupacionComunidad")
 
 ######################################
 ### Cargar Paquetes 
@@ -43,14 +44,13 @@ dim(data)
 ###### Aqui comienzan a procesar los datos y reorganizarlos
 
 # Create various species lists (based on English names and systematic order)
-species.list <- levels(data$engname)   # alphabetic list
+species.list <- levels(as.factor(data$engname))   # alphabetic list
 spec.name.list <- tapply(data$specid, data$engname, mean) # species ID
 spec.id.list <- unique(data$specid)    # ID list
 ordered.spec.name.list <- spec.name.list[order(spec.name.list)] # ID-order list
 
-COUNTS <- cbind(data$count141, data$count142, data$count143)  # Counts 2014
-DET <- COUNTS
-DET[DET > 1] <- 1       # now turned into detection/nondetection data
+DET <- cbind(data$count141, data$count142, data$count143)  # Counts 2014
+DET[DET > 1] <- 1       # Todo lo que es mayor a 1, lo convierto en 1 (datos para detección/no detección)
 
 # Put detection data into 3D array: site x rep x species
 nsite <- 267                    # number of sites in Swiss MHB
@@ -97,7 +97,8 @@ tmp <- apply(Y, c(1,3), max, na.rm = TRUE)
 tmp[tmp == "-Inf"] <- NA
 sort(C <- apply(tmp, 1, sum))     # Compute and print sorted species counts
 
-plot(table(C), xlim = c(0, 60), xlab = "Observed number of species", ylab = "Number of quadrats", frame = F)
+plot(table(C), xlim = c(0, 60), xlab = "Observed number of species", 
+     ylab = "Number of quadrats", frame = F)
 abline(v = mean(C, na.rm = TRUE), col = "blue", lwd = 3)
 
 ######################################
