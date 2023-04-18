@@ -25,7 +25,7 @@ for(k in 1:M){
 }
 ```
 ### Hiperprevias de los parámetros de la comunidad. 
-Puede haber muchas opciones (normal, uniforme). Eso es bastante subjetivo y muchas veces hay que probar distintas opciones para asegurarse que haya convergencia del modelo. A veces saltan errores y simplemente hayq ue cambiar de distribución o los límites de las mismas.
+Puede haber muchas opciones (normal, uniforme). Eso es bastante subjetivo y muchas veces hay que probar distintas opciones para asegurarse que haya convergencia del modelo. A veces saltan errores y simplemente hay que cambiar de distribución o los límites de las mismas.
 ```
 # Modelo de ocupación
 mu.lpsi ~ dnorm(0,0.01)
@@ -61,7 +61,7 @@ for(k in 1:M){
 }
 ```
 ### Modelo Ecológico para la ocurrencia verdadera (modelo de proceso). 
-Se modela la ocupación **psi** por sitio **i** que va desde 1 hasta número de sitios (nsite), y por especie. Esto se hace dentro de los loops por especie y por sitio.
+Se modela la ocupación **psi** por sitio **i** que va desde 1 hasta número de sitios (nsite), y por especie **k**. Esto se hace dentro de los loops por especie y por sitio.
 En este caso las covariables tienen valores por sitio **i** y los parámetros para cada especie **k**
 ```
 for(k in 1:M){
