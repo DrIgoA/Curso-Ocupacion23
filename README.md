@@ -75,8 +75,8 @@ verosimilitud - Precisión, sesgo, exactitud.
 - Modelos de Ocupación de comunidades.
 
     - [Modulo 6](https://github.com/apgoijman/Curso-Ocupacion23/files/11254905/Modulo.6_Occupacion2023.pdf)
-    - [Ejemplos Modulo 6 - Guía de un modelo de comunidades con DA](https://github.com/apgoijman/Curso-Ocupacion23/files/11254909/Ejemplo.Modulo.6.md)
-
+    - [Ejemplos Modulo 6 - Guía de un modelo de comunidades con DA](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Ejemplo%20Modulo%206.md)
+    
 - Ejercicios de ocupación con interfase R-JAGS para análisis con métodos Bayesianos y puesta en común (práctica).
 - Trabajo práctico en proyectos finales (práctica)
 
