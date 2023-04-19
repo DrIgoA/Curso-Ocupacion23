@@ -1,13 +1,20 @@
-############################################################
-###########          Ejemplo Muestreo            ###########
-############################################################
-########              Basado en                     ########
-########      Kery, M., & Royle, J. A. (2016).      ########
-########       Applied Hierarchical Modeling        ######## 
-########              in Ecology                    ######## 
-########                Volume 1                    ########
-############################################################
- 
+##########################################################
+##### CURSO Modelado y estimación de ocupación para  #####
+#####  poblaciones y comunidades de especies bajo    #####
+#####           enfoque Bayesiano.                   #####
+#######      CCT Mendoza - ABRIL 2023                #####
+##########################################################
+###########           Ejemplo Muestreo           #########
+###########                                      #########
+##########################################################
+########              Ejemplos de:                  ######
+########  Applied hierarchical modeling in ecology  ######
+########  Modeling distribution, abundance and      ######
+########  species richness using R and BUGS         ######
+########  Volume 1: Prelude and Static models       ######
+########      Marc Kéry & J. Andy Royle             ######
+##########################################################
+
 # La siguiente simulación permite experimentar con la relación entre patrones de 
 # puntos, la ocurrencia y abundancia de organismos en un área determinada en 
 # relación a los sistemas de muestreos seleccionados para poder hacer el 

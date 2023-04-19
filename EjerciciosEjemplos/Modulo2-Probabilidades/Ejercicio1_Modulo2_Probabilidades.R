@@ -1,14 +1,12 @@
-#====================================#
-#       Modelado y estimación        #
-#    de ocupación para poblaciones   #
-#      y comunidades de especies     #
-#       bajo enfoque Bayesiano       #
-#                                    #
-#            Módulo 2                #
-#          Ejercicio 1               #
-#                                    #
-#         Probabilidades             #
-# ===================================#
+##########################################################
+##### CURSO Modelado y estimación de ocupación para  #####
+#####  poblaciones y comunidades de especies bajo    #####
+#####           enfoque Bayesiano.                   #####
+#######      CCT Mendoza - ABRIL 2023                #####
+##########################################################
+###########         Ejemplo 1 - Módulo 2         #########
+###########             Probabilidades           #########
+##########################################################
 
 # Para las funciones de probabilidad estándares, en r hay funciones que permiten
 # generar valores dentro de esa probabilidad (r), calcular probablidades (d),
@@ -49,3 +47,5 @@ ppois(5, lambda = 3)
 # ---------#
 #  Normal  #
 # ---------#
+# 
+# 
