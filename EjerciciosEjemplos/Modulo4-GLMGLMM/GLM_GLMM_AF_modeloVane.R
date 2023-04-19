@@ -161,21 +161,17 @@ nb <- 1000
 nc <- 3
 
 # Call JAGS from R (BRT < 1 min)
-#out_random_ord <- jags(data = win.data, inits = inits, parameters.to.save = params,
- #                      model.file = "GLM_normal_random_ordenada.jags",
-  #                     n.chains = nc, n.thin = nt,
-   #                    n.iter = ni, n.burnin = nb)
+out_random_ord <- jags(data = win.data, inits = inits, parameters.to.save = params,
+                        model.file = "GLM_normal_random_ordenada.jags",
+                        n.chains = nc, n.thin = nt,
+                        n.iter = ni, n.burnin = nb)
 
 save(out_random_ord, file = "out_random_ordenada")
-load("~/Documentos/TRABAJO/Curso Ocupacion Mendoza/out_random_ordenada")
+load("~/Documentos/TRABAJO/Curso Ocupacion Mendoza/out_random_ordenada") #ruta de acceso al archivo
 
 out_random_ord 
 
 library("denstrip")
-
-#1 cv
-#2 cm 
-
 plot(out_random_ord$beta0, xlim = c(-20,80), ylim =c(0.5,4.5), xlab="", type ="n",
      axes =F, main = "Ordenada por especie - fijas")
 axis(1)
