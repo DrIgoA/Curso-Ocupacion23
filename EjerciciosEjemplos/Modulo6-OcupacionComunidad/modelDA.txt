@@ -1,40 +1,40 @@
 
 model {
 
-# Priors to describe heterogeneity among species in community
-for(k in 1:M){                  # Loop over all species in augmented list
+# Previas de la comunidad
+for(k in 1:M){                  # Loop sobre especies
   lpsi[k] ~ dnorm(mu.lpsi, tau.lpsi)
   lp[k] ~ dnorm(mu.lp, tau.lp)
 }
 
-# Hyperpriors to describe full community
-omega ~ dunif(0,1)              # Data augmentation or 'occupancy' parameter
-mu.lpsi ~ dnorm(0,0.001)        # Community mean of occupancy (logit)
-mu.lp ~ dnorm(0,0.001)          # Community mean of detection (logit)
+# Hiperprevias de community
+omega ~ dunif(0,1)              
+mu.lpsi ~ dnorm(0,0.001)        
+mu.lp ~ dnorm(0,0.001)          
 tau.lpsi <- pow(sd.lpsi, -2)
-sd.lpsi ~ dunif(0,5)            # Species heterogeneity in logit(psi)
+sd.lpsi ~ dunif(0,5)            
 tau.lp <- pow(sd.lp, -2)
-sd.lp ~ dunif(0,5)              # Species heterogeneity in logit(p)
+sd.lp ~ dunif(0,5)              
 
-# Superpopulation process:this is the 'paramater expansion' part of PX-DA
+# proceso de superpoblacion
 for(k in 1:M){
-  w[k] ~ dbern(omega)           # Metacommunity membership indicator
-}                               # (or data augmentation variable)
+  w[k] ~ dbern(omega)           # indicador de pertenencia a la metacomunidad
+}                               
 
-# Ecological model for latent occurrence z (process model)
+# Modelo ecologico
 for(k in 1:M){
-  mu.psi[k] <- w[k] * psi[k]    # species not part of community zeroed out for z
+  mu.psi[k] <- w[k] * psi[k]    # las especies que no son parte de la comunidad obtienen un cero w
   logit(psi[k]) <- lpsi[k]
   for (i in 1:nsite) {
     z[i,k] ~ dbern(mu.psi[k])
   }
 }
 
-# Observation model for observed detection frequencies
+# Modelo de obsevacion
 for(k in 1:M){
   logit(p[k]) <- lp[k]
   for (i in 1:nsite) {
-    mu.p[i,k] <- z[i,k] * p[k]  # non-occurring species are zeroed out for p
+    mu.p[i,k] <- z[i,k] * p[k]  # las especies que no ocurren tienen 0 en z
     Yaug[i,k] ~ dbin(mu.p[i,k], nrep[i])
   }
 }

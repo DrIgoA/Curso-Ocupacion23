@@ -35,144 +35,112 @@ library(jagsUI)    #paquete JAGS
 ######################################
 ## Datos del Swiss breeding bird survey MHB
 # Leemos los datos y los revisamos
-data <- read.csv("MHB_2014.csv", header = T, sep = ";", dec= ".")
+data <- read.csv("MHB_2014.csv", header = T, sep = ",", dec= ".")
 
 str(data)   
 head(data)
 dim(data)
 
+# en este caso podemos decir que los datos estan ingresados en la BD de manera longitudinal los sitios y 
+# las especies, pero las repeticiones están por columnas. Cada especie esta una abajo de la otra
+
 ###### Aqui comienzan a procesar los datos y reorganizarlos
 
-# Create various species lists (based on English names and systematic order)
-species.list <- levels(as.factor(data$engname))   # alphabetic list
-spec.name.list <- tapply(data$specid, data$engname, mean) # species ID
-spec.id.list <- unique(data$specid)    # ID list
-ordered.spec.name.list <- spec.name.list[order(spec.name.list)] # ID-order list
+# Acá crean varias listas de especies (basadas en los nombres en inglés y ordenes)
+species.list <- levels(as.factor(data$engname))   # lista por orden alfabético
+spec.name.list <- tapply(data$specid, data$engname, mean) # ID de las especies
+spec.id.list <- unique(data$specid)    # lista ID
+ordered.spec.name.list <- spec.name.list[order(spec.name.list)] # lista de ID en orden
 
-DET <- cbind(data$count141, data$count142, data$count143)  # Counts 2014
+DET <- cbind(data$count141, data$count142, data$count143)  # Conteos
 DET[DET > 1] <- 1       # Todo lo que es mayor a 1, lo convierto en 1 (datos para detección/no detección)
 
-# Put detection data into 3D array: site x rep x species
-nsite <- 267                    # number of sites in Swiss MHB
-nrep <- 3                       # number of replicate surveys per season
-nspec <- length(species.list)   # 158 species occur in the 2014 data
+# Ponen los datos de deteccion en en arreglo 3D: sitio x rep x especie
+nsite <- 267                    # numero de sitios en Swiss MHB
+nrep <- 3                       # numero de repeticiones por temporada
+nspec <- length(species.list)   # 126 especies
 
+# armo el array para meter el loop
 Y <- array(NA, dim = c(nsite, nrep, nspec))
+
+# Esto es un loop para cada conjunto de datos
+# lo que hace es rellenar para cada una de las especies con las filas que correspondan
+# podemos probar con i=1 o 158 ((i-1)*nsite+1)) se agrega el +1 porque si no tomaría datos 
+# de la especie anterior
+
 for(i in 1:nspec){
    Y[,,i] <- DET[((i-1)*nsite+1):(i*nsite),]
 }
 dimnames(Y) <- list(NULL, NULL, names(ordered.spec.name.list))
 
-# Check data for one species, and pull them out from 3D array
-which(names(ordered.spec.name.list) == "Common Chaffinch")
-tmp <- Y[,,which(names(ordered.spec.name.list) == "Common Chaffinch")]
+
+# Chequear los datos de una especie y "llamarlos" del array 3D
+which(names(ordered.spec.name.list) == "Common Rosefinch")
+tmp <- Y[,,which(names(ordered.spec.name.list) == "Common Rosefinch")]
 dim(tmp)
 
-# Frequency distribution of number of surveys per site in chosen year
-table(nsurveys <- apply(Y[,,1], 1, function(x) sum(!is.na(x))))
+# Distribucion de frecuencias de numero de muestreos por sitio
+# aqui veo que 1 sitio no tuvo muestreos
+ table(nsurveys <- apply(Y[,,1], 1, function(x) sum(!is.na(x))))
 
-# Which site has NA data in 2014 ?
+# Con esto identifico cual es el sitio que no tuvo muestreo
 (NAsites <- which(nsurveys == 0) )
 
-# Observed number of occupied sites
-tmp <- apply(Y, c(1,3), max, na.rm = TRUE)
-tmp[tmp == -Inf] <- NA         # Only 266 quadrats surveyed in 2014
-sort(obs.occ <- apply(tmp, 2, sum, na.rm = TRUE))
 
-# Plot species 'occurrence frequency' distribution (not shown)
-plot(sort(obs.occ), xlab = "Species number", ylab = "Number of quads with detections")
-
-# Drop data from species that were not observed in 2014
-toss.out <- which(obs.occ == 0)
-Y <- Y[,,-toss.out]
-obs.occ <- obs.occ[-toss.out]
-
-# Redefine nspec as the observed # species: 145
-( nspec <- dim(Y)[3] )
-
-str(Y)
-
-# Get observed number of species per site
+# Numero de especies observadas por sitio 
 tmp <- apply(Y, c(1,3), max, na.rm = TRUE)
 tmp[tmp == "-Inf"] <- NA
 sort(C <- apply(tmp, 1, sum))     # Compute and print sorted species counts
 
-plot(table(C), xlim = c(0, 60), xlab = "Observed number of species", 
-     ylab = "Number of quadrats", frame = F)
+par(mfrow=c(1,1))
+
+plot(table(C), xlim = c(0, 60), xlab = "Numero de especies observadas", 
+     ylab = "Numero de cuadrantes", frame = F)
 abline(v = mean(C, na.rm = TRUE), col = "blue", lwd = 3)
-
-######################################
-### Covariables 
-######################################
-
-# Get covariates and standardise them
-# Quadrat elevation and forest cover
-orig.ele <- data$elev[1:nsite]
-(mean.ele <- mean(orig.ele, na.rm = TRUE))
-(sd.ele <- sd(orig.ele, na.rm = TRUE))
-ele <- (orig.ele - mean.ele) / sd.ele
-orig.forest <- data$forest[1:nsite]
-(mean.forest <- mean(orig.forest, na.rm = TRUE))
-(sd.forest <- sd(orig.forest, na.rm = TRUE))
-forest <- (orig.forest - mean.forest) / sd.forest
-
-# Average date and duration of survey
-tmp <- cbind(data$date141, data$date142, data$date143)[1:nsite,] 
-orig.mdate <- apply(tmp, 1, mean, na.rm = TRUE)
-(mean.mdate <- mean(orig.mdate[-NAsites]))   # drop unsurved site
-(sd.mdate <- sd(orig.mdate[-NAsites]))
-mdate <- (orig.mdate - mean.mdate) / sd.mdate
-mdate[NAsites] <- 0                 # impute mean for missing
-
-tmp <- cbind(data$dur141, data$dur142, data$dur143)[1:nsite,] 
-orig.mdur <- apply(tmp, 1, mean, na.rm = TRUE)
-(mean.mdur <- mean(orig.mdur[-NAsites]))
-(sd.mdur <- sd(orig.mdur[-NAsites]))
-mdur <- (orig.mdur - mean.mdur) / sd.mdur
-mdur[NAsites] <- 0                  # impute mean for missing
 
 ######################################################
 ########     Modelo de Dorazio-Royle (DR)     ########
 ########    para ocupacion de comunidades     ########
 ########        con aumento de datos          ########
+########           sin covariables            ########
 ######################################################
 
-# Collapse 3D detection/nondetection data to 2D detection frequencies
-Ysum <- apply(Y, c(1,3), sum, na.rm = T) # Collapse to detection frequency
-Ysum[NAsites,] <- NA                     # Have to NA out sites with NA data
+# Colapsar los datos 3D de deteccion/no deteccion a frecuencias de deteccion 2D
+Ysum <- apply(Y, c(1,3), sum, na.rm = T) # 
+Ysum[NAsites,] <- NA                     # los que tienen sitios NA, ponerles NA
 
-# Augment data set (DA part)
-nz <- 150                # Number of potential species in superpopulation
-M <- nspec + nz          # Size of augmented data set ('superpopulation')
-Yaug <- cbind(Ysum, array(0, dim=c(nsite, nz))) # Add all zero histories
+# Aumentar set de datos (DA - data augmentation)
+nz <- 80                # Numero de especies potenciales en la superpoblacion
+M <- nspec + nz          # Tamaño del data set aumentado ('superpoblacion')
+Yaug <- cbind(Ysum, array(0, dim=c(nsite, nz))) # Agregar historias con ceros
 
-# Bundle and summarize data set
+# unir y llamar al set de datos
 str( win.data <- list(Yaug = Yaug, nsite = nrow(Ysum), nrep = data$nsurvey[1:nsite], M = M, nspec = nspec, nz = nz) )
 
-# Specify model in BUGS language
-sink("model9.txt")
+# Especificar el modelo en lenguaje JAGS
+sink("modelDA.txt")
 cat("
 model {
 
-# Priors to describe heterogeneity among species in community
-for(k in 1:M){                  # Loop over all species in augmented list
+# Previas de la comunidad
+for(k in 1:M){                  # Loop sobre especies
   lpsi[k] ~ dnorm(mu.lpsi, tau.lpsi)
   lp[k] ~ dnorm(mu.lp, tau.lp)
 }
 
-# Hyperpriors to describe full community
-omega ~ dunif(0,1)              # Data augmentation or 'occupancy' parameter
-mu.lpsi ~ dnorm(0,0.001)        # Community mean of occupancy (logit)
-mu.lp ~ dnorm(0,0.001)          # Community mean of detection (logit)
+# Hiperprevias de community
+omega ~ dunif(0,1)              
+mu.lpsi ~ dnorm(0,0.001)        
+mu.lp ~ dnorm(0,0.001)          
 tau.lpsi <- pow(sd.lpsi, -2)
-sd.lpsi ~ dunif(0,5)            # Species heterogeneity in logit(psi)
+sd.lpsi ~ dunif(0,5)            
 tau.lp <- pow(sd.lp, -2)
-sd.lp ~ dunif(0,5)              # Species heterogeneity in logit(p)
+sd.lp ~ dunif(0,5)              
 
-# Superpopulation process:this is the 'paramater expansion' part of PX-DA
+# proceso de superpoblacion
 for(k in 1:M){
-  w[k] ~ dbern(omega)           # Metacommunity membership indicator
-}                               # (or data augmentation variable)
+  w[k] ~ dbern(omega)           # indicador de pertenencia a la metacomunidad
+}                               
 
 # Ecological model for latent occurrence z (process model)
 for(k in 1:M){
@@ -214,14 +182,16 @@ inits <- function() list(z = zst, w = wst, lpsi = rnorm(n = nspec+nz), lp = rnor
 params <- c("mu.lpsi", "sd.lpsi", "mu.lp", "sd.lp", "psi", "p", "Nsite", "Ntotal", "omega", "n0")
 
 # MCMC settings
-ni <- 500   ;   nt <- 2   ;   nb <- 100   ;   nc <- 3
+ni <- 10000   ;   nt <- 10  ;   nb <- 100   ;   nc <- 3;   na <- 10000
 
 # Call JAGS from R (ART 62 min), check convergence and summarize posteriors
-out9 <- jags(win.data, inits, params, "model9.txt", n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, parallel = TRUE)
-par(mfrow = c(2,2)) ; traceplot(out9, c('mu.lpsi', 'sd.lpsi', 'mu.lp', 'sd.lp'))
+outDA <- jags(win.data, inits, params, "modelDA.txt", n.chains = nc, n.thin = nt, 
+              n.iter = ni, n.burnin = nb,n.adapt = na, parallel = TRUE)
+
+par(mfrow = c(2,2)) ; traceplot(outDA, c('mu.lpsi', 'sd.lpsi', 'mu.lp', 'sd.lp'))
 
 
-print(out9, dig = 3)
+print(outDA, dig = 3)
 
 
 # Plot posterior distribution of site-specific species richness (Nsite)
@@ -254,6 +224,22 @@ abline(v = nspec, col = "grey", lwd = 4)
 # 11.7.2 Dorazio-Royle community model with covariates
 # ------------------------------------------------------------------------
 
+
+######################################
+### Covariables 
+######################################
+
+# Llamar a las covariables y estandarizarlas
+# Elevacion y cobertura de bosque
+orig.ele <- data$elev[1:nsite]
+(mean.ele <- mean(orig.ele, na.rm = TRUE))
+(sd.ele <- sd(orig.ele, na.rm = TRUE))
+ele <- (orig.ele - mean.ele) / sd.ele
+orig.forest <- data$forest[1:nsite]
+(mean.forest <- mean(orig.forest, na.rm = TRUE))
+(sd.forest <- sd(orig.forest, na.rm = TRUE))
+forest <- (orig.forest - mean.forest) / sd.forest
+
 # Get survey date and survey duration and standardise both
 # Survey date (this is Julian date, with day 1 being April 1)
 orig.DAT <- cbind(data$date141, data$date142, data$date143)[1:nsite,]
@@ -282,7 +268,8 @@ for(k in (nspec+1):(nspec+nz)){
 }
 
 # Bundle and summarize data
-str(win.data <- list(Y = Yaug, nsite = dim(Y)[1], nrep = dim(Y)[2], nspec = dim(Y)[3], nz = nz, M = nspec + nz, ele = ele, forest = forest, DAT = DAT, DUR = DUR) )
+str(win.data <- list(Y = Yaug, nsite = dim(Y)[1], nrep = dim(Y)[2], nspec = dim(Y)[3], 
+                     nz = nz, M = nspec + nz, ele = ele, forest = forest, DAT = DAT, DUR = DUR) )
 
 
 # Specify model in BUGS language
