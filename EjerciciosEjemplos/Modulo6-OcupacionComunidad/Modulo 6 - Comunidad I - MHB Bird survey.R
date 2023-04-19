@@ -58,7 +58,7 @@ DET[DET > 1] <- 1       # Todo lo que es mayor a 1, lo convierto en 1 (datos par
 # Ponen los datos de deteccion en en arreglo 3D: sitio x rep x especie
 nsite <- 267                    # numero de sitios en Swiss MHB
 nrep <- 3                       # numero de repeticiones por temporada
-nspec <- length(species.list)   # 126 especies
+nspec <- length(species.list)   # 83 especies
 
 # armo el array para meter el loop
 Y <- array(NA, dim = c(nsite, nrep, nspec))
@@ -94,7 +94,7 @@ sort(C <- apply(tmp, 1, sum))     # Compute and print sorted species counts
 
 par(mfrow=c(1,1))
 
-plot(table(C), xlim = c(0, 60), xlab = "Numero de especies observadas", 
+plot(table(C), xlim = c(0, 40), xlab = "Numero de especies observadas", 
      ylab = "Numero de cuadrantes", frame = F)
 abline(v = mean(C, na.rm = TRUE), col = "blue", lwd = 3)
 
@@ -110,7 +110,7 @@ Ysum <- apply(Y, c(1,3), sum, na.rm = T) #
 Ysum[NAsites,] <- NA                     # los que tienen sitios NA, ponerles NA
 
 # Aumentar set de datos (DA - data augmentation)
-nz <- 80                # Numero de especies potenciales en la superpoblacion
+nz <- 30                # Numero de especies potenciales en la superpoblacion
 M <- nspec + nz          # Tamaño del data set aumentado ('superpoblacion')
 Yaug <- cbind(Ysum, array(0, dim=c(nsite, nz))) # Agregar historias con ceros
 
@@ -142,20 +142,20 @@ for(k in 1:M){
   w[k] ~ dbern(omega)           # indicador de pertenencia a la metacomunidad
 }                               
 
-# Ecological model for latent occurrence z (process model)
+# Modelo ecologico
 for(k in 1:M){
-  mu.psi[k] <- w[k] * psi[k]    # species not part of community zeroed out for z
+  mu.psi[k] <- w[k] * psi[k]    # las especies que no son parte de la comunidad obtienen un cero w
   logit(psi[k]) <- lpsi[k]
   for (i in 1:nsite) {
     z[i,k] ~ dbern(mu.psi[k])
   }
 }
 
-# Observation model for observed detection frequencies
+# Modelo de obsevacion
 for(k in 1:M){
   logit(p[k]) <- lp[k]
   for (i in 1:nsite) {
-    mu.p[i,k] <- z[i,k] * p[k]  # non-occurring species are zeroed out for p
+    mu.p[i,k] <- z[i,k] * p[k]  # las especies que no ocurren tienen 0 en z
     Yaug[i,k] ~ dbin(mu.p[i,k], nrep[i])
   }
 }
@@ -173,22 +173,22 @@ Ntotal <- sum(w[])              # Total metacommunity size (= nspec + n0)
 ",fill = TRUE)
 sink()
 
-# Initial values
-wst <- rep(1, nspec+nz)                   # Simply set everybody at 'occurring'
-zst <- array(1, dim = c(nsite, nspec+nz)) # ditto for z
+# Valores iniciales
+wst <- rep(1, nspec+nz)                   # Setear todos a ocurrencia 1
+zst <- array(1, dim = c(nsite, nspec+nz)) # lo mimso para z
 inits <- function() list(z = zst, w = wst, lpsi = rnorm(n = nspec+nz), lp = rnorm(n = nspec+nz))
 
-# Parameters monitored
-params <- c("mu.lpsi", "sd.lpsi", "mu.lp", "sd.lp", "psi", "p", "Nsite", "Ntotal", "omega", "n0")
+# Parametros monitoreados
+params <- c("mu.lpsi", "mu.lp", "psi", "p", "Nsite", "Ntotal", "omega", "n0")
 
-# MCMC settings
-ni <- 10000   ;   nt <- 10  ;   nb <- 100   ;   nc <- 3;   na <- 10000
+# seteos de MCMC
+ni <- 7000   ;   nt <- 10  ;   nb <- 100   ;   nc <- 3;   na <- 3000
 
-# Call JAGS from R (ART 62 min), check convergence and summarize posteriors
+# Llamar JAGS de R, chequear convergencia y resumir posteriores
 outDA <- jags(win.data, inits, params, "modelDA.txt", n.chains = nc, n.thin = nt, 
               n.iter = ni, n.burnin = nb,n.adapt = na, parallel = TRUE)
 
-par(mfrow = c(2,2)) ; traceplot(outDA, c('mu.lpsi', 'sd.lpsi', 'mu.lp', 'sd.lp'))
+par(mfrow = c(2,2)) ; traceplot(outDA, c('mu.lpsi', 'mu.lp'))
 
 
 print(outDA, dig = 3)
