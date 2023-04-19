@@ -1,5 +1,5 @@
 ##########################################################
-##### CURSO Modelado y estimaci√≥n de ocupaci√≥n para  #####
+##### CURSO Modelado y estimaciÛn de ocupaciÛn para  #####
 #####  poblaciones y comunidades de especies bajo    #####
 #####           enfoque Bayesiano.                   #####
 #######      CCT Mendoza - ABRIL 2023                #####
@@ -12,53 +12,53 @@
 ########  Modeling distribution, abundance and      ######
 ########  species richness using R and BUGS         ######
 ########  Volume 1: Prelude and Static models       ######
-########      Marc K√©ry & J. Andy Royle             ######
+########      Marc KÈry & J. Andy Royle             ######
 ##########################################################
 
-# La siguiente simulaci√≥n permite experimentar con la relaci√≥n entre patrones de 
-# puntos, la ocurrencia y abundancia de organismos en un √°rea determinada en 
-# relaci√≥n a los sistemas de muestreos seleccionados para poder hacer el 
+# La siguiente simulaciÛn permite experimentar con la relaciÛn entre patrones de 
+# puntos, la ocurrencia y abundancia de organismos en un ·rea determinada en 
+# relaciÛn a los sistemas de muestreos seleccionados para poder hacer el 
 # revelamiento de la especie particular.
 
-# Esta funci√≥n se encuentra en la librer√≠a AHMbook
+# Esta funciÛn se encuentra en la librerÌa AHMbook
 # Antes de poder utilizarla, es necesario instalarla
  
 install.packages("AHMbook")
 
 library(AHMbook)
-# La funci√≥n "sim.fn" simula ubicaciones de plantas o animales en grillas de 
-# celdas formando un cuadrante de un tama√±o espec√≠fico (quad.size) de acuerdo
-# a una distribuci√≥n de Poisson, donde los organismos est√°n distribuidos al 
+# La funciÛn "sim.fn" simula ubicaciones de plantas o animales en grillas de 
+# celdas formando un cuadrante de un tamaÒo especÌfico (quad.size) de acuerdo
+# a una distribuciÛn de Poisson, donde los organismos est·n distribuidos al 
 # azar dentro del cuadrante. El proceso se caracteriza por una constante "intensity",
-# que es el promedio de animales o plantas (puntos) por unidad de √°rea. 
+# que es el promedio de animales o plantas (puntos) por unidad de ·rea. 
 
-# Par√°metros por default en la funci√≥n (corresponden a los valores
-# que tomar√°n los argumentos si no se especifican)
+# Par·metros por default en la funciÛn (corresponden a los valores
+# que tomar·n los argumentos si no se especifican)
 # quad.size = 10, cell.size = 1, intensity = 1
 
 # EJEMPLO ----
-set.seed(82)                    # N√∫mero entero para inicializar la generaci√≥n de valores aleatorios
+set.seed(82)                    # N˙mero entero para inicializar la generaciÛn de valores aleatorios
 
-tmp <-sim.fn(quad.size=16,       # tama√±o total del cuadrante
-             cell.size=2,        #tama√±o de las celdas de la grilla
+tmp <-sim.fn(quad.size=16,       # tamaÒo total del cuadrante
+             cell.size=2,        #tamaÒo de las celdas de la grilla
              intensity = 0.5)    # constante, valore promedio de animales por celda
 
 
 # ACTIVIDAD ----
-# Modifique la funci√≥n de simulaci√≥n para responder las siguientes preguntas
-# cambiando el tama√±o de la celda de muestreo (cell.size)
+# Modifique la funciÛn de simulaciÛn para responder las siguientes preguntas
+# cambiando el tamaÒo de la celda de muestreo (cell.size)
 
-# 1 - ¬øQue observamos en relaci√≥n a los patrones de abundancia y ocurrencia
-# cuando se modifican los tama√±os de la celda de muestreo?
+# 1 - øQue observamos en relaciÛn a los patrones de abundancia y ocurrencia
+# cuando se modifican los tamaÒos de la celda de muestreo?
 
-# 2 - ¬øQu√© sucede con los patrones de abundancia y ocurrencia cuando las especies
-# son raras? ¬øSe mantiene siempre esta relaci√≥n?
+# 2 - øQuÈ sucede con los patrones de abundancia y ocurrencia cuando las especies
+# son raras? øSe mantiene siempre esta relaciÛn?
 
-## Simulaci√≥n que muestra la relaci√≥n entre "intensity" y "cell.size" y 
-## la ocupaci√≥n y densidad media resultantes
+## SimulaciÛn que muestra la relaciÛn entre "intensity" y "cell.size" y 
+## la ocupaciÛn y densidad media resultantes
 ## 
-## En la siguiente simulaci√≥n se usa el tama√±o de cuadrante por default quadrat 
-## (10) y se var√≠an los valores del tama√±o de celda y de intensidad
+## En la siguiente simulaciÛn se usa el tamaÒo de cuadrante por default quadrat 
+## (10) y se varÌan los valores del tamaÒo de celda y de intensidad
 simrep <- 100                      # Run 50 simulation reps
 grain <- c(0.1,0.2,0.25,0.5,1,2)   # values will be fed into 'cell.size' argument
 int <- seq(0.1, 3,,6)              # values will be fed into 'lambda' argument
