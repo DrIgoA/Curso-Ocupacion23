@@ -49,4 +49,6 @@ ppois(5, lambda = 3)
 #  Normal  #
 # ---------#
 
-rnorm(2,0.5,0.03)
+# 1) Genere 10 valores aleatorios con una distribución normal con media 5 y 
+# desvío 0.3 
+# 2) Calcule el intervalo del 80 y 95 % 
