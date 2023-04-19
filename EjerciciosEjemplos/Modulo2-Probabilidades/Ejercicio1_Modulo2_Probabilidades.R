@@ -40,8 +40,9 @@ ppois(5, lambda = 3)
 
 # Actividad ----
 # 1) ¿Cómo cambia la forma de la distribución de Poisson a medida que cambia λ?
-# 2) ¿Cuál es la probabilidad de obtener y = 0 para para λ = 1.3?
-# 3) ¿Cuál es la probabilidad de y > 5 para λ=1.3?
+# 2) Genere 10 valores con un valor de lambda de 1.4 
+# 3) ¿Cuál es la probabilidad de obtener y = 0 para para λ = 1.3?
+# 4) ¿Cuál es la probabilidad de y > 5 para λ=1.3?
 
 # DISTRIBUCIONES CONTINUAS----
 # ---------#
