@@ -7,7 +7,7 @@
 ########              in Ecology                    ######## 
 ########                Volume 1                    ########
 ############################################################
-
+ 
 # La siguiente simulación permite experimentar con la relación entre patrones de 
 # puntos, la ocurrencia y abundancia de organismos en un área determinada en 
 # relación a los sistemas de muestreos seleccionados para poder hacer el 
@@ -30,10 +30,12 @@ library(AHMbook)
 # quad.size = 10, cell.size = 1, intensity = 1
 
 # EJEMPLO ----
-set.seed(82)                    # 
-tmp <-sim.fn(quad.size=16, 
-             cell.size=2, 
-             intensity = 0.5)   
+set.seed(82)                    # Número entero para inicializar la generación de valores aleatorios
+
+tmp <-sim.fn(quad.size=16,       # tamaño total del cuadrante
+             cell.size=2,        #tamaño de las celdas de la grilla
+             intensity = 0.5)    # constante, valore promedio de animales por celda
+
 
 # ACTIVIDAD ----
 # Modifique la función de simulación para responder las siguientes preguntas
