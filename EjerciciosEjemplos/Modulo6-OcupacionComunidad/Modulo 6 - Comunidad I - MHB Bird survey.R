@@ -58,7 +58,7 @@ DET[DET > 1] <- 1       # Todo lo que es mayor a 1, lo convierto en 1 (datos par
 # Ponen los datos de deteccion en en arreglo 3D: sitio x rep x especie
 nsite <- 267                    # numero de sitios en Swiss MHB
 nrep <- 3                       # numero de repeticiones por temporada
-nspec <- length(species.list)   # 83 especies
+nspec <- length(species.list)   # 67 especies
 
 # armo el array para meter el loop
 Y <- array(NA, dim = c(nsite, nrep, nspec))
@@ -182,48 +182,49 @@ inits <- function() list(z = zst, w = wst, lpsi = rnorm(n = nspec+nz), lp = rnor
 params <- c("mu.lpsi", "mu.lp", "psi", "p", "Nsite", "Ntotal", "omega", "n0")
 
 # seteos de MCMC
-ni <- 7000   ;   nt <- 10  ;   nb <- 100   ;   nc <- 3;   na <- 3000
+ni <- 2000   ;   nt <- 10  ;   nb <- 1000   ;   nc <- 3;   na <- 2000
 
 # Llamar JAGS de R, chequear convergencia y resumir posteriores
 outDA <- jags(win.data, inits, params, "modelDA.txt", n.chains = nc, n.thin = nt, 
               n.iter = ni, n.burnin = nb,n.adapt = na, parallel = TRUE)
+
 
 par(mfrow = c(2,2)) ; traceplot(outDA, c('mu.lpsi', 'mu.lp'))
 
 
 print(outDA, dig = 3)
 
+# Guardar los datos de la corrida (no usar asi no se sobre escribe la corrida completa)
+# save(outDA, file='outDA.rda')
 
-# Plot posterior distribution of site-specific species richness (Nsite)
-#par(mfrow = c(3,3), mar = c(5,4,3,2))
-#for(i in 1:267){
-#   plot(table(out9$sims.list$Nsite[,i]), main = paste("Quadrat", i), 
-#   xlab = "Local species richness", ylab = "", frame = F, 
-#   xlim = c((min(C[i], out9$sims.list$Nsite[,i], na.rm = T)-2),
-#   max(out9$sims.list$Nsite[,i]) ))
-#   abline(v = C[i], col = "grey", lwd = 4)
-#   browser()
-#}
+# Llamar a los datos de la corrida completa
+load('outDA.rda')
 
 
-# Plot it only for a selection of sites
+# Graficar la distribucion posteriors de la riqueza sitio especifica (Nsite)
+# Graficar para una selección de sitios
 par(mfrow = c(3,3), mar = c(5,4,3,2))
 for(i in c(9, 32, 162, 12, 27, 30, 118, 159, 250)){
-   plot(table(out9$sims.list$Nsite[,i]), main = paste("Quadrat", i), 
-   xlab = "Local species richness", ylab = "", frame = F, 
-   xlim = c((min(C[i], out9$sims.list$Nsite[,i], na.rm = T)-2),
-   max(out9$sims.list$Nsite[,i]) ))
+   plot(table(outDA$sims.list$Nsite[,i]), main = paste("Quadrat", i), 
+   xlab = "Riqueza local de especies", ylab = "", frame = F, 
+   xlim = c((min(C[i], outDA$sims.list$Nsite[,i], na.rm = T)-2),
+   max(outDA$sims.list$Nsite[,i]) ))
    abline(v = C[i], col = "grey", lwd = 4)
 }
 
-# Plot posterior distribution of total species richness (Ntotal)
-plot(out9$sims.list$Ntotal, main = "", ylab = "", xlab = "Avian metacommunity size in Swiss MHB survey (267 1km2 quadrats)", frame = F, xlim = c(144, 245))
+# Graficar la distribucion posteriors de la riqueza total (Ntotal)
+par(mfrow = c(1,1), mar = c(5,4,3,2))
+plot(table(outDA$sims.list$Ntotal), main = "", ylab = "", xlab = "Metacomunidad de aves", 
+     frame = F) #, xlim = c(144, 245))
 abline(v = nspec, col = "grey", lwd = 4)
 
 
-# 11.7.2 Dorazio-Royle community model with covariates
-# ------------------------------------------------------------------------
-
+######################################################
+########     Modelo de Dorazio-Royle (DR)     ########
+########    para ocupacion de comunidades     ########
+########        con aumento de datos          ########
+########           con covariables            ########
+######################################################
 
 ######################################
 ### Covariables 
@@ -256,8 +257,7 @@ DUR[is.na(DUR)] <- 0                         # mean impute missings
 
 # Augment data set: choose one of two different priors on Ntotal
 
-nz <- 250                 # Use for vague prior on Ntotal: M = 395
-nz <- 215 - nspec         # Use for informative prior on Ntotal: M = 215
+nz <- 30                 
 Yaug <- array(0, dim=c(nsite, nrep, nspec+nz)) # array with only zeroes
 Yaug[,,1:nspec] <- Y      # copy into it the observed data
 
@@ -269,11 +269,11 @@ for(k in (nspec+1):(nspec+nz)){
 
 # Bundle and summarize data
 str(win.data <- list(Y = Yaug, nsite = dim(Y)[1], nrep = dim(Y)[2], nspec = dim(Y)[3], 
-                     nz = nz, M = nspec + nz, ele = ele, forest = forest, DAT = DAT, DUR = DUR) )
+                     nz = nz, M = nspec + nz, ele = ele, forest = forest, DAT = DAT ))
 
 
 # Specify model in BUGS language
-sink("model10.txt")
+sink("modelDAcov.txt")
 cat("
 model {
 
@@ -288,7 +288,6 @@ for(k in 1:M){
   lp[k] ~ dnorm(mu.lp, tau.lp)
   betalp1[k] ~ dnorm(mu.betalp1, tau.betalp1)
   betalp2[k] ~ dnorm(mu.betalp2, tau.betalp2)
-  betalp3[k] ~ dnorm(mu.betalp3, tau.betalp3)
 }
 
 # Hyperpriors
@@ -303,7 +302,7 @@ mu.betalpsi2 ~ dnorm(0,0.1)
 tau.betalpsi2 <- pow(sd.betalpsi2, -2)
 sd.betalpsi2 ~ dunif(0,2)
 mu.betalpsi3 ~ dnorm(0,0.1)
-tau.betalpsi3 <- pow(sd.betalpsi3, -2)
+tau.betalpsi3 <- pow(sd.betalpsi2, -2)
 sd.betalpsi3 ~ dunif(0,2)
 
 # For the model of detection
@@ -316,9 +315,7 @@ sd.betalp1 ~ dunif(0,1)
 mu.betalp2 ~ dnorm(0,0.1)
 tau.betalp2 <- pow(sd.betalp2, -2)
 sd.betalp2 ~ dunif(0,1)
-mu.betalp3 ~ dnorm(0,0.1)
-tau.betalp3 <- pow(sd.betalp3, -2)
-sd.betalp3 ~ dunif(0,1)
+
 
 # Superpopulation process: Ntotal species sampled out of M available
 for(k in 1:M){
@@ -340,7 +337,7 @@ for(k in 1:M){
   for (i in 1:nsite){
     for(j in 1:nrep){
       logit(p[i,j,k]) <- lp[k] + betalp1[k] * DAT[i,j] + 
-        betalp2[k] * pow(DAT[i,j],2) + betalp3[k] * DUR[i,j]
+        betalp2[k] * pow(DAT[i,j],2) 
       mu.p[i,j,k] <- z[i,k] * p[i,j,k]
       Y[i,j,k] ~ dbern(mu.p[i,j,k])
     }
@@ -367,7 +364,6 @@ betalpsi3S[1:(nspec+1)] <- betalpsi3[1:(nspec+1)]
 lpS[1:(nspec+1)] <- lp[1:(nspec+1)]
 betalp1S[1:(nspec+1)] <- betalp1[1:(nspec+1)]
 betalp2S[1:(nspec+1)] <- betalp2[1:(nspec+1)]
-betalp3S[1:(nspec+1)] <- betalp3[1:(nspec+1)]
 }
 ",fill = TRUE)
 sink()
@@ -376,62 +372,43 @@ sink()
 # Initial values
 wst <- rep(1, nspec+nz)                   # Simply set everybody at occurring
 zst <- array(1, dim = c(nsite, nspec+nz)) # ditto
-inits <- function() list(z = zst, w = wst, lpsi = rnorm(n = nspec+nz), betalpsi1 = rnorm(n = nspec+nz), betalpsi2 = rnorm(n = nspec+nz), betalpsi3 = rnorm(n = nspec+nz), lp = rnorm(n = nspec+nz), betalp1 = rnorm(n = nspec+nz), betalp2 = rnorm(n = nspec+nz), betalp3 = rnorm(n = nspec+nz))
+inits <- function() list(z = zst, w = wst, lpsi = rnorm(n = nspec+nz), 
+                         betalpsi1 = rnorm(n = nspec+nz), betalpsi2 = rnorm(n = nspec+nz), 
+                         betalpsi3 = rnorm(n = nspec+nz), lp = rnorm(n = nspec+nz), 
+                         betalp1 = rnorm(n = nspec+nz), betalp2 = rnorm(n = nspec+nz))
 
 # Set 1
-params1 <- c("omega", "mu.lpsi", "sd.lpsi", "mu.betalpsi1", "sd.betalpsi1", "mu.betalpsi2", "sd.betalpsi2", "mu.betalpsi3", "sd.betalpsi3", "mu.lp", "sd.lp", "mu.betalp1", "sd.betalp1", "mu.betalp2", "sd.betalp2", "mu.betalp3", "sd.betalp3", "Ntotal", "Nsite")
+params1 <- c("omega", "mu.lpsi", "mu.betalpsi1", "mu.betalpsi2","mu.betalpsi3", "mu.lp", 
+             "mu.betalp1", "mu.betalp2", "Ntotal", "Nsite")
 
 # MCMC settings
-ni <- 100   ;   nt <- 2   ;   nb <- 10   ;   nc <- 3
+ni <- 40000   ;   nt <- 10   ;   nb <- 10000   ;   nc <- 3
 
 # Run JAGS, check convergence and summarize posteriors
-out101 <- jags(win.data, inits, params1, "model10.txt", n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, parallel = TRUE)
+outDAcov <- jags(win.data, inits, params1, "modelDAcov.txt", n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, parallel = TRUE)
+
 par(mfrow = c(2, 2))
-traceplot(out101, c(c("omega", "mu.lpsi", "sd.lpsi", "mu.betalpsi1", "sd.betalpsi1", "mu.betalpsi2", "sd.betalpsi2", "mu.betalpsi3", "sd.betalpsi3", "mu.lp", "sd.lp", "mu.betalp1", "sd.betalp1", "mu.betalp2", "sd.betalp2", "mu.betalp3", "sd.betalp3", "Ntotal")) )
+traceplot(outDAcov, c(c("omega", "mu.lpsi", "mu.betalpsi1", 
+                      "mu.betalpsi2", "mu.betalpsi3", "mu.lp", 
+                      "mu.betalp1", "mu.betalp2","Ntotal")) )
 
 # Set 2
-params2 <- c("mu.lpsi", "sd.lpsi", "mu.betalpsi1", "sd.betalpsi1", "mu.betalpsi2", "sd.betalpsi2", "mu.betalpsi3", "sd.betalpsi3", "lpsi", "betalpsi1", "betalpsi2", "betalpsi3", "lp", "betalp1", "betalp2", "betalp3", "z", "w")
-ni <- 12000   ;   nt <- 20   ;   nb <- 2000   ;   nc <- 3
-out102 <- jags.basic(win.data, inits, params2, "model10.txt", n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, parallel = TRUE)
-library(coda)
-all10 <- as.matrix(out102) # Put output from 3 chains into a matrix
-summary(out102)            # May take a loooong time
-gelman.diag(out102)        # ditto
+params2 <- c("mu.lpsi", "sd.lpsi", "mu.betalpsi1", "mu.betalpsi2", "mu.betalpsi3", 
+             "lpsi", "betalpsi1", "betalpsi2", "betalpsi3", "lp", "sd.lp", "betalp1", "betalp2", 
+              "z", "w")
+ni <- 400   ;   nt <- 20   ;   nb <- 100   ;   nc <- 3
+outDAcov2 <- jags(win.data, inits, params2, "modelDAcov.txt", n.chains = nc, n.thin = nt, 
+                  n.iter = ni, n.burnin = nb, parallel = TRUE)
 
+# Guardar los datos de la corrida (no usar asi no se sobre escribe la corrida completa)
+# save(outDAcov, file='outDAcov.rda')
+save(outDAcov2, file='outDAcov.rda')
 
-# Comparison of main hyperparameters when M = 215 and with M = 395
-# (not all code to produce this output is shown)
-print(cbind(out10.215$summary[1:17,c(1:3, 7)], out10.395$summary[1:17, c(1:3, 7)]), 2)
+# Llamar a los datos de la corrida completa
+load('outDAcov.rda')
+load('outDAcov2.rda')
 
-
-out10 <- out101
-
-
-par(mfrow = c(1,2))       # Fig. 11-16
-psi.sample <- plogis(rnorm(10^6, mean = out10$mean$mu.lpsi, sd = out10$mean$sd.lpsi))
-p.sample <- plogis(rnorm(10^6, mean = out10$mean$mu.lp, sd = out10$mean$sd.lp))
-hist(psi.sample, freq = F, breaks = 50, col = "grey", xlab = "Species occupancy probability", ylab = "Density", main = "")
-hist(p.sample, freq = F, breaks = 50, col = "grey", xlab = "Species detection probability", ylab = "Density", main = "")
-summary(psi.sample)   ;   summary(p.sample)
-
-par(mfrow = c(2,4))  # Among-species variability in parameters (not shown)
-hist(out10$sims.list$sd.lpsi, breaks = 100, col = "grey", xlim = c(0,6), main = "Occupancy: intercept")
-abline(v = mean(out10$sims.list$sd.lpsi), col = "blue", lwd = 3)
-hist(out10$sims.list$sd.betalpsi1, breaks = 100, col = "grey", xlim = c(0,3), main = "Occupancy: linear effect of elevation")
-abline(v = mean(out10$sims.list$sd.betalpsi1), col = "blue", lwd = 3)
-hist(out10$sims.list$sd.betalpsi2, breaks = 100, col = "grey", xlim = c(0,3), main = "Occupancy: quadratic effect of elevation")
-abline(v = mean(out10$sims.list$sd.betalpsi2), col = "blue", lwd = 3)
-hist(out10$sims.list$sd.betalpsi3, breaks = 100, col = "grey", xlim = c(0,3), main = "Occupancy: linear effect of forest cover")
-abline(v = mean(out10$sims.list$sd.betalpsi3), col = "blue", lwd = 3)
-hist(out10$sims.list$sd.lp, breaks = 100, col = "grey", xlim = c(0,2), main = "Detection: intercept")
-abline(v = mean(out10$sims.list$sd.lp), col = "blue", lwd = 3)
-hist(out10$sims.list$sd.betalp1, breaks = 100, col = "grey", xlim = c(0,1), main = "Detection: linear effect of survey date")
-abline(v = mean(out10$sims.list$sd.betalp1), col = "blue", lwd = 3)
-hist(out10$sims.list$sd.betalp2, breaks = 100, col = "grey", xlim = c(0,1), main = "Detection: quadratic linear effect of survey date")
-abline(v = mean(out10$sims.list$sd.betalp2), col = "blue", lwd = 3)
-hist(out10$sims.list$sd.betalp3, breaks = 100, col = "grey", xlim = c(0,1), main = "Detection: linear effect of survey duration")
-abline(v = mean(out10$sims.list$sd.betalp3), col = "blue", lwd = 3)
-
+#### AGREGAR COVARIABLE DUR EN DETECCION? COMO EJERCICIO
 
 # Visualize covariate mean relationships for the average species
 o.ele <- seq(200, 2500,,500)               # Get covariate values for prediction
@@ -445,17 +422,18 @@ dur.pred <- (o.dur - mean.dur) / sd.dur
 
 # Predict occupancy for elevation and forest and detection for date and duration
 # Put all fourpredictions into a single
-str( tmp <- out10$sims.list )              # grab MCMC samples
+str( tmp <- outDA$sims.list )              # grab MCMC samples
 nsamp <- length(tmp[[1]])    # number of mcmc samples
-predC <- array(NA, dim = c(500, nsamp, 4)) # "C" for 'community mean'
+predC <- array(NA, dim = c(500, nsamp, 3)) # "C" for 'community mean'
+
+
 for(i in 1:nsamp){
    predC[,i,1] <- plogis(tmp$mu.lpsi[i] + tmp$mu.betalpsi1[i] * ele.pred + 
      tmp$mu.betalpsi2[i] * ele.pred^2 )
-   predC[,i,2] <- plogis(tmp$mu.lpsi[i] + tmp$mu.betalpsi3[i] * for.pred)
-   predC[,i,3] <- plogis(tmp$mu.lp[i] + tmp$mu.betalp1[i] * dat.pred + 
-     tmp$mu.betalp2[i] * dat.pred^2 )
-   predC[,i,4] <- plogis(tmp$mu.lp[i] + tmp$mu.betalp3[i] * dur.pred)
-}
+   #predC[,i,2] <- plogis(tmp$mu.lpsi[i] + tmp$mu.betalpsi3[i] * for.pred)
+   #predC[,i,3] <- plogis(tmp$mu.lp[i] + tmp$mu.betalp1[i] * dat.pred + 
+    # tmp$mu.betalp2[i] * dat.pred^2 )
+   }
 
 # Get posterior means and 95% CRIs and plot (Fig. 11–17)
 pmC <- apply(predC, c(1,3), mean)
@@ -620,5 +598,4 @@ plot(o.for, predS[,1,4], lwd = 3, type = 'l', lty = 1, frame = F,
 for(i in 2:145){
    lines(o.for, predS[,i,4], col = i, lwd = 3)
 }
-
 
