@@ -407,8 +407,12 @@ load('outDAcov2.rda')
 
 str(outDAcov)
 
+# ------------------------------------------------------------------------
+# Tarea 
+# -------------------------------------------------------------------------
+# Correr un modelo agregando la covariable "DUR" (duración) en la detección
+# -------------------------------------------------------------------------
 
-#### AGREGAR COVARIABLE DUR EN DETECCION? COMO EJERCICIO
 
 # Visualize covariate mean relationships for the average species
 o.ele <- seq(200, 2500,,500)               # Get covariate values for prediction
