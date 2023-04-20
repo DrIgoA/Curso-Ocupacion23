@@ -35,21 +35,24 @@ El objetivo del curso es el de proveer bases teórico-prácticas de métodos cua
 ## Programa
 
 ### DIA 1
-- Conceptos básicos para estudios de poblaciones y comunidades de fauna silvestre: Algunas definiciones - Poblaciones cerradas y abiertas – Comunidades – observaciones en ecología 
+- Conceptos básicos para estudios de poblaciones y comunidades de fauna silvestre: Algunas definiciones - Poblaciones cerradas y abiertas – Comunidades – observaciones en ecología
+    - [Modulo 1 - Presentación]
+    - [Modulo 1 - Ejercicio](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo1-Intro/Modulo%201.R)
 
 - Conceptos básicos de estadística: Tipos de modelos y rol de los modelos en ciencia - Modelos estadísticos - Distribuciones de probabilidad - Probabilidad,
 verosimilitud - Precisión, sesgo, exactitud. 
     - [Modulo 2 - Presentación](https://github.com/apgoijman/Curso-Ocupacion23/files/10883613/Modulo.2_Occupacion2023.pdf)
-    - [Modulo 2 - Ejercicio MLE](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo2-Probabilidades/EjercicioModulo2.pdf)
-    - [Modulo 2 - Script R para Ejercicio MLE](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo2-Probabilidades/Modulo2-EjemploLikelihhodBinomial.R)
+    - [Modulo 2 - Ejercicio probabilidades](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo2-Probabilidades/Ejercicio1_Modulo2_Probabilidades.R)
+    - [Modulo 2 - Ejercicio MLE](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo2-Probabilidades/Ejercicio2-Modulo2.pdf)
+    - [Modulo 2 - Script R para Ejercicio MLE](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo2-Probabilidades/Ejercicio2-Modulo2-LikelihhodBinomial.R)
 
 - Introducción al enfoque Bayesiano: Comparación de inferencia frecuentista y Bayesiana - Inferencia Bayesiana y Teorema de Bayes -Componentes - Modelos jerárquicos - Ventajas y desventajas 
      - [Módulo 3 - Presentación](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%203_Ocupacion2023.pdf) 
-
 - Ejercicios con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
     - [Ejemplos Modulo 3 - Iniciación a R-JAGS](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo3-Bayes/Ejemplo%20Modulo3.md)
-    - [Ejemplos Modulo 3 I](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo3-Bayes/Modulo%203%20-%20Ejemplo.R)
-    - [Ejemplos Modulo 3 II](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo3-Bayes/Modulo3-%20Ejemplo%20II.R)
+    - [Ejemplos Modulo 3 - medias](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo3-Bayes/Ejemplo1-Modulo3-Media.R)
+    - [Ejemplos Modulo 3 - Jerarquico](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo3-Bayes/Ejemplo2-Modulo3-Jerarquico.R)
+    - [*Ejercicio* para el modulo 3](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo3-Bayes/Ejercicio1%20-%20Modulo%203.R)
  
 
 ### DIA 2
