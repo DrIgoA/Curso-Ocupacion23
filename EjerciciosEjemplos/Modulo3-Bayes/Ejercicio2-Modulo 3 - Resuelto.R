@@ -4,8 +4,7 @@
 #####           enfoque Bayesiano.                   #####
 #######      CCT Mendoza - ABRIL 2023                #####
 ##########################################################
-###########           Ejemplo Muestreo           #########
-###########                                      #########
+###########      Ejercicio  jerarquico           #########
 ##########################################################
 ########              Ejemplo de:                   ######
 ########          Introduction to WinBUGS           ######
@@ -37,7 +36,7 @@ library(jagsUI)    #paquete JAGS
 data <- list(y = c(6,0,1,2,1,7,1,5,2,0))
 
 # Modelo
-sink("media-poisson.jags")
+sink("media.jags")
 cat("
 model
 {
