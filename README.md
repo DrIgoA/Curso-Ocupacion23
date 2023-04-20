@@ -75,8 +75,7 @@ verosimilitud - Precisión, sesgo, exactitud.
     - [Ejemplos Modulo 6 - Guía de un modelo de comunidades con DA](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo6-OcupacionComunidad/Ejemplo%20Modulo%206.md)
     
 - Ejercicios de ocupación con interfase R-JAGS para análisis con métodos Bayesianos y puesta en común (práctica).
-    En este ejemplo vamos a ver modelos de ocupación de comunidades con DA (data augmentation) con y sin covariables. Los datos son tomados del libro de Kery&Royle 2016). También hay dos ejercicios dentro de este ejemplo
-    - [Ejemplo MBH - Comunidad con DA](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo6-OcupacionComunidad/Modulo%206%20-%20Comunidad%20I%20-%20MHB%20Bird%20survey.R)
+    - En este ejemplo vamos a ver modelos de ocupación de comunidades con DA (data augmentation) con y sin covariables. Los datos son tomados del libro de Kery&Royle 2016). También hay dos ejercicios dentro de este ejemplo. [Ejemplo MBH - Comunidad con DA](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo6-OcupacionComunidad/Modulo%206%20-%20Comunidad%20I%20-%20MHB%20Bird%20survey.R)
 - Trabajo práctico en proyectos finales (práctica)
 
 ### DIA 5
