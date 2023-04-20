@@ -1,0 +1,18 @@
+
+
+model
+{
+  # Previas No INFORMATIVAS
+    mean ~ dunif (0, 5000)      
+    varianza ~ dlnorm (0 ,1.0E-6)  
+
+    prec <- 1/varianza             
+
+  #Likelihood
+  for (i in 1:nobs) {                # para cada uno de los individuos
+     mass[i] ~ dnorm (mean, prec)   
+ 
+   }
+}
+
+

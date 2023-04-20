@@ -106,7 +106,8 @@ inits <- function() list(lambda = c(5,2,1,3,4,2,5,2,1,3,4,2,5,2,1), mu=2,sd=5)
 
 #--------------------------------------------------------------------------- 
 # Actividad
-# 1. Que representran los 15 valores de lambda estimados?
-# 2. Como modificaria la probabilidad previa para que sea informativa?
+# 1. Que representran los 15 valores de lambda estimados en el segundo modelo?
+# 2. Que representa mu en el segundo modelo?
+# 3. Como modificaria la probabilidad previa para que sea informativa?
 # --------------------------------------------------------------------------
  

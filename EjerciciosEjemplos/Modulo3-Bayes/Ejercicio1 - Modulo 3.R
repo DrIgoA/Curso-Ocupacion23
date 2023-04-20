@@ -4,7 +4,7 @@
 #####           enfoque Bayesiano.                   #####
 #######      CCT Mendoza - ABRIL 2023                #####
 ##########################################################
-###########           Ejemplo Muestreo           #########
+###########           Ejercicio Media            #########
 ###########                                      #########
 ##########################################################
 ########              Ejemplo de:                   ######
@@ -34,57 +34,11 @@ hist(y1000, col = 'grey', xlim = c(450,750), main = ' Body mass (g) of
 # 1)  Implemente un modelo lineal con estadistica frecuentista (utilizando 
 #     la funcion lm) para estimar la la masa media de los halcones machos.
 
-# SOLUCION
 summary(lm(y1000 ~ 1))
 
 # 2) Implemente el modelo con estadistica bayesiana, considerando
 #    una previa no informativa con una distribcion uniforme = (0,5000)
 
-# SOLUCION
-library(jagsUI) 
-
-# Data
-data <- list(mass = y1000, nobs = length(y1000))
-
-#Modelo con previas no informativas
-sink("peregrinos-no-informativa.jags")
-cat("
-
-model
-{
-  # Previas No INFORMATIVAS
-    mean ~ dunif (0, 5000)      
-    varianza ~ dlnorm (0 ,1.0E-6)  
-
-    prec <- 1/varianza             
-
-  #Likelihood
-  for (i in 1:nobs) {                # para cada uno de los individuos
-     mass[i] ~ dnorm (mean, prec)   
- 
-   }
-}
-
-",fill = TRUE)
-sink()
-
-# Indicamos los valores iniciales 
-inits <- function() list(varianza = 100, mean = rnorm(1,600))
-
-# MCMC settings
-ni <- 10000     # numero de iteraciones
-nt <- 2         # tasa de thining
-nb <- 1000      # iteraciones para el burn in
-nc <- 3         # numero de cadenas que corremos
-
-# Parametros que se van monitorear 
-parameters <- c("mean", "varianza")
-
-# Implementamos el modelo con jags
-out <- jags(data, inits, parameters, "peregrinos-no-informativa.jags",
-            n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb)
-
-out 
 
 # ------------------------------------------------------------------------
 # Preguntas
@@ -106,46 +60,5 @@ out
 #     nuevos valores de distribuciones previas e implementa el nuevo modelo.
 #     Como cambian los parametros y su incertidumbre? Esto es positivo o negativo?
 #     
-#     Compara graficamente las distribuciones previa y poseterior.
+# 6. Compara graficamente las distribuciones previa y poseterior.
 #     
-
-#Modelo con previas informativas
-sink("peregrinos-informativa.jags")
-cat("
-
-model
-{
-  # Previas INFORMATIVAS
-    mean ~ dunif (500, 590)      
-    varianza ~ dlnorm (0 ,1.0E-6)  
-
-    prec <- 1/varianza             
-
-  #Likelihood
-  for (i in 1:nobs) {                # para cada uno de los individuos
-     mass[i] ~ dnorm (mean, prec)   
- 
-   }
-}
-
-",fill = TRUE)
-sink()
-
-# Indicamos los valores iniciales 
-inits <- function() list(varianza = 100, mean = rnorm(1,600))
-
-# MCMC settings
-ni <- 10000     # numero de iteraciones
-nt <- 2         # tasa de thining
-nb <- 1000      # iteraciones para el burn in
-nc <- 3         # numero de cadenas que corremos
-
-# Parametros que se van monitorear 
-parameters <- c("mean", "varianza")
-
-# Implementamos el modelo con jags
-out <- jags(data, inits, parameters, "peregrinos-informativa.jags",
-            n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb)
-
-out 
-
