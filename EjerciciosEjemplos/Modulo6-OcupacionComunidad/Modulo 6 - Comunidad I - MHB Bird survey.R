@@ -188,9 +188,7 @@ ni <- 2000   ;   nt <- 10  ;   nb <- 1000   ;   nc <- 3;   na <- 2000
 outDA <- jags(win.data, inits, params, "modelDA.txt", n.chains = nc, n.thin = nt, 
               n.iter = ni, n.burnin = nb,n.adapt = na, parallel = TRUE)
 
-
 par(mfrow = c(2,2)) ; traceplot(outDA, c('mu.lpsi', 'mu.lp'))
-
 
 print(outDA, dig = 3)
 
@@ -216,7 +214,7 @@ for(i in c(9, 32, 162, 12, 27, 30, 118, 159, 250)){
 par(mfrow = c(1,1), mar = c(5,4,3,2))
 plot(table(outDA$sims.list$Ntotal), main = "", ylab = "", xlab = "Metacomunidad de aves", 
      frame = F) #, xlim = c(144, 245))
-abline(v = nspec, col = "grey", lwd = 4)
+abline(v = nspec, col = "red", lwd = 4)
 
 
 ######################################################
@@ -400,7 +398,7 @@ outDAcov2 <- jags(win.data, inits, params2, "modelDAcov.txt", n.chains = nc, n.t
                   n.iter = ni, n.burnin = nb, parallel = TRUE)
 
 # Guardar los datos de la corrida (no usar asi no se sobre escribe la corrida completa)
-save(outDAcov, file='outDAcov.rda')
+#save(outDAcov, file='outDAcov.rda')
 #save(outDAcov2, file='outDAcov.rda')
 
 # Llamar a los datos de la corrida completa
