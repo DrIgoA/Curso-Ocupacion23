@@ -36,18 +36,18 @@ El objetivo del curso es el de proveer bases teórico-prácticas de métodos cua
 
 ### DIA 1
 - Conceptos básicos para estudios de poblaciones y comunidades de fauna silvestre: Algunas definiciones - Poblaciones cerradas y abiertas – Comunidades – observaciones en ecología
-    - [Modulo 1 - Presentación]
+    - [Modulo 1 - **Presentación**]
     - [Modulo 1 - Ejercicio](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo1-Intro/Modulo%201.R)
 
 - Conceptos básicos de estadística: Tipos de modelos y rol de los modelos en ciencia - Modelos estadísticos - Distribuciones de probabilidad - Probabilidad,
 verosimilitud - Precisión, sesgo, exactitud. 
-    - [Modulo 2 - Presentación](https://github.com/apgoijman/Curso-Ocupacion23/files/10883613/Modulo.2_Occupacion2023.pdf)
+    - [Modulo 2 - **Presentación**](https://github.com/apgoijman/Curso-Ocupacion23/files/10883613/Modulo.2_Occupacion2023.pdf)
     - [*Ejercicio* probabilidades - Modulo 2](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo2-Probabilidades/Ejercicio1_Modulo2_Probabilidades.R)
     - [*Ejercicio* MLE - Modulo 2](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo2-Probabilidades/Ejercicio2-Modulo2.pdf)
     - [Script R para *Ejercicio* MLE - Modulo 2](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo2-Probabilidades/Ejercicio2-Modulo2-LikelihhodBinomial.R)
 
 - Introducción al enfoque Bayesiano: Comparación de inferencia frecuentista y Bayesiana - Inferencia Bayesiana y Teorema de Bayes -Componentes - Modelos jerárquicos - Ventajas y desventajas 
-     - [Módulo 3 - Presentación](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%203_Ocupacion2023.pdf) 
+     - [Módulo 3 - **Presentación**](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%203_Ocupacion2023.pdf) 
 - Ejercicios con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
     - [Ejemplos Modulo 3 - Iniciación a R-JAGS](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo3-Bayes/Ejemplo%20Modulo3.md)
     - [Ejemplos Modulo 3 - medias](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo3-Bayes/Ejemplo1-Modulo3-Media.R)
@@ -57,14 +57,14 @@ verosimilitud - Precisión, sesgo, exactitud.
 
 ### DIA 2
 - Modelos lineales generalizados con enfoque Bayesiano: Uso de interfase RJAGS para análisis Bayesianos – GLM – Introducción a efectos aleatorios y GLMM – GLMM Poisson y Binomial
-    - [Módulo 4 - Presentación](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%204_Occupacion2023.pdf)
+    - [Módulo 4 - **Presentación**](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%204_Occupacion2023.pdf)
 - Ejercicios de GLM y GLMM con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
     - [Ejemplos Modulo 4, GLM y GLMM](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Modulo4-EjemploGLM-GLMM.R)
     - [Ejemplos Modulo 4, GLM Poisson](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Bayes/Modulo4-EjemploPoissonGLM-Facu.R)
 
 ### DIA 3
 - Detección imperfecta y modelos de ocupación para poblaciones: Solo una estación – Con covariables.
-    - [Modulo 5 - Presentación](https://github.com/apgoijman/Curso-Ocupacion23/files/11214935/Modulo.5_Occupacion2023.pdf)
+    - [Modulo 5 - **Presentación**](https://github.com/apgoijman/Curso-Ocupacion23/files/11214935/Modulo.5_Occupacion2023.pdf)
     - [Ejemplos de formatos de bases de datos - cómo acomodarlas en matrices de ocupación](https://github.com/apgoijman/Curso-Ocupacion23/files/10824363/Formatos.de.bases.de.datos.pdf)
 - Ejercicios de ocupación con interfase R-JAGS para análisis con métodos Bayesianos (práctica) y puesta en común.
 - Trabajo práctico en proyectos finales (práctica)
@@ -73,9 +73,8 @@ verosimilitud - Precisión, sesgo, exactitud.
 
 ### DIA 4
 - Modelos de Ocupación de comunidades.
-
-    - [Modulo 6 - Presentación](https://github.com/apgoijman/Curso-Ocupacion23/files/11254905/Modulo.6_Occupacion2023.pdf)
-    - [Ejemplos Modulo 6 - Guía de un modelo de comunidades con DA](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo6-OcupacionComunidad/Ejemplo%20Modulo%206.md)
+    - [Modulo 6 - **Presentación**](https://github.com/apgoijman/Curso-Ocupacion23/files/11254905/Modulo.6_Occupacion2023.pdf)
+    - [*Ejemplos* Modulo 6 - Guía de un modelo de comunidades con DA](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo6-OcupacionComunidad/Ejemplo%20Modulo%206.md)
     
 - Ejercicios de ocupación con interfase R-JAGS para análisis con métodos Bayesianos y puesta en común (práctica).
     - En este ejemplo vamos a ver modelos de ocupación de comunidades con DA (data augmentation) con y sin covariables. Los datos son tomados del libro de Kery&Royle 2016). También hay dos ejercicios dentro de este ejemplo. [Ejemplo MBH - Comunidad con DA](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo6-OcupacionComunidad/Modulo%206%20-%20Comunidad%20I%20-%20MHB%20Bird%20survey.R)
