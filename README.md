@@ -62,10 +62,11 @@ verosimilitud - Precisión, sesgo, exactitud.
 ### DIA 3
 - Detección imperfecta y modelos de ocupación para poblaciones: Solo una estación – Con covariables.
     - [Modulo 5 - Presentación](https://github.com/apgoijman/Curso-Ocupacion23/files/11214935/Modulo.5_Occupacion2023.pdf)
+    - [Ejemplos de formatos de bases de datos - cómo acomodarlas en matrices de ocupación](https://github.com/apgoijman/Curso-Ocupacion23/files/10824363/Formatos.de.bases.de.datos.pdf)
 - Ejercicios de ocupación con interfase R-JAGS para análisis con métodos Bayesianos (práctica) y puesta en común.
 - Trabajo práctico en proyectos finales (práctica)
 
-[Formatos de bases de datos.pdf](https://github.com/apgoijman/Curso-Ocupacion23/files/10824363/Formatos.de.bases.de.datos.pdf)
+
 
 ### DIA 4
 - Modelos de Ocupación de comunidades.
