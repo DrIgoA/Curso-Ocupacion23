@@ -42,9 +42,9 @@ El objetivo del curso es el de proveer bases teórico-prácticas de métodos cua
 - Conceptos básicos de estadística: Tipos de modelos y rol de los modelos en ciencia - Modelos estadísticos - Distribuciones de probabilidad - Probabilidad,
 verosimilitud - Precisión, sesgo, exactitud. 
     - [Modulo 2 - Presentación](https://github.com/apgoijman/Curso-Ocupacion23/files/10883613/Modulo.2_Occupacion2023.pdf)
-    - [Modulo 2 - Ejercicio probabilidades](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo2-Probabilidades/Ejercicio1_Modulo2_Probabilidades.R)
-    - [Modulo 2 - Ejercicio MLE](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo2-Probabilidades/Ejercicio2-Modulo2.pdf)
-    - [Modulo 2 - Script R para Ejercicio MLE](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo2-Probabilidades/Ejercicio2-Modulo2-LikelihhodBinomial.R)
+    - [*Ejercicio* probabilidades - Modulo 2](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo2-Probabilidades/Ejercicio1_Modulo2_Probabilidades.R)
+    - [*Ejercicio* MLE - Modulo 2](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo2-Probabilidades/Ejercicio2-Modulo2.pdf)
+    - [Script R para *Ejercicio* MLE - Modulo 2](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo2-Probabilidades/Ejercicio2-Modulo2-LikelihhodBinomial.R)
 
 - Introducción al enfoque Bayesiano: Comparación de inferencia frecuentista y Bayesiana - Inferencia Bayesiana y Teorema de Bayes -Componentes - Modelos jerárquicos - Ventajas y desventajas 
      - [Módulo 3 - Presentación](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%203_Ocupacion2023.pdf) 
