@@ -50,9 +50,9 @@ verosimilitud - Precisión, sesgo, exactitud.
      - [Módulo 3 - **Presentación**](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%203_Ocupacion2023.pdf) 
 - Ejercicios y ejemplos con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
     - [Ejemplo guia Modulo 3 - Iniciación a R-JAGS](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo3-Bayes/Ejemplo%20Modulo3.md)
-    - [*Ejercicio* Modulo 3 - calculo de medias normal](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo3-Bayes/Ejemplo1-Modulo3-Media.R)
-    - [*Ejercicio* Modulo 3 - Jerarquico poisson](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo3-Bayes/Ejemplo2-Modulo3-Jerarquico.R)
-    - [*Ejercicio* Modulo 3](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo3-Bayes/Ejercicio1%20-%20Modulo%203.R)
+    - [*Ejercicio* Modulo 3 - calculo de medias normal zorzales](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo3-Bayes/Ejemplo1-Modulo3-Media.R)
+    - [*Ejercicio* Modulo 3 - poisson y jerarquico poisson ranas](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo3-Bayes/Ejemplo2-Modulo3-Jerarquico.R)
+    - [*Ejercicio* Modulo 3 - Halcones peregrinos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo3-Bayes/Ejercicio1%20-%20Modulo%203.R)
  
 
 ### DIA 2
