@@ -196,8 +196,7 @@ inits <- function() list(z=zst,lpsi=rnorm(roed.data$nspec), b1=rnorm(roed.data$n
 inits <- function() list(z=zst,lpsi=runif(9), b1=runif(9),
                          mu.lpsi=runif(1),mu.b1=runif(1))
 
-params1 <- c("lpsi", "b1", "lp","mu.lpsi","mu.lp","mu.b1")
-params2 <- c("Nsite", "Nocc.fs")
+
 
 # ajustes de MCMC
 ni <- 10000
@@ -223,17 +222,6 @@ out2 = jags(roed.data,inits, params2, "mod_is.jags", n.chains=nc,
 ###    las cuales corresponden al tipo de ambiente en el cual se encontraba ubicada
 ###    la línea de trampas de captura viva.
 ### 3. Grafique el efecto del Indice de Shannon sobre la ocupacion de cada especie
-
-library(denstrip)
-plot(out1$sims.list$b1, xlim=c(-3, 3), ylim=c(1, 9), xlab="", ylab="", type="n", axes =
-       F, main = "Density strip plots")
-axis(1)
-axis(2, at = 1:9, labels = c('Aa','Ad','Cm','Cl','Cv','Of', 'Or','Md', 'Tp'), las = 1)
-abline(v = c(--1,-0.5,0.5,1), col = "grey") ; abline(v = 0)
-for(k in 1:9){
-  denstrip(unlist(out1$sims.list$b1[,k]), at = k,
-           colmax = "#4292c6", colmin = "#f7fbff")
-}
 
 
 
