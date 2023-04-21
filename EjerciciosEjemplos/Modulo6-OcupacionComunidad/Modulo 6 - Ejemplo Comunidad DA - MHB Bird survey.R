@@ -182,22 +182,20 @@ inits <- function() list(z = zst, w = wst, lpsi = rnorm(n = nspec+nz), lp = rnor
 params <- c("mu.lpsi", "mu.lp", "psi", "p", "Nsite", "Ntotal", "omega", "n0")
 
 # seteos de MCMC
-ni <- 2000   ;   nt <- 10  ;   nb <- 1000   ;   nc <- 3;   na <- 2000
+ni <- 1000   ;   nt <- 10  ;   nb <- 100   ;   nc <- 3;   na <- 2000
 
 # Llamar JAGS de R, chequear convergencia y resumir posteriores
 outDA <- jags(win.data, inits, params, "modelDA.txt", n.chains = nc, n.thin = nt, 
               n.iter = ni, n.burnin = nb,n.adapt = na, parallel = TRUE)
-
-par(mfrow = c(2,2)) ; traceplot(outDA, c('mu.lpsi', 'mu.lp'))
-
-print(outDA, dig = 3)
 
 # Guardar los datos de la corrida (no usar asi no se sobre escribe la corrida completa)
 # save(outDA, file='outDA.rda')
 
 # Llamar a los datos de la corrida completa
 load('outDA.rda')
+par(mfrow = c(2,2)) ; traceplot(outDA, c('mu.lpsi', 'mu.lp'))
 
+print(outDA, dig = 3)
 
 # Graficar la distribucion posteriors de la riqueza sitio especifica (Nsite)
 # Graficar para una selección de sitios
@@ -384,6 +382,12 @@ ni <- 400   ;   nt <- 10   ;   nb <- 100   ;   nc <- 3
 # Run JAGS, check convergence and summarize posteriors
 outDAcov <- jags(win.data, inits, params1, "modelDAcov.txt", n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, parallel = TRUE)
 
+# Guardar los datos de la corrida (no usar asi no se sobre escribe la corrida completa)
+#save(outDAcov, file='outDAcov.rda')
+
+# Llamar a los datos de la corrida completa
+load('outDAcov.rda')
+
 par(mfrow = c(2, 2))
 traceplot(outDAcov, c(c("omega", "mu.lpsi", "mu.betalpsi1", 
                       "mu.betalpsi2", "mu.betalpsi3", "mu.lp", 
@@ -398,14 +402,16 @@ outDAcov2 <- jags(win.data, inits, params2, "modelDAcov.txt", n.chains = nc, n.t
                   n.iter = ni, n.burnin = nb, parallel = TRUE)
 
 # Guardar los datos de la corrida (no usar asi no se sobre escribe la corrida completa)
-#save(outDAcov, file='outDAcov.rda')
 #save(outDAcov2, file='outDAcov.rda')
 
 # Llamar a los datos de la corrida completa
-load('outDAcov.rda')
 load('outDAcov2.rda')
 
 str(outDAcov)
+str(outDAcov2)
+
+outDAcov$summary
+outDAcov2$summary
 
 # ------------------------------------------------------------------------
 # Tarea 
@@ -467,7 +473,8 @@ par(mfrow=c(1,1))
 offset <- 30    # Set off elevation for better visibility
 elev<-data$elev[1:267]
 
-plot(elev, outDA$mean$Nsite, xlab = "Elevation (metres)", ylab = "Community size estimate (Nsite)", frame = F, ylim = c(0,60), pch = 16) # black: model 9
+plot(elev, outDA$mean$Nsite, xlab = "Elevation (metres)", 
+     ylab = "Community size estimate (Nsite)", frame = F, ylim = c(0,30), pch = 16) # black: model 9
 lines(smooth.spline(outDA$mean$Nsite ~ elev), lwd = 3)
 points(elev+offset, outDAcov$mean$Nsite, pch = 16, col = "blue") # red: model 10
 lines(smooth.spline(outDAcov$mean$Nsite ~ elev), lwd = 3, col = "blue")
