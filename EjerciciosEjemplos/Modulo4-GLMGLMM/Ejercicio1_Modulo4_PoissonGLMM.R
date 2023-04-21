@@ -2,24 +2,39 @@
 # agregar una tercera dimensión (año/year) 
 # agregar la temporada y el manejo agrícola como covariable - plantear interacciones
 
-rm(list=ls())
+##########################################################
+##### CURSO Modelado y estimación de ocupación para  #####
+#####  poblaciones y comunidades de especies bajo    #####
+#####           enfoque Bayesiano.                   #####
+#######      CCT Mendoza - ABRIL 2023                #####
+##########################################################
+##########       Ejercicio GLMM Poisson              #####
+##########################################################
+
+# Los datos presentados corresponden a conteo de artropodos obtenidos en bordes de lotes agricolas con el objetivo de 
+# conocer como afectan los diferentes manejos agrícolas (orgánico / Convencional) a la abundancia de artropodos. Se realizaron muestreos
+# durante dos años consecutivos. En cada año se relevaron dos estaciones (Primavera / Verano)
+
+rm(list=ls()) #limpio el ambiente de R
+
 library(jagsUI)
 
-data <- read.csv("M4_datos_artrop_facu.csv", header=T)
+data <- read.csv("Datos_Ejercicio1_Modulo4_PoissonGLMM.csv", header=T)
 attach(data)
 str(data)
 
+# Grafico exploratorio (abundancia de artropodos y volumen vegetal)
 plot(volveg,abund)
 
-# sitios
+# seteo sitios
 site.list <- data$point2[1:128]
 site.name <- seq(32)
 
-# establecimientos. 4 establecimientos: DH, AV, CH, LG
+# seteo establecimientos. 4 establecimientos: DH, AV, CH, LG
 farm <- as.factor(data$farm)
 farm <- levels(farm) 
 
-# año. 2 años
+# seteo años. 2 años
 #year <- as.factor(data$year)
 #year <- levels(year)
 
@@ -27,10 +42,14 @@ nsite <- length(site.name)
 nfarm <- length(farm)
 #nyear <- length(year)
 
-library(abind) 
+library(abind) # matrices
 
+###################################################################################################
+# Ejercicio
+# Paso 1: correr el modelo 1. El mismo incorpora al volumen vegetal como una covariable, llamada "vveg"
+# en este caso, las matrices van a ser de dos dimensiones: sitio y establecimiento.
 # Análisis del año 1
-##  AÑO 1 
+##  AÑO 1 - lectura de los datos del año 1
 data1 <- data[1:128,] # en el csv los datos están ordenados por años, por eso el año 1 va desde la fila 1 a la 204. Fila 1 porque no se cuenta el encabezado
 
 ### Construir matrices individuales
@@ -52,7 +71,7 @@ str(abund)
 dimnames(abund) <- list(site=site.name, farm=farm)
 abund[,1]
 
-# vveg - volumen vegetal
+# vveg - volumen vegetal (covariable)
 vveg.dh1 <- dh1$volveg 
 vveg.dh1 <- as.matrix(scale(vveg.dh1))
 
@@ -70,7 +89,7 @@ str(vveg)
 dimnames(vveg) <- list(site=site.name, farm=farm)
 vveg[,1]
 
-###################################################################################################
+#
 win.data <- list(abund=abund, 
                  vveg=vveg,
                  nsite=dim(abund)[1],
@@ -78,7 +97,7 @@ win.data <- list(abund=abund,
                  )
 str(win.data)
 
-# Specify model in BUGS language
+# Modelo 1
 cat(file = "M4-GLMMPoisson-Ejercicio-1-Facu.txt","
 model {
 # modelos para missing covariates
@@ -127,7 +146,7 @@ inits <- function() list(alpha0 = rnorm(1:32), alpha = rnorm(1)) # Inits
 params <- c("mu.alpha", "sd.alpha", "alpha0", "alpha")           # Params
 ni <- 300000 ; nt <- 25 ; nb <- 150000 ; nc <- 3                 # MCMC settings
 
-# Call WinBUGS or JAGS from R (ART 6-7 min) and summarize posteriors
+# Call WinBUGS or JAGS from R (6-7 min) and summarize posteriors
 out <- jags(win.data, inits, params, "M4-GLMMPoisson-Ejercicio-1-Facu.txt", n.chains = nc, n.thin = nt,
              n.iter = ni, n.burnin = nb)
 
@@ -141,4 +160,14 @@ save(out, file='out.rda')
 
 # cargar la salida
 load('out.rda')
+
+###################################################################################################
+# Paso 2: graficar la relación entre el volumen vegetal ("vveg") y la abundancia de artropodos a partir de la salida (out) del GLMM. 
+
+###################################################################################################
+# Paso 3: Incorporar otra covariable. En este caso, resulta de interés agregar el manejo agrícola (Orgánico / Convencional) 
+# y la estación/temporada de muestreo (Primavera / Verano). Plantee interacciones entre covariables de interés. 
+
+###################################################################################################
+# Paso 4: Incorporar el año como efecto aleatorio. Debe agregar una tercera dimension que corresponda al año. 
 
