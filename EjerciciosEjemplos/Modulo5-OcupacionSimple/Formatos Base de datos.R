@@ -102,6 +102,7 @@ lista.predios<-as.vector(names(y[,1,1,1]))
 lista.especies<-as.vector(names(y[1,1,1,]))
 lista.sitios<-as.vector(names(y[1,,1,1]))
 lista.reps<-as.vector(names(y[1,1,,1]))
+
 # Dimensiones de cada elemento
 npredios<-length(lista.predios)
 nspec<-length(lista.especies)
