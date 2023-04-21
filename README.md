@@ -69,7 +69,7 @@ verosimilitud - Precisión, sesgo, exactitud.
     - [Modulo 5 - **Presentación**](https://github.com/apgoijman/Curso-Ocupacion23/files/11214935/Modulo.5_Occupacion2023.pdf)
 - Ejemplos y Ejercicios de ocupación con interfase R-JAGS para análisis con métodos Bayesianos (práctica) y puesta en común.
     - [Ejemplo - Ocupacion 1 especie con datos simulados](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Ejemplo1_Modulo5_OcupacionSimple_datos-simulados.R)
-    - [*Ejercicio* Ocupacion datos reales "bluebug"](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Ejercicio1_Modulo5_OcupacionSimple_datos-reales.R) y [**Base de datos - FALTA**]
+    - [*Ejercicio* Ocupacion datos reales "bluebug"](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Ejercicio1_Modulo5_OcupacionSimple_datos-reales.R) y [Base de datos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/bluebug.txt)
     - [Ejemplo Ocupacion simple con datos en forma de VECTOR](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Ejemplo-vector.R) y [Base de datos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/datos_cm.csv)
    - Ejemplos de bases de datos. Como armarlas desde Excel con tablas dinámicas y desde R [Ejemplos de formatos de bases de datos - cómo acomodarlas en matrices de ocupación](https://github.com/apgoijman/Curso-Ocupacion23/files/10824363/Formatos.de.bases.de.datos.pdf)
         - [Archivo en R](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Formatos%20Base%20de%20datos.R)
@@ -77,7 +77,7 @@ verosimilitud - Precisión, sesgo, exactitud.
         - [Datos longitudinal](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/datos_LONG_COMPLETOS.csv)
     - [*Ejercicio* Ocupacion datos reales Jilguero](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Ejercicio-Modulo5-OcupacionSICLFA.R). En estos enlaces pueden encontrarse los archivos para correr el script:
         - [Base de datos Jilguero](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/SICFLA.csv)
-        - [Base de datos covariables](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Cova_sicfla.csv]
+        - [Base de datos de covariables](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Cova_sicfla.csv]
         - [Base de datos covariables anuales](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Cova_sicflayear.csv).
         - En este enlace estan los datos corridos completos [Datos corridos completos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/SICFLA.rda)
 - Trabajo práctico en proyectos finales (práctica)
