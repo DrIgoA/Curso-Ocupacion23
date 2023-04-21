@@ -1,0 +1,12 @@
+
+model
+{
+  for (i in 1:10)
+  {
+    y[i] ~ dpois (m)
+    }
+  
+  m ~ dlnorm(0.0, 1.0E-6)
+}
+
+

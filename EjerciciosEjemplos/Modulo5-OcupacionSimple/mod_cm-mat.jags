@@ -1,0 +1,24 @@
+
+    model{
+    
+    # Priors 
+      lpsi ~ dnorm(0, 0.01)
+      b1 ~   dnorm(0, 0.01)
+      p ~   dunif(0, 1)
+    
+    # Ecological model, process model (true occurrence at site i) 
+    for (i in 1:nsite) {                                           #loop sobre sitios 
+          psi[i] <- lpsi + b1*is[i]
+    
+          z[i] ~ dbern(psi[i])
+     
+    for (j in 1:4) { 
+          tmp[i,j] <- p * z[i]
+          y[i,j] ~ dbern(tmp[i,j])
+    } 
+    } #nsite
+    
+    }
+    
+  
+
