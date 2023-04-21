@@ -53,6 +53,7 @@ verosimilitud - Precisión, sesgo, exactitud.
     - [*Ejercicio* Modulo 3 - calculo de medias normal zorzales](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo3-Bayes/Ejemplo1-Modulo3-Media.R)
     - [*Ejercicio* Modulo 3 - poisson y jerarquico poisson ranas](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo3-Bayes/Ejemplo2-Modulo3-Jerarquico.R)
     - [*Ejercicio* Modulo 3 - Halcones peregrinos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo3-Bayes/Ejercicio1%20-%20Modulo%203.R)
+    - [*Ejercicio* Modulo 3 - Arboles](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo3-Bayes/Ejercicio2-Modulo%203.R)
  
 
 ### DIA 2
@@ -60,8 +61,8 @@ verosimilitud - Precisión, sesgo, exactitud.
     - [Módulo 4 - **Presentación**](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%204_Occupacion2023.pdf)
 - Ejercicios de GLM y GLMM con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
     - [Ejemplos Modulo 4, GLM y GLMM] (https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Ejemplo1_Modulo4.R) y [Base de datos] 
-    - [Ejemplos Modulo 4, GLM Poisson] (https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Ejercicio2_Modulo4_PoissonGLM.R)
-    (https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Ejercicio1_Modulo4_PoissonGLMM.R)
+    - [*Ejercicio* Modulo 4, GLM Poisson](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Ejercicio2_Modulo4_PoissonGLM.R)
+    - [*Ejercicio* Modulo 4, GLMM Poisson](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Ejercicio1_Modulo4_PoissonGLMM.R)
 
 ### DIA 3
 - Detección imperfecta y modelos de ocupación para poblaciones: Solo una estación – Con covariables.
