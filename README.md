@@ -77,7 +77,7 @@ verosimilitud - Precisión, sesgo, exactitud.
         - [Datos longitudinal](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/datos_LONG_COMPLETOS.csv)
     - [*Ejercicio* Ocupacion datos reales Jilguero](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Ejercicio-Modulo5-OcupacionSICLFA.R). En estos enlaces pueden encontrarse los archivos para correr el script:
         - [Base de datos Jilguero](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/SICFLA.csv)
-        - [Base de datos de covariables](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Cova_sicfla.csv]
+        - [Base de datos de covariables](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Cova_sicfla.csv)
         - [Base de datos covariables anuales](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Cova_sicflayear.csv).
         - En este enlace estan los datos corridos completos [Datos corridos completos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/SICFLA.rda)
 - Trabajo práctico en proyectos finales (práctica)
