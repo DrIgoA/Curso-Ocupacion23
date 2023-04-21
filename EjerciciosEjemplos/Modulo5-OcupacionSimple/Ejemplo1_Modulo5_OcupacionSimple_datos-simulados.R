@@ -7,7 +7,7 @@
 ###########     Una Especie, Estacion Simple     ###########
 ############################################################
 ########              Ejemplos de:                  ########
-########   Kéry, M., & Schaub, M. (2012). Bayesian  ########
+########   KÃ©ry, M., & Schaub, M. (2012). Bayesian  ########
 ########    population analysis using WinBUGS: a    ######## 
 ########          hierchical perspective.           ######## 
 ########              Academic Press.               ########
@@ -37,7 +37,7 @@ library(jagsUI)    #paquete JAGS
 ### Simulo los datos 
 ########################################
 # Muestreo
-R <- 200    # número de sitios
+R <- 200    # nÃºmero de sitios
 T <- 3      # numero de repeticiones
 
 # Determinar parametros
@@ -152,7 +152,7 @@ beta.psi = 3, alpha.p = 1, beta.p = 6) {
 
    # Agrego Ruido Bernoulli: sorteo occurrencia del indicador z desde Bernoulli(psi)
    z <- rbinom(n = R, size = 1, prob = psi)
-   occ.fs <- sum(z)	# Ocupacion de una muestra Finita (see Royle and Kéry 2007)
+   occ.fs <- sum(z)	# Ocupacion de una muestra Finita (see Royle and KÃ©ry 2007)
 
    # Proceso de observacion
    # Relacion entre prob deteccion - covariable
