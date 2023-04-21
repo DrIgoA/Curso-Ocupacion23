@@ -183,9 +183,9 @@ sink()
    params3 <- "Nsite"
 
 # ajustes de MCMC
-  ni <- 5000
+  ni <- 500 #60000
   nt <- 10 
-  nb <- 1000
+  nb <- 100 #100
   nc <- 3
 
 # llamar JAGS desde R 
@@ -203,8 +203,8 @@ out4N = jags(roed.data, inits, params3, "comuroedor_sinDA.jags", n.chains=nc,
 #save(out4N, file='roedN.rda')
 
 load('roedsp.rda')
-load('roedco.rda')
-load('roedNp.rda')
+load('roedcomu.rda')
+load('roedN.rda')
 
 par(mfrow=c(3,2))
 traceplot(out41)
