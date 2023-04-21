@@ -60,17 +60,20 @@ verosimilitud - Precisión, sesgo, exactitud.
 - Modelos lineales generalizados con enfoque Bayesiano: Uso de interfase RJAGS para análisis Bayesianos – GLM – Introducción a efectos aleatorios y GLMM – GLMM Poisson y Binomial
     - [Módulo 4 - **Presentación**](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%204_Occupacion2023.pdf)
 - Ejercicios de GLM y GLMM con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
-    - [Ejemplos Modulo 4, GLM y GLMM - Asimetria fluctuante](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Ejemplo1_Modulo4.R) y [**Base de datos - FALTA**] 
+    - [Ejemplos Modulo 4, GLM y GLMM - Asimetria fluctuante](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Ejemplo1_Modulo4.R) y [Base de datos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/ejemplo_AF.csv) 
     - [*Ejercicio* Modulo 4, GLM Poisson - insectos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Ejercicio2_Modulo4_PoissonGLM.R)[**Base de datos - FALTA**]
     - [*Ejercicio* Modulo 4, GLMM Poisson - insectos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Ejercicio1_Modulo4_PoissonGLMM.R) y [Base de datos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Datos_Ejercicio1_Modulo4_PoissonGLMM.csv)
 
 ### DIA 3
 - Detección imperfecta y modelos de ocupación para poblaciones: Solo una estación – Con covariables.
     - [Modulo 5 - **Presentación**](https://github.com/apgoijman/Curso-Ocupacion23/files/11214935/Modulo.5_Occupacion2023.pdf)
-    - [Ejemplos de formatos de bases de datos - cómo acomodarlas en matrices de ocupación](https://github.com/apgoijman/Curso-Ocupacion23/files/10824363/Formatos.de.bases.de.datos.pdf)
-- Ejercicios de ocupación con interfase R-JAGS para análisis con métodos Bayesianos (práctica) y puesta en común.
+- Ejemplos y Ejercicios de ocupación con interfase R-JAGS para análisis con métodos Bayesianos (práctica) y puesta en común.
+    - [Ejemplo - Ocupacion 1 especie con datos simulados](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Ejemplo1_Modulo5_OcupacionSimple_datos-simulados.R)
+    - [*Ejercicio* Ocupacion datos reales "bluebug"](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Ejercicio1_Modulo5_OcupacionSimple_datos-reales.R)[**Base de datos - FALTA**]
+    - [Ejemplo Ocupacion simple con datos en forma de VECTOR](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Ejemplo-vector.R)[Base de datos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/datos_cm.csv)
+   - Ejemplos de bases de datos. Como armarlas desde Excel con tablas dinámicas y desde R [Ejemplos de formatos de bases de datos - cómo acomodarlas en matrices de ocupación](https://github.com/apgoijman/Curso-Ocupacion23/files/10824363/Formatos.de.bases.de.datos.pdf) y [Archivo en R](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Formatos%20Base%20de%20datos.R) con [Datos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/datos_MATRIZ.csv)(https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/datos_LONG_COMPLETOS.csv)
+       - [*Ejercicio* Ocupacion datos reales Jilguero](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Ejercicio-Modulo5-OcupacionSICLFA.R)[Base de datos Jilguero y covariables](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/SICFLA.csv)(https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Cova_sicfla.csv)(https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/Cova_sicflayear.csv). [Datos corridos completos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo5-OcupacionSimple/SICFLA.rda)
 - Trabajo práctico en proyectos finales (práctica)
-
 
 
 ### DIA 4
