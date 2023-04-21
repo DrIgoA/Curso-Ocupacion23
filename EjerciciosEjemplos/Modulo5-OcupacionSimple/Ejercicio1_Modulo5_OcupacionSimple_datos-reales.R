@@ -7,7 +7,7 @@
 ###########     Una Especie, Estacion Simple     ###########
 ############################################################
 ########              Ejemplos de:                  ########
-########   Kéry, M., & Schaub, M. (2012). Bayesian  ########
+########   KÃ©ry, M., & Schaub, M. (2012). Bayesian  ########
 ########    population analysis using WinBUGS: a    ######## 
 ########          hierchical perspective.           ######## 
 ########              Academic Press.               ########
