@@ -60,9 +60,9 @@ verosimilitud - Precisión, sesgo, exactitud.
 - Modelos lineales generalizados con enfoque Bayesiano: Uso de interfase RJAGS para análisis Bayesianos – GLM – Introducción a efectos aleatorios y GLMM – GLMM Poisson y Binomial
     - [Módulo 4 - **Presentación**](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%204_Occupacion2023.pdf)
 - Ejercicios de GLM y GLMM con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
-    - [Ejemplos Modulo 4, GLM y GLMM](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Ejemplo1_Modulo4.R) y [**Base de datos - FALTA**] 
-    - [*Ejercicio* Modulo 4, GLM Poisson](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Ejercicio2_Modulo4_PoissonGLM.R)
-    - [*Ejercicio* Modulo 4, GLMM Poisson](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Ejercicio1_Modulo4_PoissonGLMM.R) y [Base de datos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Datos_Ejercicio1_Modulo4_PoissonGLMM.csv)
+    - [Ejemplos Modulo 4, GLM y GLMM - Asimetria fluctuante](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Ejemplo1_Modulo4.R) y [**Base de datos - FALTA**] 
+    - [*Ejercicio* Modulo 4, GLM Poisson - insectos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Ejercicio2_Modulo4_PoissonGLM.R)[**Base de datos - FALTA**]
+    - [*Ejercicio* Modulo 4, GLMM Poisson - insectos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Ejercicio1_Modulo4_PoissonGLMM.R) y [Base de datos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Datos_Ejercicio1_Modulo4_PoissonGLMM.csv)
 
 ### DIA 3
 - Detección imperfecta y modelos de ocupación para poblaciones: Solo una estación – Con covariables.
