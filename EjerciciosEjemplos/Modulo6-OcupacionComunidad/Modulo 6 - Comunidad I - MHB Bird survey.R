@@ -188,9 +188,7 @@ ni <- 2000   ;   nt <- 10  ;   nb <- 1000   ;   nc <- 3;   na <- 2000
 outDA <- jags(win.data, inits, params, "modelDA.txt", n.chains = nc, n.thin = nt, 
               n.iter = ni, n.burnin = nb,n.adapt = na, parallel = TRUE)
 
-
 par(mfrow = c(2,2)) ; traceplot(outDA, c('mu.lpsi', 'mu.lp'))
-
 
 print(outDA, dig = 3)
 
@@ -216,7 +214,7 @@ for(i in c(9, 32, 162, 12, 27, 30, 118, 159, 250)){
 par(mfrow = c(1,1), mar = c(5,4,3,2))
 plot(table(outDA$sims.list$Ntotal), main = "", ylab = "", xlab = "Metacomunidad de aves", 
      frame = F) #, xlim = c(144, 245))
-abline(v = nspec, col = "grey", lwd = 4)
+abline(v = nspec, col = "red", lwd = 4)
 
 
 ######################################################
@@ -336,8 +334,7 @@ for(k in 1:M){
 for(k in 1:M){
   for (i in 1:nsite){
     for(j in 1:nrep){
-      logit(p[i,j,k]) <- lp[k] + betalp1[k] * DAT[i,j] + 
-        betalp2[k] * pow(DAT[i,j],2) 
+      logit(p[i,j,k]) <- lp[k] + betalp1[k] * DAT[i,j] + betalp2[k] * pow(DAT[i,j],2) 
       mu.p[i,j,k] <- z[i,k] * p[i,j,k]
       Y[i,j,k] ~ dbern(mu.p[i,j,k])
     }
@@ -382,7 +379,7 @@ params1 <- c("omega", "mu.lpsi", "mu.betalpsi1", "mu.betalpsi2","mu.betalpsi3", 
              "mu.betalp1", "mu.betalp2", "Ntotal", "Nsite")
 
 # MCMC settings
-ni <- 40000   ;   nt <- 10   ;   nb <- 10000   ;   nc <- 3
+ni <- 400   ;   nt <- 10   ;   nb <- 100   ;   nc <- 3
 
 # Run JAGS, check convergence and summarize posteriors
 outDAcov <- jags(win.data, inits, params1, "modelDAcov.txt", n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, parallel = TRUE)
@@ -401,14 +398,21 @@ outDAcov2 <- jags(win.data, inits, params2, "modelDAcov.txt", n.chains = nc, n.t
                   n.iter = ni, n.burnin = nb, parallel = TRUE)
 
 # Guardar los datos de la corrida (no usar asi no se sobre escribe la corrida completa)
-# save(outDAcov, file='outDAcov.rda')
-save(outDAcov2, file='outDAcov.rda')
+#save(outDAcov, file='outDAcov.rda')
+#save(outDAcov2, file='outDAcov.rda')
 
 # Llamar a los datos de la corrida completa
 load('outDAcov.rda')
 load('outDAcov2.rda')
 
-#### AGREGAR COVARIABLE DUR EN DETECCION? COMO EJERCICIO
+str(outDAcov)
+
+# ------------------------------------------------------------------------
+# Tarea 
+# -------------------------------------------------------------------------
+# Correr un modelo agregando la covariable "DUR" (duración) en la detección
+# -------------------------------------------------------------------------
+
 
 # Visualize covariate mean relationships for the average species
 o.ele <- seq(200, 2500,,500)               # Get covariate values for prediction
@@ -422,20 +426,20 @@ dur.pred <- (o.dur - mean.dur) / sd.dur
 
 # Predict occupancy for elevation and forest and detection for date and duration
 # Put all fourpredictions into a single
-str( tmp <- outDA$sims.list )              # grab MCMC samples
+str( tmp <- outDAcov$sims.list )              # grab MCMC samples
 nsamp <- length(tmp[[1]])    # number of mcmc samples
 predC <- array(NA, dim = c(500, nsamp, 3)) # "C" for 'community mean'
 
-
 for(i in 1:nsamp){
    predC[,i,1] <- plogis(tmp$mu.lpsi[i] + tmp$mu.betalpsi1[i] * ele.pred + 
-     tmp$mu.betalpsi2[i] * ele.pred^2 )
-   #predC[,i,2] <- plogis(tmp$mu.lpsi[i] + tmp$mu.betalpsi3[i] * for.pred)
-   #predC[,i,3] <- plogis(tmp$mu.lp[i] + tmp$mu.betalp1[i] * dat.pred + 
-    # tmp$mu.betalp2[i] * dat.pred^2 )
+     tmp$mu.betalpsi2[i] * ele.pred^2 )    #media de forest es cero
+   predC[,i,2] <- plogis(tmp$mu.lpsi[i] + tmp$mu.betalpsi3[i] * for.pred)  #media de elev es cero
+   predC[,i,3] <- plogis(tmp$mu.lp[i] + tmp$mu.betalp1[i] * dat.pred + tmp$mu.betalp2[i] * dat.pred^2 )
    }
 
-# Get posterior means and 95% CRIs and plot (Fig. 11–17)
+# Get posterior means and 95% CRIs and plot 
+# Valores predichos medios (media sobre las simulaciones - para cada valor de la covariable y para cada 
+# covariable)
 pmC <- apply(predC, c(1,3), mean)
 criC <- apply(predC, c(1,3), function(x) quantile(x, prob = c(0.025, 0.975)))
 
@@ -446,156 +450,53 @@ plot(o.for, pmC[,2], col = "blue", lwd = 3, type = 'l', lty = 1, frame = F, ylim
 matlines(o.for, t(criC[,,2]), col = "grey", lty = 1)
 plot(o.dat, pmC[,3], col = "blue", lwd = 3, type = 'l', lty = 1, frame = F, ylim = c(0.2, 0.8), xlab = "Survey date", ylab = "Community mean detection")
 matlines(o.dat, t(criC[,,3]), col = "grey", lty = 1)
-plot(o.dur, pmC[,4], col = "blue", lwd = 3, type = 'l', lty = 1, frame = F, ylim = c(0.2, 0.8), xlab = "Survey duration", ylab = "Community mean detection")
-matlines(o.dur, t(criC[,,4]), col = "grey", lty = 1)
 
 
-# Plot posterior distribution of site-specific species richness (Nsite)
-par(mfrow = c(3,3), mar = c(5,4,3,2))
-for(i in 1:267){
-   plot(table(out10$sims.list$Nsite[,i]), main = paste("Quadrat", i), 
-   xlab = "Local species richness", ylab = "", frame = F, 
-   xlim = c((min(C[i], out10$sims.list$Nsite[,i], na.rm = T)-2),
-   max(out10$sims.list$Nsite[,i]) ))
-   abline(v = C[i], col = "grey", lwd = 4)
-   browser()
-}
-
-# Plot it only for a selection of sites (Fig. 11-18)
+# Distribucion posterior de la riqueza sitio-específica para una selección de sitios
 par(mfrow = c(3,3), mar = c(5,4,3,2))
 for(i in c(9, 32, 162, 12, 27, 30, 118, 159, 250)){
-   plot(table(out10$sims.list$Nsite[,i]), main = paste("Quadrat", i), 
-   xlab = "Local species richness", ylab = "", frame = F, 
-   xlim = c((min(C[i], out10$sims.list$Nsite[,i], na.rm = T)-2),
-   max(out10$sims.list$Nsite[,i]) ))
+   plot(table(outDAcov$sims.list$Nsite[,i]), main = paste("Quadrat", i), 
+   xlab = "Riqueza de especies local", ylab = "", frame = F, 
+   xlim = c((min(C[i], outDAcov$sims.list$Nsite[,i], na.rm = T)-2),
+   max(outDAcov$sims.list$Nsite[,i]) ))
    abline(v = C[i], col = "grey", lwd = 4)
 }
 
-# Plot Nsite estimates under models 9 & 10 vs. elevation (Fig. 11-19)
+par(mfrow=c(1,1))
+# Plot Nsite estimates under models DA & DAcov vs. elevation (Fig. 11-19)
 offset <- 30    # Set off elevation for better visibility
-plot(elev, out9$mean$Nsite, xlab = "Elevation (metres)", ylab = "Community size estimate (Nsite)", frame = F, ylim = c(0,60), pch = 16) # black: model 9
-lines(smooth.spline(out9$mean$Nsite ~ elev), lwd = 3)
-points(elev+offset, out10$mean$Nsite, pch = 16, col = "blue") # red: model 10
-lines(smooth.spline(out10$mean$Nsite ~ elev), lwd = 3, col = "blue")
+elev<-data$elev[1:267]
+
+plot(elev, outDA$mean$Nsite, xlab = "Elevation (metres)", ylab = "Community size estimate (Nsite)", frame = F, ylim = c(0,60), pch = 16) # black: model 9
+lines(smooth.spline(outDA$mean$Nsite ~ elev), lwd = 3)
+points(elev+offset, outDAcov$mean$Nsite, pch = 16, col = "blue") # red: model 10
+lines(smooth.spline(outDAcov$mean$Nsite ~ elev), lwd = 3, col = "blue")
 
 
-str(all10)                    # look at the MCMC output
-pm <- apply(all10, 2, mean)    # Get posterior means and 95% CRIs
-cri <- apply(all10, 2, function(x) quantile(x, prob = c(0.025, 0.975))) # CRIs
+str(outDAcov2$sims.list$lpsi)
+
+par(mfrow=c(1,1))
+# Calculo los betas de los coeficientes
+betalpsi1 <- apply(outDAcov2$sims.list$betalpsi1,c(2),mean)
+cri.betalpsi1 <- apply(outDAcov2$sims.list$betalpsi1,c(2),function(x) quantile(x,prob=c(0.025,0.975)))
+betalpsi2 <- apply(outDAcov2$sims.list$betalpsi2,c(2),mean)
+cri.betalpsi2 <- apply(outDAcov2$sims.list$betalpsi2,c(2),function(x) quantile(x,prob=c(0.025,0.975)))
+betalpsi3 <- apply(outDAcov2$sims.list$betalpsi3,c(2),mean)
+cri.betalpsi3 <- apply(outDAcov2$sims.list$betalpsi3,c(2),function(x) quantile(x,prob=c(0.025,0.975)))
+
+## Elevation in 67 species (observadas)
+plot(betalpsi1[1:67],1:67, xlim=c(-8,8),xlab='Elevation', ylab='Species',
+     cex=0.8,pch=16,tck=-0.02, main='Covariate effects on species (Beta)')
+abline(v=0, lwd=2, col='black')
+segments(cri.betalpsi1[1,1:67],1:67,cri.betalpsi1[2,1:67],1:67,col='grey', lwd=1)
+sig2<- cri.betalpsi1[1,1:67]*cri.betalpsi1[2,1:67]>0    #mayor a cero son los dos + o dos - == efecto signif   
+segments(cri.betalpsi1[1,1:67][sig2==1],(1:67)[sig2==1],cri.betalpsi1[2,1:67][sig2==1],(1:67)[sig2==1],lwd=1, col='blue')
+abline(v=outDAcov2$summary[3,1],lwd=1,col='red')
+abline(v=outDAcov2$summary[3,c(3,7)],lwd=1,col='red',lty=2)
 
 
-# Effects of date (linear and quadratic) and of duration on detection
-#par(mfrow = c(1,3), cex.lab = 1.3, cex.axis = 1.3) # Can put all three in one
-par(mfrow = c(1,2), cex.lab = 1.3, cex.axis = 1.3)
-# Date linear (Fig. 11 – 20 left)
-plot(pm[1:145], 1:145, xlim = c(-1.5, 1.5), xlab = "Parameter estimate", ylab = "Species number", main = "Effect of date (linear) on detection", pch = 16)
-abline(v = 0, lwd = 2, col = "black")
-segments(cri[1, 1:145], 1:145, cri[2, 1:145], 1:145, col = "grey", lwd = 1)
-sig1 <- (cri[1, 1:145] * cri[2, 1:145]) > 0
-segments(cri[1, 1:145][sig1 == 1], (1:145)[sig1 == 1], cri[2, 1:145][sig1 == 1], (1:145)[sig1 == 1], col = "blue", lwd = 2)
-abline(v = out101$summary[11,1], lwd = 3, col = "red")
-abline(v = out101$summary[11,c(3,7)], lwd = 2, col = "red", lty = 2)
-
-
-
-# Date quadratic (not shown)
-plot(pm[216:360], 1:145, xlim = c(-1.5, 1.5), xlab = "Parameter estimate", ylab = "Species number", main = "Effect of date (quadratic) on detection", pch = 16)
-abline(v = 0, lwd = 2, col = "black")
-segments(cri[1, 216:360], 1:145, cri[2, 216:360], 1:145, col = "grey", lwd = 1)
-sig2 <- (cri[1, 216:360] * cri[2, 216:360]) > 0
-segments(cri[1, 216:360][sig2 == 1], (1:145)[sig2 == 1], cri[2, 216:360][sig2 == 1], (1:145)[sig2 == 1], col = "blue", lwd = 2)
-abline(v = out101$summary[13,1], lwd = 3, col = "red")
-abline(v = out101$summary[13, c(3,7)], lwd = 3, col = "red", lty = 2)
-
-
-# Survey duration (Fig. 11-20 right)
-plot(pm[431:575], 1:145, xlim = c(-0.5, 1), xlab = "Parameter estimate", ylab = "Species number", main = "Effect of survey duration on detection", pch = 16)
-abline(v = 0, lwd = 2, col = "black")
-segments(cri[1, 431:575], 1:145, cri[2, 431:575], 1:145, col = "grey", lwd = 1)
-sig3 <- (cri[1, 431:575] * cri[2, 431:575]) > 0
-segments(cri[1, 431:575][sig3 == 1], (1:145)[sig3 == 1], cri[2, 431:575][sig3 == 1], (1:145)[sig3 == 1], col = "blue", lwd = 2)
-abline(v = out101$summary[15,1], lwd = 3, col = "red")
-abline(v = out101$summary[15, c(3,7)], lwd = 3, col = "red", lty = 2)
-
-
-# Effects of elevation (linear and quadratic) and of forest on occupancy
-# par(mfrow = c(1,3), cex.lab = 1.3, cex.axis = 1.3) # can do all in one
-# Effect of elevation (linear) on occupancy probability (Fig. 11-21)
-plot(pm[646:790], 1:145, xlim = c(-8, 8), xlab = "Parameter estimate", ylab = "Species number", main = "Effect of elevation (linear) on occupancy", pch = 16)
-abline(v = 0, lwd = 2, col = "black")
-segments(cri[1, 646:790], 1:145, cri[2, 646:790], 1:145, col = "grey", lwd = 1)
-sig4 <- (cri[1, 646:790] * cri[2, 646:790]) > 0
-segments(cri[1, 646:790][sig4 == 1], (1:145)[sig4 == 1], cri[2, 646:790][sig4 == 1], (1:145)[sig4 == 1], col = "blue", lwd = 2)
-abline(v = out101$summary[3,1], lwd = 3, col = "red")
-abline(v = out101$summary[3,c(3,7)], lwd = 3, col = "red", lty = 2)
-
-
-# Effect of elevation (quadratic) on occupancy probability (Fig. 11-22)
-plot(pm[861:1005], 1:145, xlim = c(-4, 2), xlab = "Parameter estimate", ylab = "Species number", main = "Effect of elevation (quadratic) on occupancy", pch = 16)
-abline(v = 0, lwd = 2, col = "black")
-segments(cri[1, 861:1005], 1:145, cri[2, 861:1005], 1:145, col = "grey", lwd=1)
-sig5 <- (cri[1, 861:1005] * cri[2, 861:1005]) > 0
-segments(cri[1, 861:1005][sig5 == 1], (1:145)[sig5 == 1], cri[2, 861:1005][sig5 == 1], (1:145)[sig5 == 1], col = "blue", lwd = 2)
-abline(v = out101$summary[5,1], lwd = 3, col = "red")
-abline(v = out101$summary[5,c(3,7)], lwd = 3, col = "red", lty = 2)
-
-
-# Effect of forest (linear) on occupancy probability (Fig. 11-23)
-plot(pm[1076:1220], 1:145, xlim = c(-3, 4), xlab = "Parameter estimate", ylab = "Species number", main = "Effect of forest cover on occupancy", pch = 16)
-abline(v = 0, lwd = 2, col = "black")
-segments(cri[1, 1076:1220], 1:145, cri[2, 1076:1220],1:145, col = "grey", lwd=1)
-sig6 <- (cri[1, 1076:1220] * cri[2, 1076:1220]) > 0
-segments(cri[1, 1076:1220][sig6 == 1], (1:145)[sig6 == 1], cri[2, 1076:1220][sig6 == 1], (1:145)[sig6 == 1], col = "blue", lwd = 2)
-abline(v = out101$summary[7,1], lwd = 3, col = "red")
-abline(v = out101$summary[7,c(3,7)], lwd = 3, col = "red", lty = 2)
-negsig6 <- (cri[1, 1076:1220] < 0 & cri[2, 1076:1220] < 0) == 1 # sig negative
-possig6 <- (cri[1, 1076:1220] > 0 & cri[2, 1076:1220] > 0) == 1 # sig positive
-
-
-# Predict detection for date and duration and occupancy for elevation and forest
-# for each of the 145 observed species
-predS <- array(NA, dim = c(500, nspec, 4))   # covariate value x species x response, "S" for 'species'
-p.coef <- cbind(lp=pm[1292:1436], betalp1 = pm[1:145], betalp2 = pm[216:360], betalp3 = pm[431:575])
-psi.coef <- cbind(lpsi=pm[1507:1651], betalpsi1 = pm[646:790], betalpsi2 = pm[861:1005], betalpsi3 = pm[1076:1220])
-
-for(i in 1:nspec){          # Loop over 145 observed species
-   predS[,i,1] <- plogis(p.coef[i,1] + p.coef[i,2] * dat.pred + 
-     p.coef[i,3] * dat.pred^2 )     # p ~ date
-   predS[,i,2] <- plogis(p.coef[i,1] + p.coef[i,4] * dur.pred) # p ~ duration
-   predS[,i,3] <- plogis(psi.coef[i,1] + psi.coef[i,2] * ele.pred + 
-     psi.coef[i,3] * ele.pred^2 )     # psi ~ elevation
-   predS[,i,4] <- plogis(psi.coef[i,1] + psi.coef[i,4] * for.pred) # psi ~ forest
-}
-
-# Plots for detection probability and survey date and duration (Fig. 11-24)
-par(mfrow = c(1,2), cex.lab = 1.3, cex.axis = 1.3)
-plot(o.dat, predS[,1,1], lwd = 3, type = 'l', lty = 1, frame = F, 
-   ylim = c(0, 1), xlab = "Survey date (1 = 1 April)", 
-   ylab = "Detection probability")
-for(i in 2:145){
-   lines(o.dat, predS[,i,1], col = i, lwd = 3)
-}
-
-plot(o.dur, predS[,1,2], lwd = 3, type = 'l', lty = 1, frame = F, 
-   ylim = c(0, 1), xlab = "Survey duration (min)", 
-   ylab = "Detection probability")
-for(i in 2:145){
-   lines(o.dur, predS[,i,2], col = i, lwd = 3)
-}
-
-
-# Plots for occupancy probability and elevation and forest cover (Fig. 11-25)
-par(mfrow = c(1,2), cex.lab = 1.3, cex.axis = 1.3)
-plot(o.ele, predS[,1,3], lwd = 3, type = 'l', lty = 1, frame = F, 
-   ylim = c(0, 1), xlab = "Elevation (m a.s.l.)", 
-   ylab = "Occupancy probability")
-for(i in 2:145){
-   lines(o.ele, predS[,i,3], col = i, lwd = 3)
-}
-
-plot(o.for, predS[,1,4], lwd = 3, type = 'l', lty = 1, frame = F, 
-   ylim = c(0, 1), xlab = "Forest cover (%)", ylab = "Occupancy probability")
-for(i in 2:145){
-   lines(o.for, predS[,i,4], col = i, lwd = 3)
-}
+# ------------------------------------------------------------------------
+# Tarea 
+# -------------------------------------------------------------------------
+# Graficar elevacion2 y forest
 
