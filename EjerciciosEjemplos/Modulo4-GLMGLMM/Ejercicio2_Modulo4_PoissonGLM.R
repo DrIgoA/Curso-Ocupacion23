@@ -21,7 +21,6 @@ win.data <- list(total=total, M=length(total), volveg=volveg, manejo=manejo, e=0
 str(win.data)
 cat(file="af.txt", "
 model {
-
 #Priors
 for (k in 1:2){
   alpha[k] ~ dnorm(0,1.0E-06)
@@ -32,7 +31,6 @@ for (i in 1:M){
 total[i] ~ dpois(lambda[i])
 log(lambda[i]) <- alpha[manejo[i]] + beta[1]*volveg[i]
 resi[i] <- (total[i]-lambda[i])/(sqrt(lambda[i])+e)
-
 }
 }
     
@@ -46,7 +44,7 @@ params <- c("alpha", "beta", "lambda", "resi")
 ni <- 10000 ; nt <- 1 ; nb <- 1000 ; nc <- 3
 # Call JAGS from R and summarize posteriors
 out_af <- jags(win.data, inits, params, "af.txt", 
-                   n.chains = nc, n.thin = nt, n.iter= ni, n.burnin = nb)
+               n.chains = nc, n.thin = nt, n.iter= ni, n.burnin = nb)
 print(out_af)
 
 #save(out_af, file='out_af.rda')
@@ -64,7 +62,6 @@ win.data <- list(total=total, M=length(total), volveg=volveg, manejo=manejo, e=0
 str(win.data)
 cat(file="aa.txt", "
 model {
-
 #Priors
 for (k in 1:2){
   alpha[k] ~ dnorm(0,1.0E-06)
@@ -75,7 +72,6 @@ for (i in 1:M){
 total[i] ~ dpois(lambda[i])
 log(lambda[i]) <- alpha[manejo[i]] + beta[manejo[i]]*volveg[i]
 resi[i] <- (total[i]-lambda[i])/(sqrt(lambda[i])+e)
-
 }
 }
     
@@ -107,7 +103,6 @@ win.data <- list(total=total, M=length(total), volveg=volveg, manejo=manejo, e=0
 str(win.data)
 cat(file="ff.txt", "
 model {
-
 #Priors
 for (k in 1:2){
   alpha[k] ~ dnorm(0,1.0E-06)
@@ -198,5 +193,3 @@ mtext("Abundancia total de artrópodos", font=1,   at=250, side=2, line = 1.5, c
 mtext("VolVeg", at=1, side=1, line = 1, cex = 1, padj= 0.1, font=1)
 lines(sorted.volveg1,sorted.y1[,1], col="forestgreen", lwd=2) #Media posterior
 lines(sorted.volveg2,sorted.y2[,1], col="red", lwd=2) #Media posterior
-
-
