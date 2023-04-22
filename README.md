@@ -36,7 +36,7 @@ El objetivo del curso es el de proveer bases teórico-prácticas de métodos cua
 
 ### DIA 1
 - Conceptos básicos para estudios de poblaciones y comunidades de fauna silvestre: Algunas definiciones - Poblaciones cerradas y abiertas – Comunidades – observaciones en ecología
-    - [Modulo 1 - **Presentación](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%201_Occupacion2023.pdf)
+    - [Modulo 1 - **Presentación**](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/Modulo%201_Occupacion2023.pdf)
     - [Modulo 1 - Ejercicio](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo1-Intro/Modulo%201.R)
 
 - Conceptos básicos de estadística: Tipos de modelos y rol de los modelos en ciencia - Modelos estadísticos - Distribuciones de probabilidad - Probabilidad,
