@@ -109,7 +109,7 @@ str(chaco.data <- list(y=yaug, forest=forest10z, yield=yieldmz, aridity=aridityz
                        M=nspec+nz, nz=nz, J=J))
 
 ### JAGS code
-sink("chacom24b.jags")  
+sink("chacomb.jags")  
 cat("
     model{
   
@@ -126,7 +126,6 @@ cat("
     mu.betalpsi2~ dnorm(0, 1/2.25^2)
     tau.betalpsi2 <- pow(sd.betalpsi2,-2)
     sd.betalpsi2 ~ dunif(0,8)
-    mu.betalpsi3~ dnorm(0, 1/2.25^2)
     tau.betalpsi3 <- pow(sd.betalpsi3,-2)
     sd.betalpsi3 ~ dunif(0,8)
     mu.betalpsi4~ dnorm(0, 1/2.25^2)
@@ -163,7 +162,7 @@ cat("
     
     # Ecological model, process model (true occurrence at site i) 
     for (i in 1:nsite) {                                           #loop sobre sitios 
-    logit(psi[k,i]) <- lpsi[k] + betalpsi1[k]*forest[i] + 
+    logit(psi[k,i]) <- lpsi[k] + betalpsi1[k]*forest[i]  
     betalpsi2[k]*yield[i]+ betalpsi3[k]*aridity[i] 
     mu.psi[k,i]<-w[k]*psi[k,i]
     z[i,k] ~ dbern(mu.psi[k,i])     
@@ -218,17 +217,19 @@ par.ms <- c("lpsiS","betalpsi1S","betalpsi2S","betalpsi3S","betalpsi4S","lpS", "
             "betalp3S","mu.betalpsi1","mu.betalpsi2", "mu.betalpsi3","mu.betalpsi4","mu.lpsi","Nsite")
 
 # ajustes de MCMC
-ni <- 30000 #40000
+ni <- 500 #30000 
 nt <- 10    
-nb <- 1000  
+nb <- 100 #1000  
 nc <- 3
-na <- 10000 #20000
+na <- 100 #10000 
 
-outms = jags(chaco.data, inits, par.ms, "chacom24b.jags", n.chains=nc, n.iter=ni, n.burnin=nb, 
+
+outms = jags(chaco.data, inits, par.ms, "chacomb.jags", n.chains=nc, n.iter=ni, n.burnin=nb, 
              n.thin=nt, n.adapt=na, parallel=TRUE)
 
+# corrida completa 9hs
 #save results
-save(outms, file='modelaves.rda') 
+#save(outms, file='modelaves.rda') 
 
 
 # -----------------------------------------------
@@ -241,7 +242,7 @@ save(outms, file='modelaves.rda')
 #####################################################################################################################
 # Nueva Sesion, correr la parte inicial, luego load mcmc.objects
 load('modelaves.rda') 
-
+str(outms)
 
 # summary of the posteriors
 outms
@@ -301,7 +302,7 @@ betalpsi1_all
 #####                   (Betas)                   #####         
 #######################################################
 
-par(mfrow=c(2,2), cex=1, cex.lab=1, cex.axis=0.9, cex.main=1)
+par(mfrow=c(1,1), cex=1, cex.lab=1, cex.axis=0.9, cex.main=1)
 par(mar=c(2.8,2.5,1.2,1))
 par(mgp = c(1.5,0.5,0))
 
@@ -316,7 +317,8 @@ abline(v=out1$summary[1784,1],lwd=1,col='red')
 abline(v=out1$summary[1784,c(3,7)],lwd=1,col='red',lty=2)
 
 # -----------------------------------------------
-# Actividiad 
+# Actividad 
+# 
 # Graficar efectos del resto de los parametros
 # -----------------------------------------------
 
@@ -408,7 +410,7 @@ lines(pred.yieldm, apply(pred[,,3],1,mean),lwd=3,col="black")
 
 ## Sample of posterior distributions of local species richness (alpha diversity) at all sites                                                                                              
 par(mfrow=c(1,1), cex=1, cex.lab=1, cex.axis=0.9, cex.main=1)
-plot(table(out1$sims.list$Nsite[,]),ylab="",ylim=c(0,8500),xlab='Number of species',pch=16,
+plot(table(out1$sims.list$Nsite[,]),ylab="",ylim=c(0,60000),xlab='Number of species',pch=16,
      main="Posterior distribution of total number of species")
 
 ## Relationship between Community size (alpha diversity - Derived parameter) and covariates
