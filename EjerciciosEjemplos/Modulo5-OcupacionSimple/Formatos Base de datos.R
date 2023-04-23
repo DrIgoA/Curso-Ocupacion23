@@ -1,8 +1,10 @@
 # remueve datos viejos
 rm(list=ls(all=TRUE))
+
 # indicar directorio de trabajo
 setwd('C:\\Users\\goijman.andrea\\Dropbox\\Materiales interesantes\\Scripts_Modelos\\Formatos
 BD')
+
 #leer el csv
 data<-read.csv('datos_MATRIZ.csv', sep = ";", header = T)
 #explorar datos
@@ -25,14 +27,15 @@ library(plyr)
 especies.names<-as.vector(names(data[6:18]))
 especies.names
 
-#armar el vector del nombre de las especies para cada uno de los 72 registros (36 sitios x 2
-repeticiones) y lo ordeno alfabeticamente
+#armar el vector del nombre de las especies para cada uno de los 72 
+#registros (36 sitios x 2 repeticiones) y lo ordeno alfabeticamente
 sp.names<-sort(factor(rep(especies.names,72)))
 class(sp.names)
 
 
 # extraigo los datos de registros y los pongo en una sola fila de registros
 sp.obs<-data[6:18]
+
 # los ordeno alfabeticamente de modo q cada especie aparezca junta
 sp.obs<-sp.obs[ , order(names(sp.obs))]
 head(sp.obs)
@@ -74,14 +77,26 @@ write.csv(data.aves.long, file="data.aves.long.csv")
 data2<-read.csv("datos_LONG_INCOMPLETOS.csv",header = T, sep = ";")
 head(data2, 10)
 
+## Formato longitudinal incompleto
 
+# Otra opcion cuando se ingresan los datos, es ingresar por cada punto y repeticion, las especies observadas.
+
+# Para analisis de ocupacion de una sola especie, podemos seleccionar un subset de especies
 data.LEILO <- subset(data.aves.long,data.aves.long$sp.names == "LEILO")
 head(data.LEILO)
 
+## CONSTRUCCION DE LA MATRIZ Y
+#  Como construir la matriz "y" para analizar con Occupancy
+
+# Reordeno los datos con el paquete "reshape". Los datos de deteccion/no deteccion son reordenados en una
+# matriz de N dimensiones,
+# En el ejemplo que estabmos trabajando tenemos 4 dimensiones: El predio l es la 1er dimension, luego el
+# punto i, la repeticion j y la especie k
 
 data.melt=melt(data.aves.long,id.var=c("PREDIO", "PUNTO", "REP", "sp.names"), measure.var="es
 pecies.obs")
 y1=cast(data.melt, PREDIO ~ PUNTO ~ REP ~ sp.names)
+
 # Verifico las dimensiones
 dim(y1)
 
@@ -92,6 +107,7 @@ y1[,,,1]
 
 # si hay algun NA le pone cero (esto no hay que hacerlo siempre)
 y1[is.na(y1)] <- 0
+
 # Si trabajo con occupancy paso todos los numeros a 0 o 1
 y<-aaply(y1,1,function(x) {x[x>1]<-1;x})
 dim(y)
@@ -108,6 +124,7 @@ npredios<-length(lista.predios)
 nspec<-length(lista.especies)
 nsites<-length(lista.sitios)
 nreps<-length(lista.reps)
+
 #si quiero reordenar las dimensiones
 #predio, punto, rep, sp
 #sp, predio, punto, rep
