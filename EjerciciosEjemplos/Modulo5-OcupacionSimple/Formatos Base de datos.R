@@ -74,12 +74,12 @@ str(data.aves.long)
 write.csv(data.aves.long, file="data.aves.long.csv")
 
 
-data2<-read.csv("datos_LONG_INCOMPLETOS.csv",header = T, sep = ";")
-head(data2, 10)
-
 ## Formato longitudinal incompleto
 
 # Otra opcion cuando se ingresan los datos, es ingresar por cada punto y repeticion, las especies observadas.
+
+data2<-read.csv("datos_LONG_INCOMPLETOS.csv",header = T, sep = ";")
+head(data2, 10)
 
 # Para analisis de ocupacion de una sola especie, podemos seleccionar un subset de especies
 data.LEILO <- subset(data.aves.long,data.aves.long$sp.names == "LEILO")
