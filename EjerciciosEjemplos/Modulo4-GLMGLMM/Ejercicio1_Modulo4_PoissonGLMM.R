@@ -1,7 +1,3 @@
-# dos dimensiones (sitio y establecimiento)
-# agregar una tercera dimensión (año/year) 
-# agregar la temporada y el manejo agrícola como covariable - plantear interacciones
-
 ##########################################################
 ##### CURSO Modelado y estimación de ocupación para  #####
 #####  poblaciones y comunidades de especies bajo    #####
