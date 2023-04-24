@@ -94,7 +94,7 @@ win.data <- list(abund=abund,
 str(win.data)
 
 # Modelo 1
-cat(file = "M4-GLMMPoisson-Ejercicio-1-Facu.txt","
+cat(file = "M4-GLMMPoisson-Ejercicio-1.txt","
 model {
 # modelos para missing covariates
     
@@ -143,7 +143,7 @@ params <- c("mu.alpha", "sd.alpha", "alpha0", "alpha")           # Params
 ni <- 300000 ; nt <- 25 ; nb <- 150000 ; nc <- 3                 # MCMC settings
 
 # Call WinBUGS or JAGS from R (6-7 min) and summarize posteriors
-out <- jags(win.data, inits, params, "M4-GLMMPoisson-Ejercicio-1-Facu.txt", n.chains = nc, n.thin = nt,
+out <- jags(win.data, inits, params, "M4-GLMMPoisson-Ejercicio-1.txt", n.chains = nc, n.thin = nt,
              n.iter = ni, n.burnin = nb)
 
 str(out)
