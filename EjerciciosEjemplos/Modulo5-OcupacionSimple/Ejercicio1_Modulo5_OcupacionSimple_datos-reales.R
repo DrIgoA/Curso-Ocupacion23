@@ -81,16 +81,14 @@ beta4.p ~ dnorm(0, 0.01)
 # Modelo Ecologico para el estado real parcialmente observado
 for (i in 1:R) {
    z[i] ~ dbern(psi[i])                    # Ocurrencia Real z en sitio i
-   psi[i] <- 1 / (1 + exp(-lpsi.lim[i]))
-   lpsi.lim[i] <- min(999, max(-999, lpsi[i]))   #restringe los valores mas extremos en escala logit
+   psi[i] <- 1 / (1 + exp(-lpsi[i]))
    lpsi[i] <- alpha.psi + beta.psi * edge[i]
 
    # Modelo de Observacion
    for (j in 1:T) {
       y[i,j] ~ dbern(mu.p[i,j])	# Deteccion-no detection en i j
       mu.p[i,j] <- z[i] * p[i,j]
-      p[i,j] <- 1 / (1 + exp(-lp.lim[i,j]))
-      lp.lim[i,j] <- min(999, max(-999, lp[i,j]))
+      p[i,j] <- 1 / (1 + exp(-lp[i,j]))
       lp[i,j] <- alpha.p + beta3.p * HOURS[i,j] + beta4.p * pow(HOURS[i,j], 2)
       } #j
    } #i
