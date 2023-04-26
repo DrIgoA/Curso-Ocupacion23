@@ -1,7 +1,3 @@
-# dos dimensiones (sitio y establecimiento)
-# agregar una tercera dimensión (año/year) 
-# agregar la temporada y el manejo agrícola como covariable - plantear interacciones
-
 ##########################################################
 ##### CURSO Modelado y estimación de ocupación para  #####
 #####  poblaciones y comunidades de especies bajo    #####
@@ -94,27 +90,13 @@ win.data <- list(abund=abund,
                  vveg=vveg,
                  nsite=dim(abund)[1],
                  nfarm=dim(abund)[2]
-                 )
+)
 str(win.data)
 
 # Modelo 1
-cat(file = "M4-GLMMPoisson-Ejercicio-1-Facu.txt","
+cat(file = "M4-GLMMPoisson-Ejercicio-1.txt","
 model {
-# modelos para missing covariates
-    
-     for (e in 1:nfarm){ 
-       for(j in 1:nsite) {
-          
-          vveg  [j,e] ~ dnorm(mu.vveg, tau.vveg)
-                         }
-                       }
-                     
-                     
-          tau.vveg <-pow(sd.vveg,-2)
-          sd.vveg ~ dunif(0,1)
-          mu.vveg ~ dnorm(0,1)
-          
-          
+
 # Priors
    mu.alpha ~ dnorm(0, 0.001)  # Mean hyperparam
    tau.alpha <- pow(sd.alpha, -2)
@@ -123,7 +105,6 @@ model {
 for(k in 1:1){
   alpha[k] ~ dunif(-10, 10)   # Regression params
 }
-
 # Likelihood
 for(j in 1:nsite){
  
@@ -144,11 +125,11 @@ for (e in 1:nfarm){
 # Other model run preparations
 inits <- function() list(alpha0 = rnorm(1:32), alpha = rnorm(1)) # Inits
 params <- c("mu.alpha", "sd.alpha", "alpha0", "alpha")           # Params
-ni <- 300000 ; nt <- 25 ; nb <- 150000 ; nc <- 3                 # MCMC settings
+ni <- 3000 ; nt <- 25 ; nb <- 1500 ; nc <- 3                 # MCMC settings
 
 # Call WinBUGS or JAGS from R (6-7 min) and summarize posteriors
-out <- jags(win.data, inits, params, "M4-GLMMPoisson-Ejercicio-1-Facu.txt", n.chains = nc, n.thin = nt,
-             n.iter = ni, n.burnin = nb)
+out <- jags(win.data, inits, params, "M4-GLMMPoisson-Ejercicio-1.txt", n.chains = nc, n.thin = nt,
+            n.iter = ni, n.burnin = nb)
 
 str(out)
 # checkeo de convergencia
@@ -161,6 +142,10 @@ save(out, file='out.rda')
 # cargar la salida
 load('out.rda')
 
+
+
+
+
 ###################################################################################################
 # Paso 2: graficar la relación entre el volumen vegetal ("vveg") y la abundancia de artropodos a partir de la salida (out) del GLMM. 
 
@@ -170,4 +155,3 @@ load('out.rda')
 
 ###################################################################################################
 # Paso 4: Incorporar el año como efecto aleatorio. Debe agregar una tercera dimension que corresponda al año. 
-
