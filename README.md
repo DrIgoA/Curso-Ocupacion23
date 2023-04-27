@@ -62,7 +62,8 @@ verosimilitud - Precisión, sesgo, exactitud.
 - Ejercicios de GLM y GLMM con interfase R-JAGS para análisis con métodos Bayesianos (práctica) 
     - [Ejemplos Modulo 4, GLM y GLMM - Asimetria fluctuante](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Ejemplo1_Modulo4.R) y [Base de datos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/ejemplo_AF.csv) 
     - [*Ejercicio* Modulo 4, GLMM Poisson - insectos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Ejercicio1_Modulo4_PoissonGLMM.R) y [Base de datos](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/Datos_Ejercicio1_Modulo4_PoissonGLMM.csv)
-
+            -[GLMM Artropodos, ejercicio resuelto](https://github.com/apgoijman/Curso-Ocupacion23/blob/main/EjerciciosEjemplos/Modulo4-GLMGLMM/00_RESUELTO-Modulo4-PoissonGLMM.R)
+            
 ### DIA 3
 - Detección imperfecta y modelos de ocupación para poblaciones: Solo una estación – Con covariables.
     - [Modulo 5 - **Presentación**](https://github.com/apgoijman/Curso-Ocupacion23/files/11214935/Modulo.5_Occupacion2023.pdf)
