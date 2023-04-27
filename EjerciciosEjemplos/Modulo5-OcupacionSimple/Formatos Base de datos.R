@@ -2,8 +2,7 @@
 rm(list=ls(all=TRUE))
 
 # indicar directorio de trabajo
-setwd('C:\\Users\\goijman.andrea\\Dropbox\\Materiales interesantes\\Scripts_Modelos\\Formatos
-BD')
+setwd('C:\\Users\\andrea\\Documents\\GitHub\\Curso-Ocupacion23\\EjerciciosEjemplos\\Modulo5-OcupacionSimple')
 
 #leer el csv
 data<-read.csv('datos_MATRIZ.csv', sep = ";", header = T)
@@ -16,8 +15,8 @@ str(data)
 data[is.na(data)] <- 0
 head(data)
 
-datasample<-read.csv('datOS_LONG_COMPLETOS.csv', sep = ";", header = T)
-head(data, 10)
+datasample<-read.csv('datOS_LONG_COMPLETOS.csv', sep = ",", header = T)
+head(datasample, 10)
 
 #cargo los paquetes que voy a usar
 library(reshape)
@@ -76,10 +75,11 @@ write.csv(data.aves.long, file="data.aves.long.csv")
 
 ## Formato longitudinal incompleto
 
-# Otra opcion cuando se ingresan los datos, es ingresar por cada punto y repeticion, las especies observadas.
-
-data2<-read.csv("datos_LONG_INCOMPLETOS.csv",header = T, sep = ";")
+# Otra opcion cuando se ingresan los datos, es ingresar por cada punto y repeticion, 
+# las especies observadas.
+data2<-read.csv("datos_LONG_INCOMPLETOS.csv") #,header = T, sep = ";")
 head(data2, 10)
+
 
 # Para analisis de ocupacion de una sola especie, podemos seleccionar un subset de especies
 data.LEILO <- subset(data.aves.long,data.aves.long$sp.names == "LEILO")
@@ -93,8 +93,7 @@ head(data.LEILO)
 # En el ejemplo que estabmos trabajando tenemos 4 dimensiones: El predio l es la 1er dimension, luego el
 # punto i, la repeticion j y la especie k
 
-data.melt=melt(data.aves.long,id.var=c("PREDIO", "PUNTO", "REP", "sp.names"), measure.var="es
-pecies.obs")
+data.melt=melt(data.aves.long,id.var=c("PREDIO", "PUNTO", "REP", "sp.names"), measure.var="especies.obs")
 y1=cast(data.melt, PREDIO ~ PUNTO ~ REP ~ sp.names)
 
 # Verifico las dimensiones
