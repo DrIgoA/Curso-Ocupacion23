@@ -1,10 +1,10 @@
 ##########################################################
-##### CURSO Modelado y estimación de ocupación para  #####
+##### CURSO Modelado y estimaci?n de ocupaci?n para  #####
 #####  poblaciones y comunidades de especies bajo    #####
 #####           enfoque Bayesiano.                   #####
 #######      CCT Mendoza - ABRIL 2023                #####
 ##########################################################
-###########       Ejemplo Ocupación en JAGS      #########
+###########       Ejemplo Ocupaci?n en JAGS      #########
 ###########              1 especie               #########
 ##########################################################
 #############################################################
@@ -24,7 +24,7 @@ library(jagsUI)
 
 setwd('C:/Users/andrea/Documents/GitHub/Curso-Ocupacion23/EjerciciosEjemplos/Modulo5-OcupacionSimple')
 
-#30 predios, 2 años, 6 puntos por predio y 2 repeticiones
+#30 predios, 2 a?os, 6 puntos por predio y 2 repeticiones
 data <- read.csv("SICFLA.csv",sep ="," , header = T)
 str(data)
 head(data)
@@ -167,11 +167,11 @@ cat("
     for (t in 1:nyear){                                         
     for (i in 1:nsite) {                                       
     
-    logit(psi[e,t,i]) <- lpsi[e,t] + betalpsi1 * cov1 [e,t,i] + betalpsi2 * cov2 [e,i]
-    + betalpsi4 *cov4 [e,i]
+    logit(psi[e,t,i]) <- lpsi[e,t] + betalpsi1 * cov1 [e,t,i] + 
+    betalpsi2 * cov2 [e,i]+ betalpsi4 *cov4 [e,i]
 
         z[e,t,i] ~ dbern(psi[e,t,i])
-    zSim[e,t,i] ~ dbern(psi[e,t,i]) 
+    #zSim[e,t,i] ~ dbern(psi[e,t,i]) 
     } #nsite
     } #nyear
     } #npredio
@@ -187,17 +187,17 @@ cat("
     y[e,t,i,k] ~ dbern(mu.p[e,t,i,k])        
     
 # GOF assessment
-    Tobs0[e,t,i,k] <- (sqrt(y[e,t,i,k]) - sqrt(p[e,t,i,k]*z[e,t,i]))^2  # FT discrepancy for observed data
-    ySim[e,t,i,k] ~ dbern(p[e,t,i,k]*zSim[e,t,i])
-    Tsim0[e,t,i,k] <- (sqrt(ySim[e,t,i,k]) - sqrt(p[e,t,i,k]*zSim[e,t,i]))^2  # ...and for simulated data
+#    Tobs0[e,t,i,k] <- (sqrt(y[e,t,i,k]) - sqrt(p[e,t,i,k]*z[e,t,i]))^2  # FT discrepancy for observed data
+#    ySim[e,t,i,k] ~ dbern(p[e,t,i,k]*zSim[e,t,i])
+#    Tsim0[e,t,i,k] <- (sqrt(ySim[e,t,i,k]) - sqrt(p[e,t,i,k]*zSim[e,t,i]))^2  # ...and for simulated data
 
     }
     }
     }
     } 
 # GOF assessment
-  Tobs <- sum(Tobs0)
-  Tsim <- sum(Tsim0)
+#  Tobs <- sum(Tobs0)
+#  Tsim <- sum(Tsim0)
 #  Derived variable
   N <- sum(z)
 
@@ -219,10 +219,10 @@ inits <- function(){list(z=zst)}
 params1 <- c("lpsi","lp", "betalpsi1","betalpsi2","betalpsi4","N", "Tobs", "Tsim")
 
 # version larga que ya  esta guardada, pueden correr menos para probar
-ni <- 10000 #50000      
+ni <- 1000 #50000      
 nt <- 10  
-nb <- 1000 
-na<- 5000 #20000     
+nb <- 100 
+na<- 500 #20000     
 nc <- 3
 
 out = jags(win.data, inits, params1, "singlesp_bal_nested_time_det.txt", n.chains=nc, 
@@ -359,5 +359,5 @@ polygon(x= c(pred.darb, rev(pred.darb)), y= c(cri3[1,], rev(cri3[2,])),
 # Tareas 
 # -------------------------------------------------------------------------
 # 1- Agregar arbustos como covariable de ocupacion
-# 2- Agregar viento como covariable de detección (no olvidar que se midio para los dos años...)
+# 2- Agregar viento como covariable de detecci?n (no olvidar que se midio para los dos a?os...)
 # 3- Graficar con las covariables agregadas

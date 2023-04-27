@@ -1,0 +1,97 @@
+
+    model {
+
+    # modelos para missing covariates
+    for (e in 1:npredio){                                       
+    for (i in 1:nsite) {                                       
+    cov2  [e,i] ~ dnorm(mu.cov2,   tau.cov2)
+    cov4  [e,i] ~ dnorm(mu.cov4,   tau.cov4)
+    }
+    for (t in 1:nyear){                                         
+    for (i in 1:nsite) { 
+    cov1  [e,t,i] ~ dnorm(mu.cov1,   tau.cov1)
+    }
+    }
+    }
+    
+    tau.cov1 <-pow(sd.cov1,-2)
+    sd.cov1 ~ dunif(0,10)
+    mu.cov1 ~ dnorm(0,0.01)
+    
+    tau.cov2 <-pow(sd.cov2,-2)
+    sd.cov2 ~ dunif(0,10)
+    mu.cov2 ~ dnorm(0,0.01)
+    
+    tau.cov4 <-pow(sd.cov4,-2)
+    sd.cov4 ~ dunif(0,10)
+    mu.cov4 ~ dnorm(0,0.01)
+    
+    #Hyperprevias
+    mu.lp           ~ dnorm(0, 1/2.25^2)
+    mu.lpsi      ~ dnorm(0, 1/2.25^2)
+    betalpsi1 ~ dnorm (0, 1/2.25^2)    
+    betalpsi2 ~ dnorm (0, 1/2.25^2)    
+    betalpsi4 ~ dnorm (0, 1/2.25^2)    
+
+    tau.lp        <- pow(sd.lp, -2)
+    tau.lpsi      <- pow(sd.lpsi, -2)
+    sd.lp  ~ dunif(0,8)
+    sd.lpsi  ~ dunif(0,8)
+    
+    # priors efecto tiempo
+    for (t in 1:nyear){ 
+    lp [t] ~ dnorm (mu.lp, tau.lp)
+    mu.t.lpsi [t] ~ dnorm (mu.lpsi, tau.lpsi)
+    tau.t.lpsi[t] <- pow(sd.t.lpsi[t],-2)
+    sd.t.lpsi [t] ~ dunif(0,1)
+    }
+    
+    # priors para el efecto del predio en el tiempo
+    for (e in 1:npredio){ 
+    for (t in 1:nyear){ 
+    lpsi  [e,t] ~ dnorm (mu.t.lpsi [t], tau.t.lpsi [t])
+    } 
+    } 
+    
+    # Ecological model, process model (true occurrence at site i) 
+    ## establishment as random effect
+    for (e in 1:npredio){                                       
+    for (t in 1:nyear){                                         
+    for (i in 1:nsite) {                                       
+    
+    logit(psi[e,t,i]) <- lpsi[e,t] + betalpsi1 * cov1 [e,t,i] + 
+    betalpsi2 * cov2 [e,i]+ betalpsi4 *cov4 [e,i]
+
+        z[e,t,i] ~ dbern(psi[e,t,i])
+    zSim[e,t,i] ~ dbern(psi[e,t,i]) 
+    } #nsite
+    } #nyear
+    } #npredio
+    
+    # Observation model 
+    
+    for (e in 1:npredio) {                                    
+    for (t in 1:nyear)   {                                    
+    for (i in 1:nsite)   {                                       
+    for (k in 1:nrep)    {        
+    logit(p[e,t,i,k]) <- lp[t] 
+    mu.p[e,t,i,k] <- z[e,t,i] * p[e,t,i,k]  
+    y[e,t,i,k] ~ dbern(mu.p[e,t,i,k])        
+    
+# GOF assessment
+    Tobs0[e,t,i,k] <- (sqrt(y[e,t,i,k]) - sqrt(p[e,t,i,k]*z[e,t,i]))^2  # FT discrepancy for observed data
+    ySim[e,t,i,k] ~ dbern(p[e,t,i,k]*zSim[e,t,i])
+    Tsim0[e,t,i,k] <- (sqrt(ySim[e,t,i,k]) - sqrt(p[e,t,i,k]*zSim[e,t,i]))^2  # ...and for simulated data
+
+    }
+    }
+    }
+    } 
+# GOF assessment
+  Tobs <- sum(Tobs0)
+  Tsim <- sum(Tsim0)
+#  Derived variable
+  N <- sum(z)
+
+    } #model
+    
