@@ -5,7 +5,7 @@ rm(list=ls(all=TRUE))
 setwd('C:\\Users\\andrea\\Documents\\GitHub\\Curso-Ocupacion23\\EjerciciosEjemplos\\Modulo5-OcupacionSimple')
 
 #leer el csv
-data<-read.csv('datos_MATRIZ.csv', sep = ";", header = T)
+data<-read.csv('datos_MATRIZ.csv', sep = ",", header = T)
 #explorar datos
 head(data, 10)
 
@@ -15,7 +15,7 @@ str(data)
 data[is.na(data)] <- 0
 head(data)
 
-datasample<-read.csv('datOS_LONG_COMPLETOS.csv', sep = ",", header = T)
+datasample<-read.csv('datOS_LONG_COMPLETOS.csv', sep = ";", header = T)
 head(datasample, 10)
 
 #cargo los paquetes que voy a usar

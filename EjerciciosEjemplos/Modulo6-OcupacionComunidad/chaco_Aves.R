@@ -41,7 +41,7 @@ y1[is.na(y1)] <- 0
 y<-aaply(y1,1,function(x) {x[x>1]<-1;x})
 
 #Remove "NA" sp (hay sitios sin registros entonces hay NA)
-y<-y[,,-198]  
+y<-y[,,-195]  
 
 str(y)
 dimnames(y)
@@ -119,6 +119,8 @@ dim(y)
 yaug2<-aperm(yaug,c(3,1,2))
 yaug<-yaug2
 
+dim(yaug)
+
 # Armar paquete de datos y resumirlos
 str(chaco.data <- list(y=yaug, forest=forest10z, yield=yieldmz, aridity=aridityz, 
                        detmm=detmm, htype=htype, detier=detier, nsite=nsite, nspec=nspec, 
@@ -142,6 +144,7 @@ cat("
     mu.betalpsi2~ dnorm(0, 1/2.25^2)
     tau.betalpsi2 <- pow(sd.betalpsi2,-2)
     sd.betalpsi2 ~ dunif(0,8)
+    mu.betalpsi3~ dnorm(0, 1/2.25^2)    ###  agregar 
     tau.betalpsi3 <- pow(sd.betalpsi3,-2)
     sd.betalpsi3 ~ dunif(0,8)
     mu.betalpsi4~ dnorm(0, 1/2.25^2)
@@ -178,8 +181,8 @@ cat("
     
     # Ecological model, process model (true occurrence at site i) 
     for (i in 1:nsite) {                                           #loop sobre sitios 
-    logit(psi[k,i]) <- lpsi[k] + betalpsi1[k]*forest[i]  
-    betalpsi2[k]*yield[i]+ betalpsi3[k]*aridity[i] 
+    logit(psi[k,i]) <- lpsi[k] + betalpsi1[k]*forest[i] + 
+    betalpsi2[k]*yield[i]+ betalpsi3[k]*aridity[i] + betalpsi4[k]*forest[i]*yield[i] 
     mu.psi[k,i]<-w[k]*psi[k,i]
     z[i,k] ~ dbern(mu.psi[k,i])     
     
@@ -241,7 +244,7 @@ na <- 100 #10000
 
 
 outms = jags(chaco.data, inits, par.ms, "chacomb.jags", n.chains=nc, n.iter=ni, n.burnin=nb, 
-             n.thin=nt, n.adapt=na, parallel=TRUE)
+             n.thin=nt, n.adapt=na)
 
 # corrida completa 9hs
 #save results
@@ -262,6 +265,7 @@ str(outms)
 
 # summary of the posteriors
 outms
+outms$mean
 
 # tabla de salidas
 #write.csv(outms$summary, "model_outms.csv")
@@ -313,6 +317,11 @@ betalpsi1_all<-cbind(betalpsi1[1:196],cri.betalpsi1[1,1:196],cri.betalpsi1[2,1:1
 betalpsi1_all<-betalpsi1_all[order(-betalpsi1_all[,1]),]
 betalpsi1_all
 
+# Forest 10km
+betalpsi1_all<-cbind(betalpsi1[1:196],cri.betalpsi1[1,1:196],cri.betalpsi1[2,1:196],seq(1:196))
+betalpsi1_all<-betalpsi1_all[order(-betalpsi1_all[,1]),]
+betalpsi1_all
+
 #######################################################
 ##### Plot covariate effects on species occupancy #####
 #####                   (Betas)                   #####         
@@ -323,12 +332,12 @@ par(mar=c(2.8,2.5,1.2,1))
 par(mgp = c(1.5,0.5,0))
 
 ## Yield in 196 species (ORDENADO)
-plot(betalpsi2_all[1:196,1],1:196, xlim=c(-2.5,2),xlab='Yield meat', ylab='Species',
+plot(betalpsi1_all[1:196,1],1:196, xlim=c(-2.5,2),xlab='Forest 10km', ylab='Species',
      cex=0.8,pch=16,tck=-0.02, main='Covariate effects on species (Beta)')
 abline(v=0, lwd=2, col='black')
-segments(betalpsi2_all[1:196,2],1:196,betalpsi2_all[1:196,3],1:196,col='grey', lwd=1)
-sig2<- betalpsi2_all[,2]*betalpsi2_all[,3]>0    #mayor a cero son los dos + o dos - == efecto signif   
-segments(betalpsi2_all[,2][sig2==1],(1:196)[sig2==1],betalpsi2_all[,3][sig2==1],(1:196)[sig2==1],lwd=1, col='red')
+segments(betalpsi1_all[1:196,2],1:196,betalpsi1_all[1:196,3],1:196,col='grey', lwd=1)
+sig2<- betalpsi1_all[,2]*betalpsi1_all[,3]>0    #mayor a cero son los dos + o dos - == efecto signif   
+segments(betalpsi1_all[,2][sig2==1],(1:196)[sig2==1],betalpsi1_all[,3][sig2==1],(1:196)[sig2==1],lwd=1, col='red')
 abline(v=out1$summary[1784,1],lwd=1,col='red')
 abline(v=out1$summary[1784,c(3,7)],lwd=1,col='red',lty=2)
 
@@ -357,11 +366,11 @@ for(i in 1:nspec){
   detp[i]<-plogis(pm$lpS[i]+pm$betalp1S[i])}
 
 # ordenando parametros
-det_order<-cbind(detp,seq(1:195))
+det_order<-cbind(detp,seq(1:194))
 det_order<-det_order[order(det_order[,1]),]
 
 barplot(det_order[,1], ylim = c(0,0.7),xlab = 'Species',
-        ylab = 'Detection probabilities', names.arg = seq(1:195), 
+        ylab = 'Detection probabilities', names.arg = seq(1:194), 
         axisnames = TRUE, main = 'Detection with trees')
 
 
