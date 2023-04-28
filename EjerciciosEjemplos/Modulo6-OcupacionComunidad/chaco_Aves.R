@@ -1,4 +1,20 @@
-##################################
+##########################################################
+##### CURSO Modelado y estimaci?n de ocupaci?n para  #####
+#####  poblaciones y comunidades de especies bajo    #####
+#####           enfoque Bayesiano.                   #####
+#######      CCT Mendoza - ABRIL 2023                #####
+##########################################################
+###########       Ejemplo Ocupaci?n en JAGS      #########
+###########              Comunidades             #########
+# ##########################################################
+# Macchi, L., Decarre, J., Goijman, A. P., Mastrangelo, M., 
+# Blendinger, P. G., Gavier‐Pizarro, G. I., ... & Kuemmerle,
+#T. (2020). Trade‐offs between biodiversity and agriculture
+#are moving targets in dynamic landscapes. Journal of 
+#Applied Ecology, 57(10), 2054-2063.
+############################################################
+
+#################################
 rm(list=ls(all=TRUE))
 
 ###set working directory
