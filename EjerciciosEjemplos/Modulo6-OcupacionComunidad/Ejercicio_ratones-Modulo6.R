@@ -22,7 +22,7 @@
 rm(list=ls(all=TRUE)) 
 
 library(jagsUI)    #paquete JAGS
-
+setwd("C:/Users/Usuario 1/Documents/GitHub/Curso-Ocupacion23/EjerciciosEjemplos/Modulo6-OcupacionComunidad")
 data<-read.csv("datos_roedores.csv",header = T)
 str(data)
 head(data)
@@ -66,6 +66,7 @@ nseason<-2                      # muestreos
 # Creo el array vacio para luego completarlo con los datos del muestreo
 Y.season.1 <- array(NA, dim = c(nsite, nrep, nspec))
 
+str(Y.season.1)
 # Nombre a cada una de las dimensiones del array
 dimnames(Y.season.1) <- list(site=site.list,rep= rep.list, especie=species.list)
 dim(Y.season.1)
@@ -97,12 +98,13 @@ library(abind) #necesaria para combinar las matrices
 y<-abind(Y.season.1,Y.season.2,along = 4)  # es 4 porque es en una dimension mas de las que ya tienen (filas, columnas y especies)
 dimnames(y) <- list(site=site.list,rep= rep.list, especie=species.list,season=season.list)  #nombres de las dimensiones
 y
-
+str(y)
 # Escalo la covariable
 is <- (scale(data$is))
 
 ### Construyo matrices de las covariables
 is<- array(is, dim = c(nsite))
+dim(is)
 dimnames(is) <- list(site=site.list)  #nombres de las dimensiones
 
 J1<- data$J[1:nsite]
@@ -229,7 +231,7 @@ out2 = jags(roed.data,inits, params2, "mod_is.jags", n.chains=nc,
 # PARTE 2
 # ---------------
 
-# Miodel Regression para Riqueza e IS
+# Model Regression para Riqueza e IS
 is <- (scale(data$is[1:50]))
 
 #promedio de riqueza y intervalos para todas las escalas

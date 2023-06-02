@@ -18,7 +18,7 @@
 rm(list=ls(all=TRUE))
 
 ###set working directory
-setwd("C:/Users/andrea/Documents/GitHub/Curso-Ocupacion23/EjerciciosEjemplos/Modulo6-OcupacionComunidad")  #Andrea
+setwd("C:/Users/Usuario 1/Documents/GitHub/Curso-Ocupacion23/EjerciciosEjemplos/Modulo6-OcupacionComunidad")
 
 library(jagsUI)    #paquete JAGS
 library(reshape)

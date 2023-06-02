@@ -1,14 +1,14 @@
 ##########################################################
-##### CURSO Modelado y estimación de ocupación para  #####
+##### CURSO Modelado y estimaci?n de ocupaci?n para  #####
 #####  poblaciones y comunidades de especies bajo    #####
 #####           enfoque Bayesiano.                   #####
 #######      CCT Mendoza - ABRIL 2023                #####
 ##########################################################
-###########       Ejemplo Ocupación en JAGS      #########
+###########       Ejemplo Ocupaci?n en JAGS      #########
 ###########              Comunidades             #########
 #############################################################
 #         Ejercicio basado en                               #  
-#   Gómez, M.D., Goijman, A.P., Coda, J., Serafini,         #
+#   G?mez, M.D., Goijman, A.P., Coda, J., Serafini,         #
 #   V., Priotto, J. 2018. "Small mammal responses to        #
 #   farming practices in central Argentinian agroecosystems:# 
 #   the use of hierarchical occupancy models".              #
@@ -25,8 +25,8 @@ rm(list=ls(all=TRUE))
 ###################################### 
 ### Elegir directorio de trabajo
 ######################################
-setwd('C:/Users/andrea/Documents/GitHub/Curso-Ocupacion23/EjerciciosEjemplos/Modulo6-OcupacionComunidad')
 
+setwd("C:/Users/Usuario 1/Documents/GitHub/Curso-Ocupacion23/EjerciciosEjemplos/Modulo6-OcupacionComunidad")
 ######################################
 ### Cargar Paquetes 
 ######################################
@@ -35,13 +35,13 @@ library(jagsUI)    #paquete JAGS
 ######################################
 ### Cargar Datos Roedores 
 ######################################
-load('C:/Users/andrea/Documents/GitHub/Curso-Ocupacion23/EjerciciosEjemplos/Modulo6-OcupacionComunidad/Roedores.RData')
+load("~/GitHub/Curso-Ocupacion23/EjerciciosEjemplos/Modulo6-OcupacionComunidad/Roedores.RData")
 ls()   #revisar 
 
 # Es un estudio de ratones en agroecosistemas, donde se explora el efecto del manejo, 
 # el uso de la tierra, la vegetacion en bordes en la ocupacion, y la temperatura en 
 # la deteccion.
-# Se repitio en 3 temporadas estacionales (season), 34 sitios, con 20 repeticiones por stio,
+# Se repitio en 3 temporadas estacionales (season), 34 sitios, con 20 repeticiones por sitio,
 # y se registraron 7 especies (no se usa DA porque se conoce que solo estan esas especies)
 
 ## Exploro los datos
@@ -64,6 +64,13 @@ nsite
 
 str(roed.data <- list(y=y, manejo=manejo, vvegz=vvegz, tempz=tempz, nsite=nsite,
 nrep=dim(y)[2], nspec=dim(y)[3], season=dim(y)[4]))
+
+str(y)
+str(manejo)
+str(vvegz)
+str(tempz)
+str(nsite)
+
 
 ### JAGS code
 sink("comuroedor_sinDA.jags")  
@@ -268,4 +275,4 @@ abline(v=out42$summary[3,c(3,7)],lwd=1,col='red',lty=2)
 # Tareas 
 # -------------------------------------------------------------------------
 # 1- Agregar USO como covariable de ocupacion
-# 2- Graficar con las covariables agregadas y la detección
+# 2- Graficar con las covariables agregadas y la detecci?n
