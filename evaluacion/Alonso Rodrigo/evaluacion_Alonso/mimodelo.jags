@@ -1,0 +1,180 @@
+
+model{
+
+# Hyperpriors 
+ mu.co.lpsi ~ dnorm(0, 0.01) #queda
+ mu.co.betalpsi1 ~ dnorm(0, 0.01)
+ mu.co.betalpsi2 ~ dnorm(0, 0.01)
+ mu.co.betalpsi3 ~ dnorm(0, 0.01)
+ mu.co.betalpsi4 ~ dnorm(0, 0.01)
+ mu.co.betalpsi5 ~ dnorm(0, 0.01)
+ mu.co.betalpsi6 ~ dnorm(0, 0.01)
+ mu.co.betalpsi7 ~ dnorm(0, 0.01)
+ mu.co.betalpsi8 ~ dnorm(0, 0.01)
+ mu.co.betalpsi9 ~ dnorm(0, 0.01)
+ mu.co.betalpsi10 ~ dnorm(0, 0.01)
+ mu.co.betalpsi11 ~ dnorm(0, 0.01)
+ mu.co.betalpsi12 ~ dnorm(0, 0.01)
+ mu.co.betalpsi13 ~ dnorm(0, 0.01)
+ mu.co.lp ~ dnorm(0, 0.01)
+ mu.co.betalp1 ~ dnorm(0, 0.01)
+ mu.co.betalp2 ~ dnorm(0, 0.01)
+ 
+ tau.co.lpsi <- pow(sd.co.lpsi,-2)   
+ sd.co.lpsi ~ dunif(0,8)
+ tau.co.betalpsi1 <- pow(sd.co.betalpsi1,-2)
+ sd.co.betalpsi1 ~ dunif(0,8)
+ tau.co.betalpsi2 <- pow(sd.co.betalpsi2,-2)
+ sd.co.betalpsi2 ~ dunif(0,8)
+ tau.co.betalpsi3 <- pow(sd.co.betalpsi3,-2)
+ sd.co.betalpsi3 ~ dunif(0,8)
+ tau.co.betalpsi4 <- pow(sd.co.betalpsi4,-2)
+ sd.co.betalpsi4 ~ dunif(0,8)
+ tau.co.betalpsi5 <- pow(sd.co.betalpsi5,-2)
+ sd.co.betalpsi5 ~ dunif(0,8)
+ tau.co.betalpsi6 <- pow(sd.co.betalpsi6,-2)
+ sd.co.betalpsi6 ~ dunif(0,8)
+ tau.co.betalpsi7 <- pow(sd.co.betalpsi7,-2)
+ sd.co.betalpsi7 ~ dunif(0,8)
+ tau.co.betalpsi8 <- pow(sd.co.betalpsi8,-2)
+ sd.co.betalpsi8 ~ dunif(0,8)
+ tau.co.betalpsi9 <- pow(sd.co.betalpsi9,-2)
+ sd.co.betalpsi9 ~ dunif(0,8)
+ tau.co.betalpsi10 <- pow(sd.co.betalpsi10,-2)
+ sd.co.betalpsi10 ~ dunif(0,8)
+ tau.co.betalpsi11 <- pow(sd.co.betalpsi11,-2)
+ sd.co.betalpsi11 ~ dunif(0,8)
+ tau.co.betalpsi12 <- pow(sd.co.betalpsi12,-2)
+ sd.co.betalpsi12 ~ dunif(0,8)
+ tau.co.betalpsi13 <- pow(sd.co.betalpsi13,-2)
+ sd.co.betalpsi13 ~ dunif(0,8)
+ tau.co.lp <- pow(sd.co.lp,-2)   
+ sd.co.lp ~ dunif(0,8)
+
+ tau.co.betalp1 <- pow(sd.co.betalp1,-2)
+ sd.co.betalp1 ~ dunif(0,8)
+ tau.co.betalp2 <- pow(sd.co.betalp2,-2)
+ sd.co.betalp2 ~ dunif(0,8)
+
+# priors de los efectos especie-específicos en la ocupacion y detecc
+# sp representa el parámetro por especie
+# co representa el parámetro de la comunidad 
+  for (k in 1:nspec){
+    mu.sp.lpsi[k] ~ dnorm(mu.co.lpsi, tau.co.lpsi)  #queda
+    mu.sp.betalpsi1[k] ~ dnorm(mu.co.betalpsi1, tau.co.betalpsi1)
+    mu.sp.betalpsi2[k] ~ dnorm(mu.co.betalpsi2, tau.co.betalpsi2)
+    mu.sp.betalpsi3[k] ~ dnorm(mu.co.betalpsi3, tau.co.betalpsi3)
+    mu.sp.betalpsi4[k] ~ dnorm(mu.co.betalpsi4, tau.co.betalpsi4)
+    mu.sp.betalpsi5[k] ~ dnorm(mu.co.betalpsi5, tau.co.betalpsi5)
+    mu.sp.betalpsi6[k] ~ dnorm(mu.co.betalpsi6, tau.co.betalpsi6)
+    mu.sp.betalpsi7[k] ~ dnorm(mu.co.betalpsi7, tau.co.betalpsi7)
+    mu.sp.betalpsi8[k] ~ dnorm(mu.co.betalpsi8, tau.co.betalpsi8)
+    mu.sp.betalpsi9[k] ~ dnorm(mu.co.betalpsi9, tau.co.betalpsi9)
+    mu.sp.betalpsi10[k] ~ dnorm(mu.co.betalpsi10, tau.co.betalpsi10)
+    mu.sp.betalpsi11[k] ~ dnorm(mu.co.betalpsi11, tau.co.betalpsi11)
+    mu.sp.betalpsi12[k] ~ dnorm(mu.co.betalpsi12, tau.co.betalpsi12)
+    mu.sp.betalpsi13[k] ~ dnorm(mu.co.betalpsi13, tau.co.betalpsi13)
+
+    mu.sp.lp[k] ~ dnorm(mu.co.lp, tau.co.lp)
+    mu.sp.betalp1[k]~ dnorm(mu.co.betalp1, tau.co.betalp1)
+    mu.sp.betalp2[k]~ dnorm(mu.co.betalp2, tau.co.betalp2)
+    
+    #Precision de lpsi y lp  
+    tau.sp.lpsi[k] <- pow(sd.sp.lpsi[k],-2)   
+    sd.sp.lpsi[k] ~ dunif(0,8)
+    tau.sp.lp[k] <- pow(sd.sp.lp[k],-2)
+    sd.sp.lp[k] ~ dunif(0,8)
+
+    #Precision de los betas especie-especificos
+    tau.sp.betalpsi1[k] <- pow(sd.sp.betalpsi1[k],-2)
+    sd.sp.betalpsi1[k] ~ dunif(0,8)
+    tau.sp.betalpsi2[k] <- pow(sd.sp.betalpsi2[k],-2)
+    sd.sp.betalpsi2[k] ~ dunif(0,8)
+    tau.sp.betalpsi3[k] <- pow(sd.sp.betalpsi3[k],-2)
+    sd.sp.betalpsi3[k] ~ dunif(0,8)
+    tau.sp.betalpsi4[k] <- pow(sd.sp.betalpsi4[k],-2)
+    sd.sp.betalpsi4[k] ~ dunif(0,8)
+    tau.sp.betalpsi5[k] <- pow(sd.sp.betalpsi5[k],-2)
+    sd.sp.betalpsi5[k] ~ dunif(0,8)
+    tau.sp.betalpsi6[k] <- pow(sd.sp.betalpsi6[k],-2)
+    sd.sp.betalpsi6[k] ~ dunif(0,8)
+    tau.sp.betalpsi7[k] <- pow(sd.sp.betalpsi7[k],-2)
+    sd.sp.betalpsi7[k] ~ dunif(0,8)
+    tau.sp.betalpsi8[k] <- pow(sd.sp.betalpsi8[k],-2)
+    sd.sp.betalpsi8[k] ~ dunif(0,8)
+    tau.sp.betalpsi9[k] <- pow(sd.sp.betalpsi9[k],-2)
+    sd.sp.betalpsi9[k] ~ dunif(0,8)
+    tau.sp.betalpsi10[k] <- pow(sd.sp.betalpsi10[k],-2)
+    sd.sp.betalpsi10[k] ~ dunif(0,8)
+    tau.sp.betalpsi11[k] <- pow(sd.sp.betalpsi11[k],-2)
+    sd.sp.betalpsi11[k] ~ dunif(0,8)
+    tau.sp.betalpsi12[k] <- pow(sd.sp.betalpsi12[k],-2)
+    sd.sp.betalpsi12[k] ~ dunif(0,8)
+    tau.sp.betalpsi13[k] <- pow(sd.sp.betalpsi13[k],-2)
+    sd.sp.betalpsi13[k] ~ dunif(0,8)
+
+    tau.sp.betalp1[k] <- pow(sd.sp.betalp1[k],-2)
+    sd.sp.betalp1[k] ~ dunif(0,8)
+    tau.sp.betalp2[k] <- pow(sd.sp.betalp2[k],-2)
+    sd.sp.betalp2[k] ~ dunif(0,8)
+    
+    #Previas de las ordenadas
+    lpsi[k] ~ dnorm(mu.sp.lpsi[k], tau.sp.lpsi[k]) #queda
+    lp[k] ~ dnorm(mu.sp.lp[k], tau.sp.lp[k])
+    
+    #Previas de los betalpsi y betalp
+    betalpsi1[k] ~ dnorm (mu.sp.betalpsi1[k], tau.sp.betalpsi1[k])
+    betalpsi2[k] ~ dnorm (mu.sp.betalpsi2[k], tau.sp.betalpsi2[k])
+    betalpsi3[k] ~ dnorm (mu.sp.betalpsi3[k], tau.sp.betalpsi3[k])
+    betalpsi4[k] ~ dnorm (mu.sp.betalpsi4[k], tau.sp.betalpsi4[k])
+    betalpsi5[k] ~ dnorm (mu.sp.betalpsi5[k], tau.sp.betalpsi5[k])
+    betalpsi6[k] ~ dnorm (mu.sp.betalpsi6[k], tau.sp.betalpsi6[k])
+    betalpsi7[k] ~ dnorm (mu.sp.betalpsi7[k], tau.sp.betalpsi7[k])
+    betalpsi8[k] ~ dnorm (mu.sp.betalpsi8[k], tau.sp.betalpsi8[k])
+    betalpsi9[k] ~ dnorm (mu.sp.betalpsi9[k], tau.sp.betalpsi9[k])
+    betalpsi10[k] ~ dnorm (mu.sp.betalpsi10[k], tau.sp.betalpsi10[k])
+    betalpsi11[k] ~ dnorm (mu.sp.betalpsi11[k], tau.sp.betalpsi11[k]) 
+    betalpsi12[k] ~ dnorm (mu.sp.betalpsi12[k], tau.sp.betalpsi12[k])
+    betalpsi13[k] ~ dnorm (mu.sp.betalpsi13[k], tau.sp.betalpsi13[k])
+    betalp1[k] ~ dnorm(mu.sp.betalp1[k],tau.sp.betalp1[k])
+    betalp2[k] ~ dnorm(mu.sp.betalp2[k],tau.sp.betalp2[k])
+  } #nspec
+  
+# Modelo ecologico, ocurrencia en el sitio i 
+#Likelihood
+
+for (k in 1:nspec){
+#loop sobre especies
+    
+    for (m in 1:nyears){ 
+#loop sobre anios
+
+        for (i in 1:nsite) {                                           
+#loop sobre sitios
+
+          for (l in 1:nseasons){
+#loop sobre estacion
+
+              logit(psi[i,l,k,m]) <- lpsi[k] + betalpsi1[k]*summer[i,m,l] + betalpsi2[k]*fall[i,m,l] + betalpsi3[k]*winter[i,m,l] + betalpsi4[k]*spring[i,m,l] + betalpsi5[k]*tipo[i,m] + betalpsi6[k]*zanja[i,m] + betalpsi7[k]*galpon[i,m] + betalpsi8[k]*tambo[i,m] + betalpsi9[k]*vegetacion[i,m] + betalpsi10[k]*comedero[i,m] + betalpsi11[k]*silo[i,m] + betalpsi12[k]*foza[i,m] + betalpsi13[k]*tipo[i,m]
+       
+              z[i,k,l,m] ~ dbern(psi[i,l,k,m])
+  
+# Modelos de observacion para sitio nsite = i, repeticion nrep = j, nspec=k, estacion nseasons = l, año nyears = m
+
+            for (j in 1:nrep) {  
+#loop sobre repeticiones nrep
+
+               logit(p[i,j,k,l,m]) <-  lp[k] + betalp1[k]*temp[i,j,l,m] + betalp2[k]*noches[i,j]
+
+               mu.p[i,j,k,l,m] <- p[i,j,k,l,m]*z[i,k,l,m]
+
+               y[i,j,k,l,m] ~ dbern(mu.p[i,j,k,l,m])
+
+               } #nrep
+           } #nseasons
+         } #nsite
+      } #nyears
+    } #nspec
+
+} #model
+
